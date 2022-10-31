@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<płytoteka xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="plytoteka.xsd">
+    <gatunki>
+        <gatunek id="GAT_01" nazwa="Elektronika" />
+        <gatunek id="GAT_02" nazwa="Rock" />
+    </gatunki>
+
+    <albumy>
+        <!-- https://en.wikipedia.org/wiki/Flume_(album) -->
+        <album id="AL_01" gatunek="GAT_01">
+            <nazwa>Flume (Deluxe Edition)</nazwa>
+            <wykonawcy>
+                <wykonawca czyZagraniczny="tak">Flume</wykonawca>
+            </wykonawcy>
+            <producent>Harley Streten</producent>
+            <dystrybutor>Future Classic</dystrybutor>
+            <opakowanie>Digipack</opakowanie>
+            <plyty>
+                <plyta cd="1">
+                    <utwory>
+                        <utwor>
+                            <numer>01</numer>
+                            <nazwa>Sintra</nazwa>
+                            <dlugosc>2:35</dlugosc>
+                        </utwor>
+                        <utwor>
+                            <numer>02</numer>
+                            <nazwa>Holdin On</nazwa>
+                            <dlugosc>2:34</dlugosc>
+                        </utwor>
+                        <utwor>
+                            <numer>03</numer>
+                            <nazwa>Left Alone</nazwa>
+                            <dlugosc>3:29</dlugosc>
+                        </utwor>
+                    </utwory>
+                </plyta>
+                <plyta cd="2">
+                    <utwory>
+                        <utwor>
+                            <numer>01</numer>
+                            <nazwa>Intro</nazwa>
+                            <dlugosc>3:54</dlugosc>
+                        </utwor>
+                        <utwor>
+                            <numer>02</numer>
+                            <nazwa>Space Cadet</nazwa>
+                            <dlugosc>1:57</dlugosc>
+                        </utwor>
+                        <utwor>
+                            <numer>03</numer>
+                            <nazwa>Insane</nazwa>
+                            <dlugosc>2:07</dlugosc>
+                        </utwor>
+                    </utwory>
+                </plyta>
+            </plyty>
+            <data_premiery>2012-11-09</data_premiery>
+            <cena waluta="EUR">22.99</cena>
+            <ocena>3.9</ocena>
+            <naklad>500000</naklad>
+            <sprzedaneEgzemplarze>400000</sprzedaneEgzemplarze>
+        </album>
+        <!-- https://pl.wikipedia.org/wiki/...Bo_marz%C4%99_i_%C5%9Bni%C4%99 -->
+        <!-- https://open.spotify.com/album/43CSrYoXaExTUUJ8UMZgSx -->
+        <album id="AL_02" gatunek="GAT_02">
+            <nazwa>Bo Marzę i Śnię</nazwa>
+            <wykonawcy>
+                <wykonawca czyZagraniczny="nie">Krzysztof Krawczyk</wykonawca>
+            </wykonawcy>
+            <producent>Andrzej Smolik</producent>
+            <dystrybutor>BMG Poland</dystrybutor>
+            <opakowanie>Jewel case</opakowanie>
+            <plyty>
+                <plyta cd="1">
+                    <utwory>
+                        <utwor>
+                            <numer>01</numer>
+                            <nazwa>Bo jesteś ty</nazwa>
+                            <dlugosc>3:10</dlugosc>
+                        </utwor>
+                        <utwor>
+                            <numer>02</numer>
+                            <nazwa>Wiarygodny</nazwa>
+                            <dlugosc>4:31</dlugosc>
+                        </utwor>
+                        <utwor>
+                            <numer>03</numer>
+                            <nazwa>Chciałem być</nazwa>
+                            <dlugosc>3:41</dlugosc>
+                        </utwor>
+                    </utwory>
+                </plyta>
+            </plyty>
+            <data_premiery>2012-11-09</data_premiery>
+            <cena waluta="PLN">35.99</cena>
+            <ocena>4.4</ocena>
+            <naklad>2300000</naklad>
+            <sprzedaneEgzemplarze>2150000</sprzedaneEgzemplarze>
+        </album>
+    </albumy>
+
+    <klienci>
+        <klient>
+            <imie>Piotr</imie>
+            <nazwisko>Łuszcz</nazwisko>
+            <nick>Skoczek</nick>
+            <wypozyczenia>
+                <wypozyczenie>
+                    <albumy>
+                        <album numer="AL_01" />
+                        <album numer="AL_02" />
+                    </albumy>
+                    <data_rozpoczecia>2022-10-23</data_rozpoczecia>
+                </wypozyczenie>
+            </wypozyczenia>
+        </klient>
+    </klienci>
+</płytoteka>
