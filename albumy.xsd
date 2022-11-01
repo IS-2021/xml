@@ -22,7 +22,7 @@
                         </xs:element>
                         <xs:element name="wykonawcy">
                             <xs:complexType>
-                                <xs:all>
+                                <xs:sequence>
                                     <xs:element name="wykonawca">
                                         <xs:complexType>
                                             <xs:simpleContent>
@@ -32,7 +32,7 @@
                                             </xs:simpleContent>
                                         </xs:complexType>
                                     </xs:element>
-                                </xs:all>
+                                </xs:sequence>
                             </xs:complexType>
                         </xs:element>
                         <xs:element name="producent" type="common:min2charType" />
@@ -91,7 +91,7 @@
         <xs:sequence>
             <xs:element name="plyta" minOccurs="1" maxOccurs="unbounded">
                 <xs:complexType>
-                    <xs:all>
+                    <xs:all minOccurs="1">
                         <xs:element name="utwory">
                             <xs:complexType>
                                 <xs:sequence>

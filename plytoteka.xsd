@@ -11,7 +11,7 @@
 
     <!-- Types -->
     <xs:complexType name="plytotekaType">
-        <xs:all>
+        <xs:all minOccurs="1">
             <xs:element name="gatunki" type="gatunki:gatunkiType" />
             <xs:element name="albumy" type="albumy:albumyType" />
             <xs:element name="klienci" type="klienciType" />
@@ -21,7 +21,7 @@
 
     <!-- Klienci i wypożyczenia -->
     <xs:complexType name="klienciType">
-        <xs:all>
+        <xs:sequence>
             <xs:element name="klient">
                 <xs:complexType>
                     <xs:sequence>
@@ -32,7 +32,7 @@
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-        </xs:all>
+        </xs:sequence>
     </xs:complexType>
 
     <xs:simpleType name="email">
@@ -60,7 +60,7 @@
     </xs:simpleType>
 
     <xs:complexType name="wypozyczeniaType">
-        <xs:all>
+        <xs:sequence>
             <xs:element name="wypozyczenie">
                 <xs:complexType>
                     <xs:sequence>
@@ -85,7 +85,7 @@
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
-        </xs:all>
+        </xs:sequence>
     </xs:complexType>
 
 
