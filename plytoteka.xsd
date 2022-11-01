@@ -27,19 +27,31 @@
                     <xs:sequence>
                         <xs:element name="imie" type="klientNameType" />
                         <xs:element name="nazwisko" type="klientNameType" />
-                        <xs:element name="nick">
-                            <xs:simpleType>
-                                <xs:restriction base="xs:string">
-                                    <xs:maxLength value="16" />
-                                </xs:restriction>
-                            </xs:simpleType>
-                        </xs:element>
+                        <xs:element name="login" type="login" />
                         <xs:element name="wypozyczenia" type="wypozyczeniaType" />
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
         </xs:all>
     </xs:complexType>
+
+    <xs:simpleType name="email">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="5" />
+            <xs:pattern value="\w+@\w+\.\w+" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="nick">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="3" />
+            <xs:maxLength value="16" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="login">
+        <xs:union memberTypes="email nick" />
+    </xs:simpleType>
 
     <xs:simpleType name="klientNameType">
         <xs:restriction base="common:polishNameType">
