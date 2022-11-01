@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="/common/namespace"
+>
+    <!-- Typy ogólne -->
+    <xs:simpleType name="takNieType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="tak" />
+            <xs:enumeration value="nie" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="walutaType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="EUR" />
+            <xs:enumeration value="PLN" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="polishNameType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-ZĘÓĄŚŁŻŹĆŃ][a-zęóąśłżźćń]+" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="min2charType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="2"></xs:minLength>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="min1Type">
+        <xs:restriction base="xs:unsignedInt">
+            <xs:minExclusive value="0" />
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

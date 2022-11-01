@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="/gatunki/namespace"
+>
+    <!-- Gatunki -->
+    <xs:complexType name="gatunkiType">
+        <xs:sequence>
+            <xs:element name="gatunek" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:attribute name="id" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:length value="6" />
+                                <xs:pattern value="GAT_\d+" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute>
+                    <xs:attribute name="nazwa" use="required">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:minLength value="3" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

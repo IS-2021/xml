@@ -1,197 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:common="/common/namespace"
+    xmlns:gatunki="/gatunki/namespace"
+    xmlns:albumy="/albumy/namespace"
+>
+    <xs:import namespace="/common/namespace" schemaLocation="common.xsd" />
+    <xs:import namespace="/gatunki/namespace" schemaLocation="gatunki.xsd" />
+    <xs:import namespace="/albumy/namespace" schemaLocation="albumy.xsd" />
+
     <!-- Types -->
     <xs:complexType name="plytotekaType">
         <xs:all>
-            <xs:element name="gatunki" type="gatunkiType" />
-            <xs:element name="albumy" type="albumyType" />
+            <xs:element name="gatunki" type="gatunki:gatunkiType" />
+            <xs:element name="albumy" type="albumy:albumyType" />
             <xs:element name="klienci" type="klienciType" />
         </xs:all>
-    </xs:complexType>
-
-
-    <!-- Typy ogólne -->
-    <xs:simpleType name="takNieType">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="tak" />
-            <xs:enumeration value="nie" />
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="walutaType">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="EUR" />
-            <xs:enumeration value="PLN" />
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="polishNameType">
-        <xs:restriction base="xs:string">
-            <xs:pattern value="[A-ZĘÓĄŚŁŻŹĆŃ][a-zęóąśłżźćń]+" />
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="min2charType">
-        <xs:restriction base="xs:string">
-            <xs:minLength value="2"></xs:minLength>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="min1Type">
-        <xs:restriction base="xs:unsignedInt">
-            <xs:minExclusive value="0" />
-        </xs:restriction>
-    </xs:simpleType>
-
-
-    <!-- Gatunki -->
-    <xs:complexType name="gatunkiType">
-        <xs:sequence>
-            <xs:element name="gatunek" maxOccurs="unbounded">
-                <xs:complexType>
-                    <xs:attribute name="id" use="required">
-                        <xs:simpleType>
-                            <xs:restriction base="xs:string">
-                                <xs:length value="6" />
-                                <xs:pattern value="GAT_\d+" />
-                            </xs:restriction>
-                        </xs:simpleType>
-                    </xs:attribute>
-                    <xs:attribute name="nazwa" use="required">
-                        <xs:simpleType>
-                            <xs:restriction base="xs:string">
-                                <xs:minLength value="3" />
-                            </xs:restriction>
-                        </xs:simpleType>
-                    </xs:attribute>
-                </xs:complexType>
-            </xs:element>
-        </xs:sequence>
-    </xs:complexType>
-
-
-    <!-- Albumy -->
-    <xs:complexType name="albumyType">
-        <xs:sequence>
-            <xs:element name="album" maxOccurs="unbounded">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="nazwa">
-                            <xs:simpleType>
-                                <xs:restriction base="xs:string">
-                                    <xs:minLength value="2" />
-                                </xs:restriction>
-                            </xs:simpleType>
-                        </xs:element>
-                        <xs:element name="wykonawcy">
-                            <xs:complexType>
-                                <xs:all>
-                                    <xs:element name="wykonawca">
-                                        <xs:complexType>
-                                            <xs:simpleContent>
-                                                <xs:extension base="xs:string">
-                                                    <xs:attribute name="czyZagraniczny" type="takNieType" />
-                                                </xs:extension>
-                                            </xs:simpleContent>
-                                        </xs:complexType>
-                                    </xs:element>
-                                </xs:all>
-                            </xs:complexType>
-                        </xs:element>
-                        <xs:element name="producent" type="min2charType" />
-                        <xs:element name="dystrybutor" type="min2charType" />
-                        <xs:element name="opakowanie" type="opakowanieType" />
-                        <xs:element name="plyty" type="plytyType" />
-                        <xs:element name="data_premiery" type="xs:date" />
-                        <xs:element name="cena">
-                            <xs:complexType>
-                                <xs:simpleContent>
-                                    <xs:extension base="xs:float">
-                                        <xs:attribute name="waluta" type="walutaType" />
-                                    </xs:extension>
-                                </xs:simpleContent>
-                            </xs:complexType>
-                        </xs:element>
-                        <xs:element name="ocena">
-                            <xs:simpleType>
-                                <xs:restriction base="xs:float">
-                                    <xs:minInclusive value="0" />
-                                    <xs:maxInclusive value="5" />
-                                </xs:restriction>
-                            </xs:simpleType>
-                        </xs:element>
-                        <xs:element name="naklad" type="min1Type" />
-                        <xs:element name="sprzedaneEgzemplarze" type="min1Type" />
-                    </xs:sequence>
-                    <xs:attribute name="id">
-                        <xs:simpleType>
-                            <xs:restriction base="xs:string">
-                                <xs:pattern value="AL_\d+" />
-                            </xs:restriction>
-                        </xs:simpleType>
-                    </xs:attribute>
-                    <xs:attribute name="gatunek">
-                        <xs:simpleType>
-                            <xs:restriction base="xs:string">
-                                <xs:pattern value="GAT_\d+" />
-                            </xs:restriction>
-                        </xs:simpleType>
-                    </xs:attribute>
-                </xs:complexType>
-            </xs:element>
-        </xs:sequence>
-    </xs:complexType>
-
-    <xs:simpleType name="opakowanieType">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="Digipack" />
-            <xs:enumeration value="Jewel case" />
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:complexType name="plytyType">
-        <xs:sequence>
-            <xs:element name="plyta" minOccurs="1" maxOccurs="unbounded">
-                <xs:complexType>
-                    <xs:all>
-                        <xs:element name="utwory">
-                            <xs:complexType>
-                                <xs:sequence>
-                                    <xs:element name="utwor" type="utworType" maxOccurs="unbounded" />
-                                </xs:sequence>
-                            </xs:complexType>
-                        </xs:element>
-                    </xs:all>
-                    <xs:attribute name="cd" use="required" type="xs:unsignedInt" />
-                </xs:complexType>
-            </xs:element>
-        </xs:sequence>
-    </xs:complexType>
-
-    <xs:complexType name="utworType">
-        <xs:sequence>
-            <xs:element name="numer">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:pattern value="\d{2}" />
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
-            <xs:element name="nazwa">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:minLength value="3" />
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
-            <xs:element name="dlugosc">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:pattern value="[1-5][0-9]?:[0-5][0-9]"></xs:pattern>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:element>
-        </xs:sequence>
     </xs:complexType>
 
 
@@ -218,7 +42,7 @@
     </xs:complexType>
 
     <xs:simpleType name="klientNameType">
-        <xs:restriction base="polishNameType">
+        <xs:restriction base="common:polishNameType">
             <xs:minLength value="3" />
         </xs:restriction>
     </xs:simpleType>
