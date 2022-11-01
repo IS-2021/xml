@@ -94,5 +94,25 @@
 
 
     <!-- Document -->
-    <xs:element name="płytoteka" type="plytotekaType" />
+    <xs:element name="płytoteka" type="plytotekaType">
+        <!-- Klucze -->
+        <xs:key name="gatunekID">
+            <xs:selector xpath="gatunki/gatunek" />
+            <xs:field xpath="@id" />
+        </xs:key>
+        <xs:key name="albumID">
+            <xs:selector xpath="albumy/album" />
+            <xs:field xpath="@id" />
+        </xs:key>
+
+        <!-- Odwołania -->
+        <xs:keyref name="gatunekRef" refer="gatunekID">
+            <xs:selector xpath="albumy/album" />
+            <xs:field xpath="@gatunek" />
+        </xs:keyref>
+        <xs:keyref name="albumRef" refer="albumID">
+            <xs:selector xpath="klienci/klient/wypozyczenia/wypozyczenie/albumy/album" />
+            <xs:field xpath="@numer" />
+        </xs:keyref>
+    </xs:element>
 </xs:schema>
