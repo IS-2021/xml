@@ -35,4 +35,16 @@
             <xs:minExclusive value="0" />
         </xs:restriction>
     </xs:simpleType>
+
+    <xs:simpleType name="NIP">
+        <xs:restriction base="xs:string">
+            <xs:length value="10" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="PESEL">
+        <xs:restriction base="xs:string">
+            <xs:length value="11" />
+        </xs:restriction>
+    </xs:simpleType>
 </xs:schema>

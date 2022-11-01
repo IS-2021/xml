@@ -25,6 +25,10 @@
             <xs:element name="klient">
                 <xs:complexType>
                     <xs:sequence>
+                        <xs:choice>
+                            <xs:element name="nip" type="common:NIP" />
+                            <xs:element name="pesel" type="common:PESEL" />
+                        </xs:choice>
                         <xs:element name="imie" type="klientNameType" />
                         <xs:element name="nazwisko" type="klientNameType" />
                         <xs:element name="login" type="login" />

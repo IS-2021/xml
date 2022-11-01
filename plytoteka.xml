@@ -10,7 +10,7 @@
 
     <albumy>
         <!-- https://en.wikipedia.org/wiki/Flume_(album) -->
-        <album id="AL_01" gatunek="GAT_01">
+        <album id="AL_01" gatunek="GAT_01" explicit="false">
             <nazwa>Flume (Deluxe Edition)</nazwa>
             <wykonawcy>
                 <wykonawca czyZagraniczny="tak">Flume</wykonawca>
@@ -66,7 +66,7 @@
         </album>
         <!-- https://pl.wikipedia.org/wiki/...Bo_marz%C4%99_i_%C5%9Bni%C4%99 -->
         <!-- https://open.spotify.com/album/43CSrYoXaExTUUJ8UMZgSx -->
-        <album id="AL_02" gatunek="GAT_02">
+        <album id="AL_02" gatunek="GAT_02" explicit="false">
             <nazwa>Bo Marzę i Śnię</nazwa>
             <wykonawcy>
                 <wykonawca czyZagraniczny="nie">Krzysztof Krawczyk</wykonawca>
@@ -107,7 +107,7 @@
         <klient>
             <imie>Piotr</imie>
             <nazwisko>Łuszcz</nazwisko>
-            <nick>Skoczek</nick>
+            <login>skoczek</login>
             <wypozyczenia>
                 <wypozyczenie>
                     <albumy>
