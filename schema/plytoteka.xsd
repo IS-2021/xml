@@ -6,10 +6,10 @@
     xmlns:albumy="/albumy/namespace"
     xmlns:klienci="/klienci/namespace"
 >
-    <xs:import namespace="/common/namespace" schemaLocation="common.xsd" />
-    <xs:import namespace="/gatunki/namespace" schemaLocation="gatunki.xsd" />
-    <xs:import namespace="/albumy/namespace" schemaLocation="albumy.xsd" />
-    <xs:import namespace="/klienci/namespace" schemaLocation="klienci.xsd" />
+    <xs:import namespace="/common/namespace" schemaLocation="namespaces/common.xsd" />
+    <xs:import namespace="/gatunki/namespace" schemaLocation="namespaces/gatunki.xsd" />
+    <xs:import namespace="/albumy/namespace" schemaLocation="namespaces/albumy.xsd" />
+    <xs:import namespace="/klienci/namespace" schemaLocation="namespaces/klienci.xsd" />
 
     <!-- Types -->
     <xs:complexType name="plytotekaType">
