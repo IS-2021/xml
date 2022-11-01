@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="/klienci/namespace"
+    xmlns="/klienci/namespace"
+    xmlns:common="/common/namespace"
+>
+    <xs:import namespace="/common/namespace" schemaLocation="common.xsd" />
+
+    <!-- Klienci i wypożyczenia -->
+    <xs:complexType name="klienciType">
+        <xs:sequence>
+            <xs:element name="klient">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:choice>
+                            <xs:element name="nip" type="common:NIP" />
+                            <xs:element name="pesel" type="common:PESEL" />
+                        </xs:choice>
+                        <xs:element name="imie" type="klientNameType" />
+                        <xs:element name="nazwisko" type="klientNameType" />
+                        <xs:element name="login" type="login" />
+                        <xs:element name="wypozyczenia" type="wypozyczeniaType" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="email">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="5" />
+            <xs:pattern value="\w+@\w+\.\w+" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="nick">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="3" />
+            <xs:maxLength value="16" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="login">
+        <xs:union memberTypes="email nick" />
+    </xs:simpleType>
+
+    <xs:simpleType name="klientNameType">
+        <xs:restriction base="common:polishNameType">
+            <xs:minLength value="3" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="albumType">
+        <xs:attribute name="numer">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:pattern value="AL_\d+"></xs:pattern>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="wypozyczoneAlbumySequence">
+        <xs:sequence>
+            <xs:element name="album" maxOccurs="2" type="albumType" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="wypozyczeniaType">
+        <xs:sequence>
+            <xs:element name="wypozyczenie">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="albumy" type="wypozyczoneAlbumySequence" />
+                        <xs:element name="data_rozpoczecia" type="xs:date" />
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
