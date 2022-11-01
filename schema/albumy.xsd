@@ -13,25 +13,11 @@
             <xs:element name="album" maxOccurs="unbounded" >
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="nazwa">
-                            <xs:simpleType>
-                                <xs:restriction base="xs:string">
-                                    <xs:minLength value="2" />
-                                </xs:restriction>
-                            </xs:simpleType>
-                        </xs:element>
+                        <xs:element name="nazwa" type="common:min2charType" />
                         <xs:element name="wykonawcy">
                             <xs:complexType>
                                 <xs:sequence>
-                                    <xs:element name="wykonawca">
-                                        <xs:complexType>
-                                            <xs:simpleContent>
-                                                <xs:extension base="xs:string">
-                                                    <xs:attribute name="czyZagraniczny" type="common:takNieType" />
-                                                </xs:extension>
-                                            </xs:simpleContent>
-                                        </xs:complexType>
-                                    </xs:element>
+                                    <xs:element name="wykonawca" type="wykonawcaType" />
                                 </xs:sequence>
                             </xs:complexType>
                         </xs:element>
@@ -78,6 +64,14 @@
                 </xs:complexType>
             </xs:element>
         </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="wykonawcaType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="czyZagraniczny" type="common:takNieType" />
+            </xs:extension>
+        </xs:simpleContent>
     </xs:complexType>
 
     <xs:simpleType name="opakowanieType">

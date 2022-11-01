@@ -63,28 +63,28 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:complexType name="albumType">
+        <xs:attribute name="numer">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:pattern value="AL_\d+"></xs:pattern>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="wypozyczoneAlbumySequence">
+        <xs:sequence>
+            <xs:element name="album" maxOccurs="unbounded" type="albumType" />
+        </xs:sequence>
+    </xs:complexType>
+
     <xs:complexType name="wypozyczeniaType">
         <xs:sequence>
             <xs:element name="wypozyczenie">
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="albumy">
-                            <xs:complexType>
-                                <xs:sequence>
-                                    <xs:element name="album" maxOccurs="unbounded">
-                                        <xs:complexType>
-                                            <xs:attribute name="numer">
-                                                <xs:simpleType>
-                                                    <xs:restriction base="xs:string">
-                                                        <xs:pattern value="AL_\d+"></xs:pattern>
-                                                    </xs:restriction>
-                                                </xs:simpleType>
-                                            </xs:attribute>
-                                        </xs:complexType>
-                                    </xs:element>
-                                </xs:sequence>
-                            </xs:complexType>
-                        </xs:element>
+                        <xs:element name="albumy" type="wypozyczoneAlbumySequence" />
                         <xs:element name="data_rozpoczecia" type="xs:date" />
                     </xs:sequence>
                 </xs:complexType>
