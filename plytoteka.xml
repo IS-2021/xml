@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<płytoteka xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:noNamespaceSchemaLocation="plytoteka.xsd">
+<płytoteka
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="plytoteka.xsd"
+>
     <gatunki>
         <gatunek id="GAT_01" nazwa="Elektronika" />
         <gatunek id="GAT_02" nazwa="Rock" />
