@@ -10,7 +10,7 @@
     <!-- Albumy -->
     <xs:complexType name="albumyType">
         <xs:sequence>
-            <xs:element name="album" maxOccurs="unbounded">
+            <xs:element name="album" maxOccurs="unbounded" >
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element name="nazwa">
@@ -60,6 +60,7 @@
                         <xs:element name="naklad" type="common:min1Type" />
                         <xs:element name="sprzedaneEgzemplarze" type="common:min1Type" />
                     </xs:sequence>
+                    <xs:attributeGroup ref="albumInfoGroup" />
                     <xs:attribute name="id">
                         <xs:simpleType>
                             <xs:restriction base="xs:string">
@@ -130,4 +131,10 @@
             </xs:element>
         </xs:sequence>
     </xs:complexType>
+
+    <xs:attributeGroup name="albumInfoGroup">
+        <xs:attribute name="explicit" type="xs:boolean" use="required" />
+        <xs:attribute name="deluxe" type="xs:boolean" default="0" />
+        <xs:attribute name="vinyl" type="xs:boolean" default="0" />
+    </xs:attributeGroup>
 </xs:schema>
