@@ -13,7 +13,7 @@
             <xs:element name="album" maxOccurs="unbounded" >
                 <xs:complexType>
                     <xs:sequence>
-                        <xs:element name="nazwa" type="common:min2charType" />
+                        <xs:element name="nazwa" type="common:min2charString" />
                         <xs:element name="wykonawcy">
                             <xs:complexType>
                                 <xs:sequence>
@@ -21,8 +21,8 @@
                                 </xs:sequence>
                             </xs:complexType>
                         </xs:element>
-                        <xs:element name="producent" type="common:min2charType" />
-                        <xs:element name="dystrybutor" type="common:min2charType" />
+                        <xs:element name="producent" type="common:min2charString" />
+                        <xs:element name="dystrybutor" type="common:min2charString" />
                         <xs:element name="opakowanie" type="opakowanieType" />
                         <xs:element name="plyty" type="plytyType" />
                         <xs:element name="data_premiery" type="xs:date" />
@@ -43,8 +43,8 @@
                                 </xs:restriction>
                             </xs:simpleType>
                         </xs:element>
-                        <xs:element name="naklad" type="common:min1Type" />
-                        <xs:element name="sprzedaneEgzemplarze" type="common:min1Type" />
+                        <xs:element name="naklad" type="common:min1numberValue" />
+                        <xs:element name="sprzedaneEgzemplarze" type="common:min1numberValue" />
                     </xs:sequence>
                     <xs:attributeGroup ref="albumInfoGroup" />
                     <xs:attribute name="id">

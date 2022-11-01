@@ -24,13 +24,13 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="min2charType">
+    <xs:simpleType name="min2charString">
         <xs:restriction base="xs:string">
             <xs:minLength value="2"></xs:minLength>
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="min1Type">
+    <xs:simpleType name="min1numberValue">
         <xs:restriction base="xs:unsignedInt">
             <xs:minExclusive value="0" />
         </xs:restriction>
