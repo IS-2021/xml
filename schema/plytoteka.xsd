@@ -75,7 +75,7 @@
 
     <xs:complexType name="wypozyczoneAlbumySequence">
         <xs:sequence>
-            <xs:element name="album" maxOccurs="unbounded" type="albumType" />
+            <xs:element name="album" maxOccurs="2" type="albumType" />
         </xs:sequence>
     </xs:complexType>
 
