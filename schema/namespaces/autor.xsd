@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="/autor/namespace"
+    xmlns:klienci="/klienci/namespace"
+>
+    <xs:import namespace="/klienci/namespace" schemaLocation="klienci.xsd" />
+
+    <xs:complexType name="autorType">
+        <xs:all>
+            <xs:element name="imie" type="klienci:klientNameType" />
+            <xs:element name="nazwisko" type="klienci:klientNameType" />
+            <xs:element name="indeks">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:length value="6" />
+                        <xs:pattern value="\d+" />
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element name="zadanie">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:pattern value="Zadanie \d" />
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:all>
+    </xs:complexType>
+</xs:schema>

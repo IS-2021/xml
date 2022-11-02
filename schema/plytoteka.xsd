@@ -5,15 +5,20 @@
     xmlns:gatunki="/gatunki/namespace"
     xmlns:albumy="/albumy/namespace"
     xmlns:klienci="/klienci/namespace"
+    xmlns:autor="/autor/namespace"
 >
+    <!-- Imports -->
     <xs:import namespace="/common/namespace" schemaLocation="namespaces/common.xsd" />
     <xs:import namespace="/gatunki/namespace" schemaLocation="namespaces/gatunki.xsd" />
     <xs:import namespace="/albumy/namespace" schemaLocation="namespaces/albumy.xsd" />
     <xs:import namespace="/klienci/namespace" schemaLocation="namespaces/klienci.xsd" />
+    <xs:import namespace="/autor/namespace" schemaLocation="namespaces/autor.xsd" />
 
-    <!-- Types -->
+
+    <!-- Document types -->
     <xs:complexType name="plytotekaType">
         <xs:all minOccurs="1">
+            <xs:element name="autor" type="autor:autorType" />
             <xs:element name="gatunki" type="gatunki:gatunkiType" />
             <xs:element name="albumy" type="albumy:albumyType" />
             <xs:element name="klienci" type="klienci:klienciType" />

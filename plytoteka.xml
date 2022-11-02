@@ -5,6 +5,13 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="schema/plytoteka.xsd"
 >
+    <autor>
+        <imie>Jakub</imie>
+        <nazwisko>Kazimierczak</nazwisko>
+        <indeks>242418</indeks>
+        <zadanie>Zadanie 3</zadanie>
+    </autor>
+
     <gatunki>
         <gatunek id="GAT_01" nazwa="Elektronika" />
         <gatunek id="GAT_02" nazwa="Rock" />
