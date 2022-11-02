@@ -1,0 +1,36 @@
+album > producent {
+    grid-area: producent;
+}
+album > dystrybutor {
+    grid-area: dystrybutor;
+}
+album > opakowanie {
+    grid-area: opakowanie;
+}
+album > data_premiery {
+    grid-area: data_premiery;
+}
+album > cena {
+    grid-area: cena;
+}
+album > ocena {
+    grid-area: ocena;
+}
+album > naklad {
+    grid-area: naklad;
+}
+album > sprzedaneEgzemplarze {
+    grid-area: sprzedaneEgzemplarze;
+}
+
+album > producent,
+album > dystrybutor,
+album > opakowanie,
+album > data_premiery,
+album > cena,
+album > ocena,
+album > naklad,
+album > sprzedaneEgzemplarze {
+    justify-self: end;
+    margin-bottom: .5rem;
+}
