@@ -69,7 +69,7 @@
 
     <xs:complexType name="wypozyczeniaType">
         <xs:sequence>
-            <xs:element name="wypozyczenie">
+            <xs:element name="wypozyczenie" minOccurs="0" maxOccurs="unbounded">
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element name="albumy" type="wypozyczoneAlbumySequence" />
