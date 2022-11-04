@@ -6,10 +6,15 @@
     xsi:noNamespaceSchemaLocation="schema/plytoteka.xsd"
 >
     <autor>
+        <student>
         <imie>Jakub</imie>
         <nazwisko>Kazimierczak</nazwisko>
         <indeks>242418</indeks>
-        <zadanie>Zadanie 3</zadanie>
+        </student>
+        <zadanie>
+            <temat>💿 Płytoteka</temat>
+            <nazwa>Zadanie 3</nazwa>
+        </zadanie>
     </autor>
 
     <gatunki>
