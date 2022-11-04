@@ -1,10 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200&display=swap");
 
 :root {
     --gray: #858585;
-    --orange: #FF8A00;
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --orange: #ff8a00;
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1),
+        0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
 * {
@@ -18,19 +19,19 @@ plytoteka {
     background-color: #f5f5f5;
 }
 
-plytoteka>klienci::before {
+plytoteka > klienci::before {
     content: "Klienci";
 }
 
-plytoteka>albumy::before {
+plytoteka > albumy::before {
     content: "Albumy";
 }
 
-plytoteka>klienci::before,
-plytoteka>albumy::before {
+plytoteka > klienci::before,
+plytoteka > albumy::before {
     text-align: center;
     border-radius: 8px;
-    padding: .5rem;
+    padding: 0.5rem;
     background-color: #1b1b1b;
     color: #fff;
     display: block;
@@ -40,33 +41,33 @@ plytoteka>albumy::before {
     box-shadow: var(--shadow-md);
 }
 
-plytoteka>albumy {
+plytoteka > albumy {
     display: flex;
     flex-direction: column;
     margin-bottom: 4rem;
 }
 
-plytoteka>albumy album {
+plytoteka > albumy album {
     display: grid;
-    
+
     grid-template-columns: 1fr max-content;
-    grid-template-areas: 
-    "nazwa 		cena"
-    "wykonawcy 	ocena"
-    "plyty		producent"
-    "plyty		dystrybutor"
-    "plyty		opakowanie"
-    "plyty		data_premiery"
-    "plyty		naklad"
-    "plyty		sprzedaneEgzemplarze";
+    grid-template-areas:
+        "nazwa 		cena"
+        "wykonawcy 	ocena"
+        "plyty		producent"
+        "plyty		dystrybutor"
+        "plyty		opakowanie"
+        "plyty		data_premiery"
+        "plyty		naklad"
+        "plyty		sprzedaneEgzemplarze";
 
     padding: 1rem;
     box-shadow: var(--shadow-md);
     border-radius: 8px;
-    margin-bottom: .75rem;
+    margin-bottom: 0.75rem;
     background-color: #fff;
 
-    transition: all .3s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 album > nazwa,
@@ -78,18 +79,21 @@ album > cena {
 
 album > cena::after {
     content: attr(waluta);
-    margin-left: .5rem;
+    margin-left: 0.5rem;
 }
 
 album > ocena {
     font-weight: 700;
 }
+
 album > ocena::before {
     content: "Ocena: ";
 }
+
 album > ocena::after {
     content: "/5 ⭐";
 }
+
 album > ocena::before,
 album > ocena::after {
     color: var(--gray);
@@ -117,11 +121,13 @@ album > plyty {
     display: flex;
     flex-direction: column;
 }
+
 album > plyty::before {
     content: "Tracklista";
     font-weight: 700;
     font-size: 1.5rem;
 }
+
 album > plyty plyta::before {
     content: "💿 CD " attr(cd);
     font-weight: 700;
@@ -135,7 +141,7 @@ plyta {
 plyta utwory {
     display: flex;
     flex-direction: column;
-    margin-top: .25rem;
+    margin-top: 0.25rem;
 }
 
 utwor {
@@ -148,8 +154,9 @@ utwor numer {
     grid-area: numer;
     font-family: "JetBrains Mono", "Consolas", monospace;
     color: var(--gray);
-    margin-right: .5rem;
+    margin-right: 0.5rem;
 }
+
 utwor numer::after {
     content: ".";
 }
@@ -161,33 +168,39 @@ utwor nazwa {
 
 utwor dlugosc {
     grid-area: dlugosc;
-    font-feature-settings: 'tnum' on, 'lnum' on;
-}
-utwor dlugosc::after {
-    content: "-";
-    margin: 0 .25rem;
-    color: var(--gray);
+    font-feature-settings: "tnum" on, "lnum" on;
 }
 
+utwor dlugosc::after {
+    content: "-";
+    margin: 0 0.25rem;
+    color: var(--gray);
+}
 
 album > producent::before {
     content: "Producent:";
 }
+
 album > dystrybutor::before {
     content: "Dystrybutor:";
 }
+
 album > opakowanie::before {
     content: "Opakowanie:";
 }
+
 album > data_premiery::before {
     content: "Data premiery:";
 }
+
 album > ocena::before {
     content: "Ocena:";
 }
+
 album > naklad::before {
     content: "Naklad:";
 }
+
 album > sprzedaneEgzemplarze::before {
     content: "Sprzedano:";
 }
@@ -210,9 +223,8 @@ album > ocena::before,
 album > naklad::before,
 album > sprzedaneEgzemplarze::before {
     color: var(--gray);
-    margin-right: .5rem;
+    margin-right: 0.5rem;
     font-weight: 300;
 }
-
 
 /* album wykonawcy */
