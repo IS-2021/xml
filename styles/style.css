@@ -4,18 +4,47 @@
 :root {
     --gray: #858585;
     --orange: #ff8a00;
+    --dark: #202124;
     --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1),
         0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
 * {
     font-family: "Inter", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+autor {
+    position: sticky;
+    top: 0;
+
+    display: grid;
+    grid-template-areas: "student zadanie";
+
+    background-color: #202124;
+    color: gray;
+    padding: 0.75rem 1rem;
+    /* width: 100vw; */
+    margin-bottom: 3rem;
+}
+
+autor > student {
+    grid-area: student;
+}
+autor > zadanie {
+    grid-area: zadanie;
+    justify-self: end;
+}
+zadanie > temat::after {
+    content: " /";
+}
+
+student > nazwisko::after {
+    content: ",";
 }
 
 plytoteka {
-    display: block;
-    max-width: 960px;
-    margin: 1rem auto;
     background-color: #f5f5f5;
 }
 
@@ -30,9 +59,9 @@ plytoteka > albumy::before {
 plytoteka > klienci::before,
 plytoteka > albumy::before {
     text-align: center;
-    border-radius: 8px;
+    border-radius: 4px;
     padding: 0.5rem;
-    background-color: #1b1b1b;
+    background-color: var(--dark);
     color: #fff;
     display: block;
     font-weight: 700;
@@ -68,6 +97,12 @@ plytoteka > albumy album {
     background-color: #fff;
 
     transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+plytoteka > klienci klient:hover,
+plytoteka > albumy album:hover {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+        0 8px 10px -6px rgb(0 0 0 / 0.1);
 }
 
 album > nazwa,
@@ -227,4 +262,129 @@ album > sprzedaneEgzemplarze::before {
     font-weight: 300;
 }
 
-/* album wykonawcy */
+klient {
+    display: block;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-areas:
+        "imie nazwisko"
+        "login login"
+        "wypozyczenia wypozyczenia";
+
+    padding: 1rem;
+    box-shadow: var(--shadow-md);
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    background-color: #fff;
+
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+klient pesel {
+    display: none;
+}
+
+klient imie,
+klient nazwisko {
+    font-size: 1.75rem;
+    font-weight: 700;
+}
+
+klient imie,
+klient nazwisko {
+    display: inline-block;
+}
+
+klient login {
+    display: block;
+    color: var(--gray);
+    margin-bottom: 1.5rem;
+}
+
+klient login::before {
+    content: "login: ";
+    margin-left: auto;
+}
+
+klient wypozyczenia::before {
+    display: block;
+}
+
+klient wypozyczenia::before {
+    content: "Wypożyczenia";
+    font-size: 1.5rem;
+    font-weight: 700;
+    position: relative;
+    top: 0;
+}
+
+wypozyczenie::before {
+    grid-area: title;
+
+    line-height: 1rem;
+    content: "Wypożyczenie";
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--gray);
+
+    margin-bottom: 0.5rem;
+}
+
+wypozyczenie {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+        "title  data_rozpoczecia"
+        ".      data_zakonczenia"
+        "albumy albumy";
+
+    border: 2px dashed #202124;
+    padding: 1rem;
+    margin-top: 0.5rem;
+    border-radius: 8px;
+    box-shadow: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+}
+
+wypozyczenie data_rozpoczecia {
+    grid-area: data_rozpoczecia;
+    font-weight: 600;
+}
+wypozyczenie data_zakonczenia {
+    grid-area: data_zakonczenia;
+    font-weight: 600;
+}
+
+wypozyczenie data_rozpoczecia::before {
+    content: "Data rozpoczęcia: ";
+    color: var(--gray);
+    font-weight: 400;
+    grid-area: data_rozpoczecia;
+}
+
+wypozyczenie data_zakonczenia::before {
+    content: "Data zakończenia: ";
+    color: var(--gray);
+    font-weight: 400;
+    grid-area: data_zakonczenia;
+}
+
+wypozyczenie albumy::before {
+    content: "Wypożyczone albumy: ";
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+wypozyczenie albumy {
+    grid-area: albumy;
+    display: flex;
+    flex-direction: column;
+    margin-left: 0;
+}
+
+wypozyczenie album {
+    display: list-item;
+    margin-left: 1.35rem;
+}
+
+wypozyczenie album::after {
+    content: attr(numer);
+}
