@@ -27,7 +27,7 @@
 
 
     <!-- Document -->
-    <xs:element name="płytoteka" type="plytotekaType">
+    <xs:element name="plytoteka" type="plytotekaType">
         <!-- Klucze -->
         <xs:key name="gatunekID">
             <xs:selector xpath="gatunki/gatunek" />

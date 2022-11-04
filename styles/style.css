@@ -11,21 +11,23 @@
     font-family: "Inter", sans-serif;
 }
 
-płytoteka {
+plytoteka {
     display: block;
     max-width: 960px;
     margin: 1rem auto;
     background-color: #f5f5f5;
 }
 
-płytoteka > klienci::before {
+plytoteka>klienci::before {
     content: "Klienci";
 }
-płytoteka > albumy::before {
+
+plytoteka>albumy::before {
     content: "Albumy";
 }
-płytoteka > klienci::before,
-płytoteka > albumy::before {
+
+plytoteka>klienci::before,
+plytoteka>albumy::before {
     text-align: center;
     border-radius: 8px;
     padding: .5rem;
@@ -38,13 +40,13 @@ płytoteka > albumy::before {
     box-shadow: var(--shadow-md);
 }
 
-płytoteka > albumy {
+plytoteka>albumy {
     display: flex;
     flex-direction: column;
     margin-bottom: 4rem;
 }
 
-płytoteka > albumy album {
+plytoteka>albumy album {
     display: grid;
     
     grid-template-columns: 1fr max-content;
