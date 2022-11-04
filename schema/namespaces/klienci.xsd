@@ -74,6 +74,7 @@
                     <xs:sequence>
                         <xs:element name="albumy" type="wypozyczoneAlbumySequence" />
                         <xs:element name="data_rozpoczecia" type="xs:date" />
+                        <xs:element name="data_zakonczenia" type="xs:date" minOccurs="0" />
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
