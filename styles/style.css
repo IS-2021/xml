@@ -117,6 +117,12 @@ album > cena::after {
     margin-left: 0.5rem;
 }
 
+album > cena[waluta=PLN],
+album > cena[waluta=PLN]::after {
+    content: "ZŁ";
+    color: #e74032;
+}
+
 album > ocena {
     font-weight: 700;
 }
