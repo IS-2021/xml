@@ -10,7 +10,7 @@
     <!-- Albumy -->
     <xs:complexType name="albumyType">
         <xs:sequence>
-            <xs:element name="album" maxOccurs="unbounded" >
+            <xs:element name="album" maxOccurs="unbounded">
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element name="nazwa" type="common:min2charString" />
@@ -92,6 +92,11 @@
                                     <xs:element name="utwor" type="utworType" maxOccurs="unbounded" />
                                 </xs:sequence>
                             </xs:complexType>
+                            <!-- Unique -->
+                            <xs:unique name="utworNumerUnique">
+                                <xs:selector xpath="utwor/numer" />
+                                <xs:field xpath="." />
+                            </xs:unique>
                         </xs:element>
                     </xs:all>
                     <xs:attribute name="cd" use="required" type="xs:unsignedInt" />
