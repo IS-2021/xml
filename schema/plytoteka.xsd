@@ -47,5 +47,11 @@
             <xs:selector xpath="klienci/klient/klienci/wypozyczenie/albumy/album" />
             <xs:field xpath="@numer" />
         </xs:keyref>
+
+        <!-- Unique -->
+        <xs:unique name="utworNumerUnique">
+            <xs:selector xpath="albumy/album/plyty/plyta/utwory/utwor/numer" />
+            <xs:field xpath="." />
+        </xs:unique>
     </xs:element>
 </xs:schema>
