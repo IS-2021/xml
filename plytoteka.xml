@@ -871,6 +871,45 @@
                     <data_rozpoczecia>2022-10-23</data_rozpoczecia>
                     <data_zakonczenia>2022-11-04</data_zakonczenia>
                 </wypozyczenie>
+                <wypozyczenie>
+                    <albumy>
+                        <album numer="AL_01" />
+                        <album numer="AL_20" />
+                    </albumy>
+                    <data_rozpoczecia>2022-11-04</data_rozpoczecia>
+                    <data_zakonczenia>2022-11-08</data_zakonczenia>
+                </wypozyczenie>
+                <wypozyczenie>
+                    <albumy>
+                        <album numer="AL_14" />
+                        <album numer="AL_23" />
+                    </albumy>
+                    <data_rozpoczecia>2022-10-23</data_rozpoczecia>
+                </wypozyczenie>
+            </wypozyczenia>
+        </klient>
+        <klient>
+            <pesel>81101074789</pesel>
+            <imie>Christian</imie>
+            <nazwisko>Perez</nazwisko>
+            <login>mr_worldwide</login>
+            <wypozyczenia>
+                <wypozyczenie>
+                    <albumy>
+                        <album numer="AL_10" />
+                        <album numer="AL_11" />
+                    </albumy>
+                    <data_rozpoczecia>2021-03-15</data_rozpoczecia>
+                    <data_zakonczenia>2021-03-30</data_zakonczenia>
+                </wypozyczenie>
+                <wypozyczenie>
+                    <albumy>
+                        <album numer="AL_03" />
+                        <album numer="AL_13" />
+                    </albumy>
+                    <data_rozpoczecia>2022-04-07</data_rozpoczecia>
+                    <data_zakonczenia>2022-04-04</data_zakonczenia>
+                </wypozyczenie>
             </wypozyczenia>
         </klient>
     </klienci>
