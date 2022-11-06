@@ -47,7 +47,7 @@
                         <xs:element name="sprzedaneEgzemplarze" type="common:min1numberValue" />
                     </xs:sequence>
                     <xs:attributeGroup ref="albumInfoGroup" />
-                    <xs:attribute name="id">
+                    <xs:attribute name="id" use="required">
                         <xs:simpleType>
                             <xs:restriction base="xs:string">
                                 <xs:pattern value="AL_\d+" />
