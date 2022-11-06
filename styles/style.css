@@ -117,10 +117,25 @@ album > cena::after {
     margin-left: 0.5rem;
 }
 
-album > cena[waluta=PLN],
-album > cena[waluta=PLN]::after {
+album wykonawca[czyZagraniczny="tak"] {
+    color: var(--orange);
+    font-style: italic;
+}
+
+album > cena[waluta="PLN"]::after {
     content: "ZŁ";
-    color: #e74032;
+}
+
+album > cena[waluta="USD"],
+album > cena[waluta="USD"]::after {
+    content: "$";
+    color: #289947;
+}
+
+album > cena[waluta="EUR"],
+album > cena[waluta="EUR"]::after {
+    content: "€";
+    color: #2d7cee;
 }
 
 album > ocena {
