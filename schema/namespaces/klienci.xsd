@@ -10,7 +10,7 @@
     <!-- Klienci i wypożyczenia -->
     <xs:complexType name="klienciType">
         <xs:sequence>
-            <xs:element name="klient">
+            <xs:element name="klient" minOccurs="0" maxOccurs="unbounded">
                 <xs:complexType>
                     <xs:sequence>
                         <xs:choice>
