@@ -57,11 +57,16 @@ plytoteka klient {
 plytoteka > klienci::before {
     content: "Klienci";
 }
-
 plytoteka > albumy::before {
     content: "Albumy";
 }
+plytoteka > gatunki::before {
+    content: "Gatunki";
+    grid-column-start: 1;
+    grid-column-end: 4;
+}
 
+plytoteka > gatunki::before,
 plytoteka > klienci::before,
 plytoteka > albumy::before {
     text-align: center;
@@ -74,6 +79,26 @@ plytoteka > albumy::before {
     font-size: 2rem;
     margin-bottom: 1rem;
     box-shadow: var(--shadow-md);
+}
+
+plytoteka > gatunki {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: .5rem;
+    margin-bottom: 3rem;
+}
+
+gatunki gatunek::before {
+    content: attr(nazwa);
+}
+
+gatunki gatunek {
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 1rem;
+    content: attr(nazwa);
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 plytoteka > albumy {
@@ -105,6 +130,7 @@ plytoteka > albumy album {
     transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
+plytoteka > gatunki gatunek:hover,
 plytoteka > klienci klient:hover,
 plytoteka > albumy album:hover {
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
