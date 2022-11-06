@@ -77,7 +77,9 @@
     <xs:simpleType name="opakowanieType">
         <xs:restriction base="xs:string">
             <xs:enumeration value="Digipack" />
-            <xs:enumeration value="Jewel case" />
+            <xs:enumeration value="Digibook" />
+            <xs:enumeration value="Jewel Case" />
+            <xs:enumeration value="Standard" />
         </xs:restriction>
     </xs:simpleType>
 

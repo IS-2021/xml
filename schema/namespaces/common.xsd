@@ -15,6 +15,7 @@
         <xs:restriction base="xs:string">
             <xs:enumeration value="EUR" />
             <xs:enumeration value="PLN" />
+            <xs:enumeration value="USD" />
         </xs:restriction>
     </xs:simpleType>
 
