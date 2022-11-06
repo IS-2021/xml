@@ -47,5 +47,11 @@
             <xs:selector xpath="klienci/klient/wypozyczenia/wypozyczenie/albumy/album" />
             <xs:field xpath="@numer" />
         </xs:keyref>
+
+        <!-- Unique -->
+        <xs:unique name="unique_NIP_or_PESEL">
+            <xs:selector xpath="klienci/klient/pesel" />
+            <xs:field xpath="." />
+        </xs:unique>
     </xs:element>
 </xs:schema>
