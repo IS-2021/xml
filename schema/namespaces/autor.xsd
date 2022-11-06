@@ -31,7 +31,7 @@
 
     <xs:complexType name="zadanieType">
         <xs:sequence>
-            <xs:element name="temat" type="xs:string" />
+            <xs:element name="temat" type="xs:string"  minOccurs="0"/>
             <xs:element name="nazwa">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
