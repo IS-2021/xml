@@ -44,7 +44,7 @@
             <xs:field xpath="@gatunek" />
         </xs:keyref>
         <xs:keyref name="albumRef" refer="albumID">
-            <xs:selector xpath="klienci/klient/klienci/wypozyczenie/albumy/album" />
+            <xs:selector xpath="klienci/klient/wypozyczenia/wypozyczenie/albumy/album" />
             <xs:field xpath="@numer" />
         </xs:keyref>
     </xs:element>
