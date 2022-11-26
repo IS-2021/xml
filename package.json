@@ -4,6 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "support": "grunt exec:support",
+    "xhtml": "grunt exec:xhtml",
+    "txt": "grunt exec:txt",
+    "svg": "grunt exec:svg",
+    "build": "grunt --force exec:support exec:xhtml exec:txt exec:svg",
     "watch": "grunt watch"
   },
   "repository": {
