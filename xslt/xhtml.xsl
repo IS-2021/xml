@@ -24,9 +24,16 @@
                     <xsl:attribute name="rel">stylesheet</xsl:attribute>
                     <xsl:attribute name="href">../../styles/layout.css</xsl:attribute>
                 </xsl:element>
+                <xsl:element name="link">
+                    <xsl:attribute name="rel">stylesheet</xsl:attribute>
+                    <xsl:attribute name="href">../../styles/override.css</xsl:attribute>
+                </xsl:element>
             </xsl:element>
             <xsl:element name="body">
-                <xsl:apply-templates select="//data/albumy" />
+                <xsl:element name="div">
+                    <xsl:attribute name="class">albumy</xsl:attribute>
+                    <xsl:apply-templates select="//data/albumy" />
+                </xsl:element>
             </xsl:element>
         </xsl:element>
     </xsl:template>
@@ -37,12 +44,8 @@
 
     <xsl:template match="//data/albumy/album">
         <xsl:element name="div">
-            <xsl:attribute name="class">album</xsl:attribute>
+            <xsl:attribute name="class">album__info</xsl:attribute>
 
-            <xsl:element name="div">
-                <xsl:attribute name="class">nazwa</xsl:attribute>
-                <xsl:value-of select="nazwa" />
-            </xsl:element>
             <xsl:element name="img">
                 <xsl:attribute name="src">
                     <xsl:value-of select="okladka" />
@@ -52,44 +55,51 @@
                 </xsl:attribute>
             </xsl:element>
             <xsl:element name="div">
-                <xsl:attribute name="class">wykonawcy</xsl:attribute>
-                <xsl:apply-templates select="wykonawcy" />
-            </xsl:element>
-            <xsl:element name="div">
-                <xsl:attribute name="class">producent</xsl:attribute>
-                <xsl:value-of select="producent" />
-            </xsl:element>
-            <xsl:element name="div">
-                <xsl:attribute name="class">dystrybutor</xsl:attribute>
-                <xsl:value-of select="dystrybutor" />
-            </xsl:element>
-            <xsl:element name="div">
-                <xsl:attribute name="class">opakowanie</xsl:attribute>
-                <xsl:value-of select="opakowanie" />
-            </xsl:element>
-            <xsl:element name="div">
-                <xsl:attribute name="class">plyty</xsl:attribute>
-                <xsl:apply-templates select="plyty" />
-            </xsl:element>
-            <xsl:element name="div">
-                <xsl:attribute name="class">data_premiery</xsl:attribute>
-                <xsl:value-of select="data_premiery" />
-            </xsl:element>
-            <xsl:element name="div">
-                <xsl:attribute name="class">cena</xsl:attribute>
-                <xsl:apply-templates select="cena" />
-            </xsl:element>
-            <xsl:element name="div">
-                <xsl:attribute name="class">ocena</xsl:attribute>
-                <xsl:value-of select="ocena" />
-            </xsl:element>
-            <xsl:element name="div">
-                <xsl:attribute name="class">naklad</xsl:attribute>
-                <xsl:value-of select="naklademplarze" />
-            </xsl:element>
-            <xsl:element name="div">
-                <xsl:attribute name="class">sprzedaneEgzemplarze</xsl:attribute>
-                <xsl:value-of select="sprzedaneEgzemplarze" />
+                <xsl:attribute name="class">album</xsl:attribute>
+                <xsl:element name="div">
+                    <xsl:attribute name="class">nazwa</xsl:attribute>
+                    <xsl:value-of select="nazwa" />
+                </xsl:element>
+                <xsl:element name="div">
+                    <xsl:attribute name="class">wykonawcy</xsl:attribute>
+                    <xsl:apply-templates select="wykonawcy" />
+                </xsl:element>
+                <xsl:element name="div">
+                    <xsl:attribute name="class">producent</xsl:attribute>
+                    <xsl:value-of select="producent" />
+                </xsl:element>
+                <xsl:element name="div">
+                    <xsl:attribute name="class">dystrybutor</xsl:attribute>
+                    <xsl:value-of select="dystrybutor" />
+                </xsl:element>
+                <xsl:element name="div">
+                    <xsl:attribute name="class">opakowanie</xsl:attribute>
+                    <xsl:value-of select="opakowanie" />
+                </xsl:element>
+                <xsl:element name="div">
+                    <xsl:attribute name="class">plyty</xsl:attribute>
+                    <xsl:apply-templates select="plyty" />
+                </xsl:element>
+                <xsl:element name="div">
+                    <xsl:attribute name="class">data_premiery</xsl:attribute>
+                    <xsl:value-of select="data_premiery" />
+                </xsl:element>
+                <xsl:element name="div">
+                    <xsl:attribute name="class">cena</xsl:attribute>
+                    <xsl:apply-templates select="cena" />
+                </xsl:element>
+                <xsl:element name="div">
+                    <xsl:attribute name="class">ocena</xsl:attribute>
+                    <xsl:value-of select="ocena" />
+                </xsl:element>
+                <xsl:element name="div">
+                    <xsl:attribute name="class">naklad</xsl:attribute>
+                    <xsl:value-of select="naklademplarze" />
+                </xsl:element>
+                <xsl:element name="div">
+                    <xsl:attribute name="class">sprzedaneEgzemplarze</xsl:attribute>
+                    <xsl:value-of select="sprzedaneEgzemplarze" />
+                </xsl:element>
             </xsl:element>
         </xsl:element>
     </xsl:template>

@@ -1,3 +1,6 @@
+.gatunki,
+.albumy,
+.klienci,
 gatunki,
 albumy,
 klienci {
@@ -6,38 +9,54 @@ klienci {
     margin: 0 auto;
 }
 
+.album > .producent,
 album > producent {
     grid-area: producent;
 }
+.album > .dystrybutor,
 album > dystrybutor {
     grid-area: dystrybutor;
 }
+.album > .opakowanie,
 album > opakowanie {
     grid-area: opakowanie;
 }
+.album > .data_premiery,
 album > data_premiery {
     grid-area: data_premiery;
 }
+.album > .cena,
 album > cena {
     grid-area: cena;
 }
+.album > .ocena,
 album > ocena {
     grid-area: ocena;
 }
+.album > .naklad,
 album > naklad {
     grid-area: naklad;
 }
+.album > .sprzedaneEgzemplarze,
 album > sprzedaneEgzemplarze {
     grid-area: sprzedaneEgzemplarze;
 }
 
+.album > .producent,
 album > producent,
+.album > .dystrybutor,
 album > dystrybutor,
+.album > .opakowanie,
 album > opakowanie,
+.album > .data_premiery,
 album > data_premiery,
+.album > .cena,
 album > cena,
+.album > .ocena,
 album > ocena,
+.album > .naklad,
 album > naklad,
+.album > .sprzedaneEgzemplarze,
 album > sprzedaneEgzemplarze {
     justify-self: end;
     margin-bottom: 0.5rem;

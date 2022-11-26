@@ -16,6 +16,7 @@
     padding: 0;
 }
 
+.autor,
 autor {
     position: sticky;
     top: 0;
@@ -30,44 +31,56 @@ autor {
     margin-bottom: 3rem;
 }
 
+.autor > .student,
 autor > student {
     grid-area: student;
 }
+.autor > .zadanie,
 autor > zadanie {
     grid-area: zadanie;
     justify-self: end;
 }
+.zadanie > .temat::after,
 zadanie > temat::after {
     content: " /";
 }
 
+.student > .nazwisko::after,
 student > nazwisko::after {
     content: ",";
 }
 
+body,
 plytoteka {
     background-color: #f5f5f5;
     margin-bottom: 2rem;
 }
 
+body .klient,
 plytoteka klient {
     margin-bottom: 0.75rem;
 }
 
+body > .klienci::before,
 plytoteka > klienci::before {
     content: "Klienci";
 }
+body > .albumy::before,
 plytoteka > albumy::before {
     content: "Albumy";
 }
+body > .gatunki::before,
 plytoteka > gatunki::before {
     content: "Gatunki";
     grid-column-start: 1;
     grid-column-end: 4;
 }
 
+body > .gatunki::before,
 plytoteka > gatunki::before,
+body > .klienci::before,
 plytoteka > klienci::before,
+body > .albumy::before,
 plytoteka > albumy::before {
     text-align: center;
     border-radius: 4px;
@@ -101,12 +114,14 @@ gatunki gatunek {
     transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
+body > .albumy,
 plytoteka > albumy {
     display: flex;
     flex-direction: column;
     margin-bottom: 4rem;
 }
 
+body > .albumy .album,
 plytoteka > albumy album {
     display: grid;
 
@@ -120,16 +135,9 @@ plytoteka > albumy album {
         "plyty		data_premiery"
         "plyty		naklad"
         "plyty		sprzedaneEgzemplarze";
-
-    padding: 1rem;
-    box-shadow: var(--shadow-md);
-    border-radius: 8px;
-    margin-bottom: 0.75rem;
-    background-color: #fff;
-
-    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
+body > .albumy .album__info:hover,
 plytoteka > gatunki gatunek:hover,
 plytoteka > klienci klient:hover,
 plytoteka > albumy album:hover {
@@ -146,11 +154,14 @@ gatunki gatunek:active {
     outline: none;
 }
 
+.albumy .album::before,
 albumy album::before {
     content: "ID: " attr(id);
     color: var(--gray);
 }
 
+.album > .nazwa,
+.album > .cena,
 album > nazwa,
 album > cena {
     grid-area: nazwa;
@@ -158,11 +169,13 @@ album > cena {
     font-weight: 900;
 }
 
+.album > .cena,
 album > cena::after {
     content: attr(waluta);
     margin-left: 0.5rem;
 }
 
+/* .album .wykonawca, */
 album wykonawca[czyZagraniczny="tak"] {
     color: var(--orange);
     font-style: italic;
@@ -184,29 +197,36 @@ album > cena[waluta="EUR"]::after {
     color: #2d7cee;
 }
 
+.album > .ocena,
 album > ocena {
     font-weight: 700;
 }
 
+.album > .ocena::before,
 album > ocena::before {
     content: "Ocena: ";
 }
 
+.album > .ocena::after,
 album > ocena::after {
     content: "/5 ⭐";
 }
 
+.album > .ocena::before,
 album > ocena::before,
+.album > .ocena::after,
 album > ocena::after {
     color: var(--gray);
     font-weight: 500;
 }
 
+.album > .wykonawcy,
 album > wykonawcy {
     grid-area: wykonawcy;
     padding-bottom: 1.5rem;
 }
 
+.album > .wykonawcy::before,
 album > wykonawcy::before {
     content: "Wykonawcy:";
     color: gray;
@@ -214,44 +234,52 @@ album > wykonawcy::before {
     font-weight: 400;
 }
 
+.wykonawcy .wykonawca:not(:last-child)::after,
 wykonawcy wykonawca:not(:last-child)::after {
     content: ",";
 }
 
+.album > .plyty,
 album > plyty {
     grid-area: plyty;
     display: flex;
     flex-direction: column;
 }
 
+.album > .plyty::before,
 album > plyty::before {
     content: "Tracklista";
     font-weight: 700;
     font-size: 1.5rem;
 }
 
+.album > .plyty .plyta::before,
 album > plyty plyta::before {
     content: "💿 CD " attr(cd);
     font-weight: 700;
     font-size: 1.25rem;
 }
 
+.plyta,
 plyta {
     margin-bottom: 1rem;
 }
 
+.plyta .utwory,
 plyta utwory {
     display: flex;
     flex-direction: column;
     margin-top: 0.25rem;
 }
 
+.utwor,
 utwor {
     display: grid;
     grid-template-areas: "numer dlugosc nazwa";
     grid-template-columns: min-content min-content 1fr;
 }
 
+.utwor .numer,
 utwor numer {
     grid-area: numer;
     font-family: "JetBrains Mono", "Consolas", monospace;
@@ -259,70 +287,95 @@ utwor numer {
     margin-right: 0.5rem;
 }
 
+.utwor .numer::after,
 utwor numer::after {
     content: ".";
 }
 
+.utwor .nazwa,
 utwor nazwa {
     grid-area: nazwa;
     /* font-weight: 700; */
 }
 
+.utwor .dlugosc,
 utwor dlugosc {
     grid-area: dlugosc;
     font-feature-settings: "tnum" on, "lnum" on;
 }
 
+.utwor .dlugosc::after,
 utwor dlugosc::after {
     content: "-";
     margin: 0 0.25rem;
     color: var(--gray);
 }
 
+.album > .producent::before,
 album > producent::before {
     content: "Producent:";
 }
 
+.album > .dystrybutor::before,
 album > dystrybutor::before {
     content: "Dystrybutor:";
 }
 
+.album > .opakowanie::before,
 album > opakowanie::before {
     content: "Opakowanie:";
 }
 
+.album > .data_premiery::before,
 album > data_premiery::before {
     content: "Data premiery:";
 }
 
+.album > .ocena::before,
 album > ocena::before {
     content: "Ocena:";
 }
 
+.album > .naklad::before,
 album > naklad::before {
     content: "Naklad:";
 }
 
+.album > .sprzedaneEgzemplarze::before,
 album > sprzedaneEgzemplarze::before {
     content: "Sprzedano:";
 }
 
+.album > .producent,
 album > producent,
+.album > .dystrybutor,
 album > dystrybutor,
+.album > .opakowanie,
 album > opakowanie,
+.album > .data_premiery,
 album > data_premiery,
+.album > .ocena,
 album > ocena,
+.album > .naklad,
 album > naklad,
+.album > .sprzedaneEgzemplarze,
 album > sprzedaneEgzemplarze {
     font-weight: 500;
 }
 
+.album > .producent::before,
 album > producent::before,
+.album > .dystrybutor::before,
 album > dystrybutor::before,
+.album > .opakowanie::before,
 album > opakowanie::before,
+.album > .data_premiery::before,
 album > data_premiery::before,
+.album > .ocena::before,
 album > ocena::before,
+.album > .naklad::before,
 album > naklad::before,
+.album > .sprzedaneEgzemplarze::before,
 album > sprzedaneEgzemplarze::before {
     color: var(--gray);
     margin-right: 0.5rem;

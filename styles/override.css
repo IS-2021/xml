@@ -1,0 +1,58 @@
+.album__info {
+    display: flex;
+
+    padding: 1rem;
+    box-shadow: var(--shadow-md);
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+    background-color: #fff;
+
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.album__info img {
+    max-height: 280px;
+    margin-right: 1rem;
+}
+
+.album {
+    width: 100%;
+}
+
+.album::before {
+    display: none;
+}
+
+.album .czyZagraniczny {
+    display: none;
+}
+
+.album .wykonawcy {
+    display: flex;
+}
+
+.album .wykonawcy::before {
+    margin-right: 0.5rem;
+}
+
+.cena,
+.cena .oryginalna,
+.cena .przeliczona {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.cena .oryginalna,
+.cena .przeliczona {
+    gap: 0.5rem;
+}
+
+.cena {
+    flex-direction: column-reverse;
+}
+
+.cena .oryginalna {
+    color: var(--gray);
+    font-size: 1rem;
+    font-weight: 500;
+}
