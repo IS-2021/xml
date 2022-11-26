@@ -7,7 +7,7 @@ module.exports = (grunt) => {
         pkg: grunt.file.readJSON("package.json"),
         exec: {
             support: {
-                cmd: `java -jar ${JAR} -s:plytoteka.xml -xsl:${XSLT_DIR}/plytoteka.xsl -o:${XSLT_OUT}/pomocniczny.xml`,
+                cmd: `java -jar ${JAR} -s:plytoteka.xml -xsl:${XSLT_DIR}/pomocniczy.xsl -o:${XSLT_OUT}/pomocniczny.xml`,
             },
         },
         watch: {
