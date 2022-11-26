@@ -219,7 +219,8 @@
 
     <xsl:template match="*[name()='data_premiery']">
         <xsl:element name="data_premiery">
-            <xsl:element name="dzien">
+            <xsl:value-of select="." />
+            <!-- <xsl:element name="dzien">
                 <xsl:value-of select="format-date(., '[D01]')" />
             </xsl:element>
             <xsl:element name="miesiac">
@@ -227,7 +228,7 @@
             </xsl:element>
             <xsl:element name="rok">
                 <xsl:value-of select="format-date(., '[Y01]')" />
-            </xsl:element>
+            </xsl:element> -->
         </xsl:element>
     </xsl:template>
 
