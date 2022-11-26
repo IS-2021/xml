@@ -113,9 +113,7 @@
     <xsl:template name="data">
         <xsl:element name="data">
             <!-- Autor -->
-            <xsl:element name="autor">
-                <xsl:copy-of select="//autor" copy-namespaces="no" />
-            </xsl:element>
+            <xsl:copy-of select="//autor" copy-namespaces="no" />
 
             <!-- Przepisanie albumów -->
             <xsl:element name="albumy">
@@ -181,12 +179,13 @@
         <xsl:variable name="nameTokens" as="xs:string*" select="tokenize(., ' ')" />
 
         <xsl:element name="producent">
-            <xsl:element name="imie">
+            <xsl:value-of select="." />
+            <!-- <xsl:element name="imie">
                 <xsl:value-of select="$nameTokens[1]" />
             </xsl:element>
             <xsl:element name="nazwisko">
                 <xsl:value-of select="$nameTokens[2]" />
-            </xsl:element>
+            </xsl:element> -->
         </xsl:element>
     </xsl:template>
 
