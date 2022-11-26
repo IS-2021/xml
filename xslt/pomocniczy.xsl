@@ -115,6 +115,11 @@
             <!-- Autor -->
             <xsl:copy-of select="//autor" copy-namespaces="no" />
 
+            <!-- Przepisanie gatunkow -->
+            <xsl:element name="gatunki">
+                <xsl:apply-templates select="/plytoteka/gatunki" />
+            </xsl:element>
+
             <!-- Przepisanie albumów -->
             <xsl:element name="albumy">
                 <xsl:apply-templates select="/plytoteka/albumy" />
@@ -128,12 +133,33 @@
     </xsl:template>
 
 
+    <!-- Templates | Gatunki -->
+    <xsl:template match="/plytoteka/gatunki">
+        <xsl:for-each select="gatunek">
+            <xsl:element name="gatunek">
+                <xsl:element name="id">
+                    <xsl:value-of select="@id" />
+                </xsl:element>
+                <xsl:element name="nazwa">
+                    <xsl:value-of select="@nazwa" />
+                </xsl:element>
+            </xsl:element>
+        </xsl:for-each>
+    </xsl:template>
+
+
     <!-- Templates | Albumy -->
     <xsl:template match="/plytoteka/albumy">
         <xsl:for-each select="./album">
             <xsl:sort select="ocena" data-type="number" order="descending" />
 
             <xsl:element name="album">
+                <xsl:element name="id">
+                    <xsl:value-of select="@id" />
+                </xsl:element>
+                <xsl:element name="gatunekId">
+                    <xsl:value-of select="@gatunek" />
+                </xsl:element>
                 <xsl:apply-templates select="*[name()='nazwa']" />
                 <xsl:element name="gatunek">
                     <xsl:value-of select="key('keyGenre', @gatunek)/@nazwa" />
@@ -336,6 +362,9 @@
     <xsl:template match="*[name()='album']">
         <xsl:variable name="album" select="key('keyAlbum', @numer)" />
         <xsl:element name="album">
+            <xsl:element name="id">
+                <xsl:value-of select="$album/@id" />
+            </xsl:element>
             <xsl:copy-of select="$album/nazwa" copy-namespaces="no" />
             <xsl:copy-of select="$album/wykonawcy" copy-namespaces="no" />
         </xsl:element>
