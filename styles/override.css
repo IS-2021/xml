@@ -1,3 +1,14 @@
+body > .albumy .album {
+    padding: 0 1rem;
+    box-shadow: unset;
+    margin-bottom: unset;
+    transition: unset;
+}
+
+.gatunek .id {
+    display: none;
+}
+
 .album__info {
     display: flex;
 
@@ -48,6 +59,7 @@
 }
 
 .cena {
+    align-self: start;
     flex-direction: column-reverse;
 }
 
