@@ -14,6 +14,17 @@
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element name="nazwa" type="common:min2charString" />
+                        <xs:element name="okladka">
+                            <xs:complexType>
+                                <xs:attribute name="src">
+                                    <xs:simpleType>
+                                        <xs:restriction base="xs:string">
+                                            <xs:minLength value="1" />
+                                        </xs:restriction>
+                                    </xs:simpleType>
+                                </xs:attribute>
+                            </xs:complexType>
+                        </xs:element>
                         <xs:element name="wykonawcy">
                             <xs:complexType>
                                 <xs:sequence>

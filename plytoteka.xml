@@ -30,6 +30,7 @@
     <albumy>
         <album id="AL_01" gatunek="GAT_07" explicit="false">
             <nazwa>Flume (Deluxe Edition)</nazwa>
+            <okladka src="Flume_Deluxe_Edition.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="tak">Flume</wykonawca>
             </wykonawcy>
@@ -84,6 +85,7 @@
         </album>
         <album explicit="false" id="AL_02" gatunek="GAT_01">
             <nazwa>Random Access Memories</nazwa>
+            <okladka src="Random_Access_Memories.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="tak">Daft Punk</wykonawca>
             </wykonawcy>
@@ -119,6 +121,7 @@
         </album>
         <album explicit="false" id="AL_03" gatunek="GAT_01">
             <nazwa>Dire Straits</nazwa>
+            <okladka src="Dire_Straits.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="tak">Dire Straits</wykonawca>
             </wykonawcy>
@@ -148,12 +151,13 @@
             </plyty>
             <data_premiery>1996-01-16</data_premiery>
             <cena waluta="EUR">59.9</cena>
-            <ocena>5.0</ocena>
+            <ocena>3.9</ocena>
             <naklad>8700000</naklad>
             <sprzedaneEgzemplarze>2200000</sprzedaneEgzemplarze>
         </album>
         <album explicit="false" id="AL_04" gatunek="GAT_05">
             <nazwa>Metallica (Remastered)</nazwa>
+            <okladka src="Metallica_Remastered.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="tak">Metallica</wykonawca>
             </wykonawcy>
@@ -183,12 +187,13 @@
             </plyty>
             <data_premiery>2021-09-10</data_premiery>
             <cena waluta="EUR">57.99</cena>
-            <ocena>5.0</ocena>
+            <ocena>4.5</ocena>
             <naklad>5100000</naklad>
             <sprzedaneEgzemplarze>1800000</sprzedaneEgzemplarze>
         </album>
         <album explicit="false" id="AL_05" gatunek="GAT_02">
             <nazwa>Milion dróg do śmierci</nazwa>
+            <okladka src="Milion_dróg_do_śmierci.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="nie">Kali</wykonawca>
                 <wykonawca czyZagraniczny="nie">Paluch</wykonawca>
@@ -219,12 +224,13 @@
             </plyty>
             <data_premiery>2016-11-18</data_premiery>
             <cena waluta="PLN">38.07</cena>
-            <ocena>5.0</ocena>
+            <ocena>4.2</ocena>
             <naklad>2600000</naklad>
             <sprzedaneEgzemplarze>2500000</sprzedaneEgzemplarze>
         </album>
         <album explicit="false" id="AL_06" gatunek="GAT_01">
             <nazwa>Born To Die (The Paradise Edition)</nazwa>
+            <okladka src="Born_To_Die_The_Paradise_Edition.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="tak">Lana Del Rey</wykonawca>
             </wykonawcy>
@@ -254,12 +260,13 @@
             </plyty>
             <data_premiery>2012-11-13</data_premiery>
             <cena waluta="USD">42.54</cena>
-            <ocena>5.0</ocena>
+            <ocena>4.7</ocena>
             <naklad>5600000</naklad>
             <sprzedaneEgzemplarze>4900000</sprzedaneEgzemplarze>
         </album>
         <album explicit="false" id="AL_07" gatunek="GAT_01">
             <nazwa>Omamy</nazwa>
+            <okladka src="Omamy.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="nie">Wieniawa Julia</wykonawca>
             </wykonawcy>
@@ -289,12 +296,13 @@
             </plyty>
             <data_premiery>2022-06-17</data_premiery>
             <cena waluta="PLN">49.99</cena>
-            <ocena>4.0</ocena>
+            <ocena>2.6</ocena>
             <naklad>9800000</naklad>
             <sprzedaneEgzemplarze>500000</sprzedaneEgzemplarze>
         </album>
         <album explicit="false" id="AL_08" gatunek="GAT_04">
             <nazwa>Bordeaux Concert</nazwa>
+            <okladka src="Bordeaux_Concert.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="tak">Jarrett Keith</wykonawca>
             </wykonawcy>
@@ -324,12 +332,13 @@
             </plyty>
             <data_premiery>2022-09-30</data_premiery>
             <cena waluta="EUR">66.99</cena>
-            <ocena>5.0</ocena>
+            <ocena>4.7</ocena>
             <naklad>3000000</naklad>
             <sprzedaneEgzemplarze>1800000</sprzedaneEgzemplarze>
         </album>
         <album explicit="false" id="AL_09" gatunek="GAT_04">
             <nazwa>Spirit To All</nazwa>
+            <okladka src="Spirit_To_All.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="nie">Wojtek Mazolewski Quintet</wykonawca>
             </wykonawcy>
@@ -359,12 +368,13 @@
             </plyty>
             <data_premiery>2022-10-11</data_premiery>
             <cena waluta="PLN">49.99</cena>
-            <ocena>5.0</ocena>
+            <ocena>3.0</ocena>
             <naklad>100000</naklad>
             <sprzedaneEgzemplarze>100000</sprzedaneEgzemplarze>
         </album>
         <album explicit="false" id="AL_10" gatunek="GAT_03">
             <nazwa>Inaczej</nazwa>
+            <okladka src="Inaczej.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="nie">Bednarek</wykonawca>
             </wykonawcy>
@@ -394,12 +404,13 @@
             </plyty>
             <data_premiery>2021-08-06</data_premiery>
             <cena waluta="PLN">44.99</cena>
-            <ocena>5.0</ocena>
+            <ocena>3.8</ocena>
             <naklad>1300000</naklad>
             <sprzedaneEgzemplarze>600000</sprzedaneEgzemplarze>
         </album>
         <album explicit="false" id="AL_11" gatunek="GAT_03">
             <nazwa>Oddycham</nazwa>
+            <okladka src="Oddycham.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="nie">Bednarek</wykonawca>
             </wykonawcy>
@@ -429,12 +440,13 @@
             </plyty>
             <data_premiery>2015-05-29</data_premiery>
             <cena waluta="PLN">33.99</cena>
-            <ocena>5.0</ocena>
+            <ocena>4.7</ocena>
             <naklad>3000000</naklad>
             <sprzedaneEgzemplarze>700000</sprzedaneEgzemplarze>
         </album>
         <album explicit="false" id="AL_12" gatunek="GAT_03">
             <nazwa>Jestem...</nazwa>
+            <okladka src="Jestem.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="nie">Bednarek</wykonawca>
             </wykonawcy>
@@ -464,12 +476,13 @@
             </plyty>
             <data_premiery>2012-11-28</data_premiery>
             <cena waluta="PLN">29.99</cena>
-            <ocena>5.0</ocena>
+            <ocena>3.4</ocena>
             <naklad>4300000</naklad>
             <sprzedaneEgzemplarze>3300000</sprzedaneEgzemplarze>
         </album>
         <album explicit="false" id="AL_13" gatunek="GAT_03">
             <nazwa>Legend: The Best Of Bob Marley &amp; The Wailers</nazwa>
+            <okladka src="Legend_The_Best_Of_Bob_Marley_The_Wailers.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="tak">Bob Marley And The Wailers</wykonawca>
             </wykonawcy>
@@ -499,12 +512,13 @@
             </plyty>
             <data_premiery>2002-06-13</data_premiery>
             <cena waluta="EUR">63.24</cena>
-            <ocena>5.0</ocena>
+            <ocena>4.9</ocena>
             <naklad>1800000</naklad>
             <sprzedaneEgzemplarze>1500000</sprzedaneEgzemplarze>
         </album>
         <album explicit="false" id="AL_14" gatunek="GAT_03">
             <nazwa>To co najlepsze</nazwa>
+            <okladka src="To_co_najlepsze.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="nie">Daab</wykonawca>
             </wykonawcy>
@@ -534,12 +548,13 @@
             </plyty>
             <data_premiery>2018-11-30</data_premiery>
             <cena waluta="PLN">26.99</cena>
-            <ocena>5.0</ocena>
+            <ocena>4.8</ocena>
             <naklad>6300000</naklad>
             <sprzedaneEgzemplarze>1700000</sprzedaneEgzemplarze>
         </album>
         <album explicit="false" id="AL_15" gatunek="GAT_06">
             <nazwa>Arrival (Original Motion Picture Soundtrack)</nazwa>
+            <okladka src="Arrival_Original_Motion_Picture_Soundtrack.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="tak">Johannsson Johann</wykonawca>
             </wykonawcy>
@@ -569,12 +584,13 @@
             </plyty>
             <data_premiery>2016-12-02</data_premiery>
             <cena waluta="EUR">59.99</cena>
-            <ocena>5.0</ocena>
+            <ocena>3.2</ocena>
             <naklad>6700000</naklad>
             <sprzedaneEgzemplarze>4400000</sprzedaneEgzemplarze>
         </album>
         <album explicit="false" id="AL_16" gatunek="GAT_06">
             <nazwa>Gru, Dru i Minionki (Despicable Me 3)</nazwa>
+            <okladka src="Gru_Dru_i_Minionki_Despicable_Me_3.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="tak">Various Artists</wykonawca>
             </wykonawcy>
@@ -604,12 +620,13 @@
             </plyty>
             <data_premiery>2017-06-23</data_premiery>
             <cena waluta="USD">17.24</cena>
-            <ocena>5.0</ocena>
+            <ocena>4.4</ocena>
             <naklad>8800000</naklad>
             <sprzedaneEgzemplarze>5200000</sprzedaneEgzemplarze>
         </album>
         <album explicit="false" id="AL_17" gatunek="GAT_06">
             <nazwa>The Witcher: Season 2 (Soundtrack from the Netflix Series)</nazwa>
+            <okladka src="The_Witcher_Season_2_Soundtrack_from_the_Netflix_Series.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="tak">Trapanese Joseph</wykonawca>
             </wykonawcy>
@@ -645,6 +662,7 @@
         </album>
         <album explicit="false" id="AL_18" gatunek="GAT_06">
             <nazwa>Bohemian Rhapsody</nazwa>
+            <okladka src="Bohemian_Rhapsody.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="tak">Queen</wykonawca>
             </wykonawcy>
@@ -680,6 +698,7 @@
         </album>
         <album explicit="false" id="AL_19" gatunek="GAT_01">
             <nazwa>Black Pumas (Deluxe Edition)</nazwa>
+            <okladka src="Black_Pumas_Deluxe_Edition.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="tak">Black Pumas</wykonawca>
             </wykonawcy>
@@ -709,12 +728,13 @@
             </plyty>
             <data_premiery>2020-10-23</data_premiery>
             <cena waluta="USD">62.99</cena>
-            <ocena>5.0</ocena>
+            <ocena>4.9</ocena>
             <naklad>1700000</naklad>
             <sprzedaneEgzemplarze>1400000</sprzedaneEgzemplarze>
         </album>
         <album explicit="false" id="AL_20" gatunek="GAT_07">
             <nazwa>To Believe</nazwa>
+            <okladka src="To_Believe.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="tak">The Cinematic Orchestra</wykonawca>
             </wykonawcy>
@@ -744,12 +764,13 @@
             </plyty>
             <data_premiery>2019-03-15</data_premiery>
             <cena waluta="EUR">31.99</cena>
-            <ocena>5.0</ocena>
+            <ocena>3.9</ocena>
             <naklad>5100000</naklad>
             <sprzedaneEgzemplarze>4500000</sprzedaneEgzemplarze>
         </album>
         <album explicit="false" id="AL_21" gatunek="GAT_01">
             <nazwa>S16</nazwa>
+            <okladka src="S16.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="tak">Woodkid</wykonawca>
             </wykonawcy>
@@ -779,12 +800,13 @@
             </plyty>
             <data_premiery>2020-10-16</data_premiery>
             <cena waluta="EUR">53.99</cena>
-            <ocena>5.0</ocena>
+            <ocena>1.0</ocena>
             <naklad>3600000</naklad>
             <sprzedaneEgzemplarze>300000</sprzedaneEgzemplarze>
         </album>
         <album explicit="false" id="AL_22" gatunek="GAT_02">
             <nazwa>Teraz pieniądz w cenie / Ty przecież wiesz co</nazwa>
+            <okladka src="Teraz_pieniądz_w_cenie_Ty_przecież_wiesz_co.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="nie">Sokół</wykonawca>
                 <wykonawca czyZagraniczny="nie">Pono</wykonawca>
@@ -815,12 +837,13 @@
             </plyty>
             <data_premiery>2012-12-03</data_premiery>
             <cena waluta="PLN">149.99</cena>
-            <ocena>5.0</ocena>
+            <ocena>3.6</ocena>
             <naklad>9400000</naklad>
             <sprzedaneEgzemplarze>3900000</sprzedaneEgzemplarze>
         </album>
         <album explicit="false" id="AL_23" gatunek="GAT_01">
             <nazwa>Brothers In Arms</nazwa>
+            <okladka src="Brothers_In_Arms.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="tak">Dire Straits</wykonawca>
             </wykonawcy>
