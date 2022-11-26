@@ -1,21 +1,23 @@
+// Config - saxon location
 const JAR = "./saxon/saxon-he-11.4.jar";
-const XSLT_DIR = "./xslt";
 
-// Konfiguracja - nazwy plikow
+// Config - input/XSL file names
+const XSLT_DIR = "./xslt";
 const SRC_XML = "plytoteka.xml";
 const XSL_POMOCNICZY = "pomocniczy.xsl";
 const XSL_XHTML = "xhtml.xsl";
 const XSL_TXT = "txt.xsl";
 const XSL_SVG = "svg.xsl";
 
-// Pliki wynikowe
+// Output files (do not modify)
+const XSLT_OUT_DIR = `${XSLT_DIR}/out`;
 const XML_POMOCNICZY = XSL_POMOCNICZY.replace("xsl", "xml");
 const OUT_XHTML = XSL_XHTML.replace("xsl", "xhtml");
 const OUT_TXT = XSL_TXT.replace("xsl", "txt");
 const OUT_SVG = XSL_SVG.replace("xsl", "txt");
 
-const command = (src_file, xsl_file, out_file) => {
-    return `java -jar ${JAR} -s:${XSLT_DIR}/${src_file} -xsl:${XSLT_DIR}/${xsl_file} -o:${XSLT_DIR}/${out_file}`;
+const command = (src_file, xsl_file, out_file, out_dir = XSLT_OUT_DIR) => {
+    return `java -jar ${JAR} -s:${XSLT_DIR}/${src_file} -xsl:${XSLT_DIR}/${xsl_file} -o:${out_dir}/${out_file}`;
 };
 const file = (file) => `${XSLT_DIR}/${file}`;
 
@@ -24,7 +26,12 @@ module.exports = (grunt) => {
         pkg: grunt.file.readJSON("package.json"),
         exec: {
             support: {
-                cmd: command(`../${SRC_XML}`, XSL_POMOCNICZY, XML_POMOCNICZY),
+                cmd: command(
+                    `../${SRC_XML}`,
+                    XSL_POMOCNICZY,
+                    XML_POMOCNICZY,
+                    XSLT_DIR
+                ),
             },
             xhtml: {
                 cmd: command(XML_POMOCNICZY, XSL_XHTML, OUT_XHTML),
