@@ -30,10 +30,82 @@
                 </xsl:element>
             </xsl:element>
             <xsl:element name="body">
+                <!-- Autor -->
+                <xsl:element name="div">
+                    <xsl:attribute name="class">autor</xsl:attribute>
+                    <xsl:apply-templates select="//data/autor" />
+                </xsl:element>
+                <!-- Gatunki -->
+                <xsl:element name="div">
+                    <xsl:attribute name="class">gatunki</xsl:attribute>
+                    <xsl:apply-templates select="//data/gatunki" />
+                </xsl:element>
+                <!-- Albumy -->
                 <xsl:element name="div">
                     <xsl:attribute name="class">albumy</xsl:attribute>
                     <xsl:apply-templates select="//data/albumy" />
                 </xsl:element>
+                <!-- Klienci -->
+                <xsl:element name="div">
+                    <xsl:attribute name="class">klienci</xsl:attribute>
+                    <xsl:apply-templates select="//data/klienci" />
+                </xsl:element>
+            </xsl:element>
+        </xsl:element>
+    </xsl:template>
+
+    <xsl:template match="//data/autor">
+        <xsl:element name="div">
+            <xsl:attribute name="class">student</xsl:attribute>
+            <xsl:apply-templates select="*[name()='student']" />
+        </xsl:element>
+        <xsl:element name="div">
+            <xsl:attribute name="class">zadanie</xsl:attribute>
+            <xsl:apply-templates select="*[name()='zadanie']" />
+        </xsl:element>
+    </xsl:template>
+
+    <xsl:template match="*[name()='student']">
+        <xsl:element name="div">
+            <xsl:attribute name="class">imie</xsl:attribute>
+            <xsl:value-of select="imie" />
+        </xsl:element>
+        <xsl:element name="div">
+            <xsl:attribute name="class">nazwisko</xsl:attribute>
+            <xsl:value-of select="nazwisko" />
+        </xsl:element>
+        <xsl:element name="div">
+            <xsl:attribute name="class">indeks</xsl:attribute>
+            <xsl:value-of select="indeks" />
+        </xsl:element>
+    </xsl:template>
+
+    <xsl:template match="*[name()='zadanie']">
+        <xsl:element name="div">
+            <xsl:attribute name="class">temat</xsl:attribute>
+            <xsl:value-of select="temat" />
+        </xsl:element>
+        <xsl:element name="div">
+            <xsl:attribute name="class">nazwa</xsl:attribute>
+            <xsl:value-of select="nazwa" />
+        </xsl:element>
+    </xsl:template>
+
+    <xsl:template match="//data/gatunki">
+        <xsl:apply-templates select="gatunek" />
+    </xsl:template>
+
+    <xsl:template match="//*[name()='gatunek']">
+        <xsl:element name="div">
+            <xsl:attribute name="class">gatunek</xsl:attribute>
+
+            <xsl:element name="div">
+                <xsl:attribute name="class">id</xsl:attribute>
+                <xsl:value-of select="id" />
+            </xsl:element>
+            <xsl:element name="div">
+                <xsl:attribute name="class">nazwa</xsl:attribute>
+                <xsl:value-of select="nazwa" />
             </xsl:element>
         </xsl:element>
     </xsl:template>
@@ -44,6 +116,9 @@
 
     <xsl:template match="//data/albumy/album">
         <xsl:element name="div">
+            <xsl:attribute name="id">
+                <xsl:value-of select="id" />
+            </xsl:attribute>
             <xsl:attribute name="class">album__info</xsl:attribute>
 
             <xsl:element name="img">
@@ -109,13 +184,19 @@
             <xsl:attribute name="class">wykonawca</xsl:attribute>
 
             <xsl:element name="div">
-                <xsl:attribute name="class">nazwa</xsl:attribute>
+                <xsl:attribute name="class">
+                    <!-- czyZagraniczny -->
+                    <xsl:variable name="czyZagranicznyClass">
+                        <xsl:if test="@czyZagraniczny = 'tak'">zagraniczny</xsl:if>
+                    </xsl:variable>
+                    <xsl:value-of select="concat('nazwa ', $czyZagranicznyClass)" />
+                </xsl:attribute>
                 <xsl:value-of select="." />
             </xsl:element>
-            <xsl:element name="div">
+            <!-- <xsl:element name="div">
                 <xsl:attribute name="class">czyZagraniczny</xsl:attribute>
                 <xsl:value-of select="@czyZagraniczny" />
-            </xsl:element>
+            </xsl:element> -->
         </xsl:element>
     </xsl:template>
 
@@ -124,7 +205,7 @@
             <xsl:attribute name="class">plyta</xsl:attribute>
             <xsl:element name="div">
                 <xsl:attribute name="class">cd</xsl:attribute>
-                <xsl:value-of select="@cd" />
+                <xsl:value-of select="concat('💿 CD ', @cd)" />
             </xsl:element>
 
             <xsl:element name="div">
@@ -172,5 +253,76 @@
             <xsl:attribute name="class">wartosc</xsl:attribute>
             <xsl:value-of select="wartosc" />
         </xsl:element>
+    </xsl:template>
+
+    <xsl:template match="//data/klienci">
+        <xsl:apply-templates />
+    </xsl:template>
+
+    <xsl:template match="//*[name()='klient']">
+        <xsl:element name="div">
+            <xsl:attribute name="class">klient</xsl:attribute>
+
+            <xsl:element name="div">
+                <xsl:attribute name="class">pesel</xsl:attribute>
+                <xsl:value-of select="@pesel" />
+            </xsl:element>
+            <xsl:element name="div">
+                <xsl:attribute name="class">godnosc</xsl:attribute>
+                <xsl:value-of select="godnosc" />
+            </xsl:element>
+            <xsl:element name="div">
+                <xsl:attribute name="class">login</xsl:attribute>
+                <xsl:value-of select="login" />
+            </xsl:element>
+            <xsl:element name="div">
+                <xsl:attribute name="class">wypozyczenia</xsl:attribute>
+                <xsl:apply-templates select="wypozyczenia" />
+            </xsl:element>
+        </xsl:element>
+    </xsl:template>
+
+    <xsl:template match="*[name()='wypozyczenia']">
+        <!-- <xsl:value-of select="local-name()" /> -->
+        <xsl:apply-templates select="wypozyczenie" />
+    </xsl:template>
+
+    <xsl:template match="wypozyczenie">
+        <xsl:element name="div">
+            <xsl:attribute name="class">wypozyczenie</xsl:attribute>
+
+            <xsl:element name="div">
+                <xsl:attribute name="class">albumy</xsl:attribute>
+                <xsl:apply-templates select="./albumy" />
+            </xsl:element>
+
+            <xsl:element name="div">
+                <xsl:attribute name="class">data_rozpoczecia</xsl:attribute>
+                <xsl:value-of select="data_rozpoczecia" />
+            </xsl:element>
+            <xsl:element name="div">
+                <xsl:attribute name="class">data_zakonczenia</xsl:attribute>
+                <xsl:value-of select="data_zakonczenia" />
+            </xsl:element>
+        </xsl:element>
+    </xsl:template>
+
+    <xsl:template match="wypozyczenie/albumy">
+        <xsl:for-each select="album">
+            <xsl:element name="a">
+                <xsl:attribute name="href">
+                    <xsl:value-of select="concat('#', id)" />
+                </xsl:attribute>
+
+                <xsl:element name="div">
+                    <xsl:attribute name="class">nazwa</xsl:attribute>
+                    <xsl:value-of select="nazwa" />
+                </xsl:element>
+                <xsl:element name="div">
+                    <xsl:attribute name="class">wykonawcy</xsl:attribute>
+                    <xsl:apply-templates select="wykonawcy/wykonawca" />
+                </xsl:element>
+            </xsl:element>
+        </xsl:for-each>
     </xsl:template>
 </xsl:stylesheet>
