@@ -27,14 +27,14 @@
         <xsl:for-each select="//data/albumy/album">
             <xsl:sort select="string-length(*[name()=$column])" data-type="number" order="ascending" />
             <xsl:if test="position()=last()">
-                <xsl:variable name="x0" select="string-length(*[name()=$column])" />
-                <xsl:variable name="x1" select="string-length($displayName)" />
+                <xsl:variable name="lenData" select="string-length(*[name()=$column])" />
+                <xsl:variable name="lenDisplay" select="string-length($displayName)" />
 
-                <xsl:if test="$x0 > $x1">
-                    <xsl:value-of select="$x0" />
+                <xsl:if test="$lenData > $lenDisplay">
+                    <xsl:value-of select="$lenData + 1" />
                 </xsl:if>
-                <xsl:if test="$x1 >= $x0">
-                    <xsl:value-of select="$x1" />
+                <xsl:if test="$lenDisplay >= $lenData">
+                    <xsl:value-of select="$lenDisplay + 1" />
                 </xsl:if>
             </xsl:if>
         </xsl:for-each>
@@ -69,10 +69,11 @@
         <xsl:variable name="priceDisplayName" select="'Cena'" />
         <xsl:variable name="priceLength">
             <xsl:call-template name="getColumnWidth">
-                <xsl:with-param name="column" select="'cena'" />
+                <xsl:with-param name="column" select="'cena/przeliczona'" />
                 <xsl:with-param name="displayName" select="$priceDisplayName" />
             </xsl:call-template>
         </xsl:variable>
+        <xsl:variable name="priceLength" select="$priceLength + 6" />
         <!-- Ocena -->
         <xsl:variable name="ratingDisplayName" select="'Ocena'" />
         <xsl:variable name="ratingLength">
