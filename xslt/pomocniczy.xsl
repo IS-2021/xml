@@ -46,7 +46,7 @@
             </xsl:element>
 
             <xsl:element name="albumy">
-                <xsl:variable name="cenaXpath" select="//plytoteka/albumy/album/cena"></xsl:variable>
+                <xsl:variable name="cenaXpath" select="//plytoteka/albumy/album/cena" />
                 <xsl:element name="lacznie">
                     <xsl:value-of select="count(//plytoteka/albumy/album)" />
                 </xsl:element>
