@@ -441,22 +441,16 @@
 
     <xsl:template match="wypozyczenie/albumy">
         <xsl:for-each select="album">
-            <xsl:element name="a">
-                <xsl:attribute name="href">
-                    <xsl:value-of select="concat('#', id)" />
-                </xsl:attribute>
+            <xsl:element name="div">
+                <xsl:attribute name="class">album</xsl:attribute>
 
                 <xsl:element name="div">
-                    <xsl:attribute name="class">album</xsl:attribute>
-
-                    <xsl:element name="div">
-                        <xsl:attribute name="class">nazwa</xsl:attribute>
-                        <xsl:value-of select="nazwa" />
-                    </xsl:element>
-                    <xsl:element name="div">
-                        <xsl:attribute name="class">wykonawcy</xsl:attribute>
-                        <xsl:apply-templates select="wykonawcy/wykonawca" />
-                    </xsl:element>
+                    <xsl:attribute name="class">nazwa</xsl:attribute>
+                    <xsl:value-of select="nazwa" />
+                </xsl:element>
+                <xsl:element name="div">
+                    <xsl:attribute name="class">wykonawcy</xsl:attribute>
+                    <xsl:apply-templates select="wykonawcy/wykonawca" />
                 </xsl:element>
             </xsl:element>
         </xsl:for-each>
