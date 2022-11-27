@@ -1,0 +1,153 @@
+body > .stats::before {
+    content: "Podsumowanie";
+}
+
+.stats {
+    display: block;
+    background-color: #fff;
+    max-width: calc(960px - 2rem) !important;
+    padding: 1rem;
+    border: 2px dashed var(--light-gray);
+    margin-bottom: 3rem !important;
+}
+
+.stats .zliczenia .gatunek {
+    display: flex;
+    justify-content: space-between;
+}
+
+.stats .gatunki .zliczenia {
+    margin: 0 !important;
+}
+
+.stats h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+}
+.stats *::before {
+    margin-right: 0.35rem;
+}
+
+.stats .albumy,
+.stats .wykonawcy,
+.stats .klienci,
+.stats .waluty {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.stats .albumy > *,
+.stats .wykonawcy > *,
+.stats .klienci > *,
+.stats .waluty > * {
+    background-color: #fff;
+    border: 2px solid #f5f5f5;
+    border-radius: 4px;
+    padding: 1rem;
+    content: attr(nazwa);
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.stats * {
+    font-weight: 700;
+}
+.stats *::before {
+    font-weight: 400;
+}
+
+/* Labels | Albumy */
+.stats .albumy .cenaMin::before {
+    content: "Minimalna:";
+}
+
+.stats .albumy .cenaAvg::before {
+    content: "Średnia:";
+}
+
+.stats .albumy .cenaMax::before {
+    content: "Maksymalna:";
+}
+
+.stats .albumy *::after {
+    content: " zł";
+}
+
+/* Labels | Wykonawcy */
+.stats .wykonawcy .krajowi::before {
+    content: "Krajowi:";
+}
+
+.stats .wykonawcy .zagraniczni::before {
+    content: "Zagraniczni:";
+    color: var(--orange);
+}
+
+.stats .wykonawcy .zagraniczni::before {
+    content: "Zagraniczni:";
+    color: var(--orange);
+}
+
+/* Labels | Waluty */
+.stats .waluta .symbol {
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.stats .waluta .symbol,
+.stats .waluta .ilosc,
+.stats .waluta .max {
+    border-bottom: 1px solid var(--light-gray);
+    padding-bottom: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.stats .waluta .ilosc,
+.stats .waluta .min,
+.stats .waluta .avg,
+.stats .waluta .max,
+.stats .waluta .sum {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.stats .waluta .ilosc::before,
+.stats .waluta .min::before,
+.stats .waluta .avg::before,
+.stats .waluta .max::before,
+.stats .waluta .sum::before {
+    display: block;
+}
+
+.stats .waluta .ilosc::before {
+    content: "Ilość:";
+}
+
+.stats .waluta .min::before {
+    content: "Minimalna:";
+}
+
+.stats .waluta .avg::before {
+    content: "Średnia:";
+}
+
+.stats .waluta .max::before {
+    content: "Maksymalna:";
+}
+
+.stats .waluta .sum::before {
+    content: "Łączna wartość:";
+}
+
+/* Labels | Klienci */
+.stats .klienci .ilosc::before {
+    content: "Łącznie:";
+}
+
+.stats .gatunek .nazwa {
+    font-weight: 400;
+}
