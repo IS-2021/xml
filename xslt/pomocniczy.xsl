@@ -19,8 +19,11 @@
         <xsl:param name="currency" />
         <xsl:variable name="lowercase" select="lower-case($currency)" />
 
-        <xsl:element name="{$lowercase}">
+        <xsl:element name="waluta">
             <xsl:variable name="prices" select="//albumy/album/cena[@waluta=$currency]" />
+            <xsl:element name="symbol">
+                <xsl:value-of select="$lowercase" />
+            </xsl:element>
             <xsl:element name="ilosc">
                 <xsl:value-of select="count($prices)" />
             </xsl:element>
@@ -33,21 +36,17 @@
             <xsl:element name="max">
                 <xsl:value-of select="max($prices)" />
             </xsl:element>
+            <xsl:element name="sum">
+                <xsl:value-of select="format-number(sum($prices), '0.00')" />
+            </xsl:element>
         </xsl:element>
     </xsl:template>
 
     <xsl:template name="stats">
         <xsl:element name="stats">
-            <xsl:variable name="wykonawcyTotal" select="count(distinct-values(//wykonawcy/wykonawca))" />
-            <xsl:variable name="wykonawcyZagraniczni" select="count(distinct-values(//wykonawca[@czyZagraniczny='tak']))" />
-
-            <xsl:element name="genreCount">
-                <xsl:value-of select="count(//plytoteka/gatunki/gatunek)" />
-            </xsl:element>
-
             <xsl:element name="albumy">
                 <xsl:variable name="cenaXpath" select="//plytoteka/albumy/album/cena" />
-                <xsl:element name="lacznie">
+                <xsl:element name="ilosc">
                     <xsl:value-of select="count(//plytoteka/albumy/album)" />
                 </xsl:element>
                 <xsl:element name="cenaMin">
@@ -66,16 +65,23 @@
             </xsl:element>
 
             <xsl:element name="wykonawcy">
-                <xsl:element name="wykonawcyTotal">
+                <xsl:element name="ilosc">
+                    <xsl:variable name="wykonawcyTotal" select="count(distinct-values(//wykonawcy/wykonawca))" />
                     <xsl:value-of select="$wykonawcyTotal" />
                 </xsl:element>
-                <xsl:element name="wykonawcyZagraniczni">
+                <xsl:element name="zagraniczni">
+                    <xsl:variable name="wykonawcyZagraniczni" select="count(distinct-values(//wykonawca[@czyZagraniczny='tak']))" />
                     <xsl:value-of select="$wykonawcyZagraniczni" />
                 </xsl:element>
             </xsl:element>
 
-            <xsl:element name="clientCount">
-                <xsl:value-of select="count(//klienci/klient)" />
+            <xsl:element name="klienci">
+                <xsl:element name="ilosc">
+                    <xsl:value-of select="count(//klienci/klient)" />
+                </xsl:element>
+                <xsl:element name="wypozyczenia">
+                    <xsl:value-of select="count(//*[name()='wypozyczenie'])" />
+                </xsl:element>
             </xsl:element>
 
             <xsl:element name="waluty">
@@ -90,22 +96,27 @@
                 </xsl:call-template>
             </xsl:element>
 
-            <xsl:element name="iloscPerGatunek">
-                <xsl:for-each select="//gatunki/gatunek">
-                    <!-- <xsl:sort select="count(//albumy/album[@gatunek=@id])" data-type="number" /> -->
+            <xsl:element name="gatunki">
+                <xsl:element name="ilosc">
+                    <xsl:value-of select="count(//plytoteka/gatunki/gatunek)" />
+                </xsl:element>
+                <xsl:element name="iloscPerGatunek">
+                    <xsl:for-each select="//gatunki/gatunek">
+                        <!-- <xsl:sort select="count(//albumy/album[@gatunek=@id])" data-type="number" /> -->
 
-                    <xsl:variable name="gatunekID" select="./@id" />
-                    <xsl:variable name="count" select="count(//albumy/album[@gatunek=$gatunekID])" />
+                        <xsl:variable name="gatunekID" select="./@id" />
+                        <xsl:variable name="count" select="count(//albumy/album[@gatunek=$gatunekID])" />
 
-                    <xsl:element name="gatunek">
-                        <xsl:element name="nazwa">
-                            <xsl:value-of select="@nazwa" />
+                        <xsl:element name="gatunek">
+                            <xsl:element name="nazwa">
+                                <xsl:value-of select="@nazwa" />
+                            </xsl:element>
+                            <xsl:element name="ilosc">
+                                <xsl:value-of select="$count" />
+                            </xsl:element>
                         </xsl:element>
-                        <xsl:element name="ilosc">
-                            <xsl:value-of select="$count" />
-                        </xsl:element>
-                    </xsl:element>
-                </xsl:for-each>
+                    </xsl:for-each>
+                </xsl:element>
             </xsl:element>
         </xsl:element>
     </xsl:template>
