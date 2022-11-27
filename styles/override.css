@@ -1,3 +1,7 @@
+.zliczenia .gatunek::before {
+    all: unset;
+}
+
 body > .albumy .album {
     padding: 0 1rem;
     box-shadow: unset;
@@ -26,7 +30,7 @@ body > .albumy .album {
     margin-right: 1rem;
 }
 
-.album {
+.album__info .album {
     width: 100%;
 }
 
@@ -60,11 +64,17 @@ body > .albumy .album {
 
 .cena {
     align-self: start;
-    flex-direction: column-reverse;
+    flex-direction: column;
 }
 
 .cena .oryginalna {
     color: var(--gray);
     font-size: 1rem;
     font-weight: 500;
+}
+
+.cena > :first-child {
+    color: #000;
+    font-weight: 900;
+    font-size: 1.75rem;
 }

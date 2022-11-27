@@ -81,6 +81,7 @@ plytoteka > gatunki::before {
     grid-column-end: 4;
 }
 
+body > .stats::before,
 body > .gatunki::before,
 plytoteka > gatunki::before,
 body > .klienci::before,
@@ -99,6 +100,7 @@ plytoteka > albumy::before {
     box-shadow: var(--shadow-md);
 }
 
+.stats .gatunki .zliczenia,
 body > .gatunki,
 plytoteka > gatunki {
     display: grid;
@@ -126,7 +128,7 @@ body > .albumy,
 plytoteka > albumy {
     display: flex;
     flex-direction: column;
-    margin-bottom: 4rem;
+    margin-bottom: 4rem !important;
 }
 
 body > .albumy .album,
@@ -537,7 +539,6 @@ wypozyczenie albumy {
     margin-left: 0;
 }
 
-.wypozyczenie .album,
 wypozyczenie album {
     display: list-item;
     margin-left: 1.35rem;
@@ -546,4 +547,32 @@ wypozyczenie album {
 .wypozyczenie .album::after,
 wypozyczenie album::after {
     content: attr(numer);
+}
+
+.wypozyczenie .album {
+    padding: 0.75rem;
+    text-decoration: none;
+    color: #000;
+}
+
+.wypozyczenie * {
+    text-decoration: none;
+}
+
+.wypozyczenie .wykonawcy {
+    padding-bottom: 0;
+}
+
+.wypozyczenie .album {
+    display: list-item;
+    margin-left: 1.75rem;
+}
+
+.wypozyczenie .album a {
+    display: block;
+    border: 2px dashed var(--gray);
+}
+
+.wypozyczenie .album > .nazwa {
+    font-size: 1rem;
 }
