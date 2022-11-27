@@ -20,6 +20,7 @@
 autor {
     position: sticky;
     top: 0;
+    z-index: 10;
 
     display: grid;
     grid-template-areas: "student zadanie";
