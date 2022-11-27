@@ -11,14 +11,19 @@ const XSL_SVG = "svg.xsl";
 
 // Output files (do not modify)
 const XSLT_OUT_DIR = `${XSLT_DIR}/out`;
-const XML_POMOCNICZY = `${SRC_XML.replace(".xml", "")}_support.xml`;
-const OUT_XHTML = "index.xhtml";
+const XML_POMOCNICZY = `${XSLT_OUT_DIR}/${SRC_XML.replace(".xml", "")}_support.xml`;
+const OUT_XHTML = SRC_XML.replace("xml", "xhtml");
 const OUT_TXT = SRC_XML.replace("xml", "txt");
 const OUT_SVG = SRC_XML.replace("svg", "txt");
 
-const command = (src_file, xsl_file, out_file, out_dir = XSLT_OUT_DIR) => {
-    return `java -jar ${JAR} -s:${XSLT_DIR}/${src_file} -xsl:${XSLT_DIR}/${xsl_file} -o:${out_dir}/${out_file}`;
+const initCommand = (src_file, xsl_file, out_file) => {
+    return `java -jar ${JAR} -s:${src_file} -xsl:${XSLT_DIR}/${xsl_file} -o:${out_file}`;
 };
+
+const command = (src_file, xsl_file, out_file, out_dir = XSLT_OUT_DIR) => {
+    return `java -jar ${JAR} -s:${src_file} -xsl:${XSLT_DIR}/${xsl_file} -o:${out_dir}/${out_file}`;
+};
+
 const file = (file) => `${XSLT_DIR}/${file}`;
 
 module.exports = (grunt) => {
@@ -26,12 +31,7 @@ module.exports = (grunt) => {
         pkg: grunt.file.readJSON("package.json"),
         exec: {
             support: {
-                cmd: command(
-                    `../${SRC_XML}`,
-                    XSL_POMOCNICZY,
-                    XML_POMOCNICZY,
-                    XSLT_DIR
-                ),
+                cmd: initCommand(SRC_XML, XSL_POMOCNICZY, XML_POMOCNICZY),
             },
             xhtml: {
                 cmd: command(XML_POMOCNICZY, XSL_XHTML, OUT_XHTML),
