@@ -281,19 +281,25 @@
                     <xsl:value-of select="." />
                 </xsl:element>
             </xsl:element>
-            <xsl:element name="przeliczona">
-                <xsl:element name="waluta">PLN</xsl:element>
-                <xsl:element name="wartosc">
-                    <xsl:choose>
-                        <xsl:when test="@waluta = 'EUR'">
-                            <xsl:value-of select="format-number(. * $kursEUR, '0.00')" />
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:value-of select="format-number(. * $kursUSD, '0.00')" />
-                        </xsl:otherwise>
-                    </xsl:choose>
+
+            <xsl:if test="@waluta != 'PLN'">
+                <xsl:element name="przeliczona">
+                    <xsl:element name="waluta">PLN</xsl:element>
+                    <xsl:element name="wartosc">
+                        <xsl:choose>
+                            <xsl:when test="@waluta = 'EUR'">
+                                <xsl:value-of select="format-number(. * $kursEUR, '0.00')" />
+                            </xsl:when>
+                            <xsl:when test="@waluta = 'USD'">
+                                <xsl:value-of select="format-number(. * $kursUSD, '0.00')" />
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:value-of select="." />
+                            </xsl:otherwise>
+                        </xsl:choose>
+                    </xsl:element>
                 </xsl:element>
-            </xsl:element>
+            </xsl:if>
         </xsl:element>
     </xsl:template>
 
