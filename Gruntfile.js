@@ -11,10 +11,13 @@ const XSL_SVG = "svg.xsl";
 
 // Output files (do not modify)
 const XSLT_OUT_DIR = `${XSLT_DIR}/out`;
-const XML_POMOCNICZY = `${XSLT_OUT_DIR}/${SRC_XML.replace(".xml", "")}_support.xml`;
+const XML_POMOCNICZY = `${XSLT_OUT_DIR}/${SRC_XML.replace(
+    ".xml",
+    ""
+)}_support.xml`;
 const OUT_XHTML = SRC_XML.replace("xml", "xhtml");
 const OUT_TXT = SRC_XML.replace("xml", "txt");
-const OUT_SVG = SRC_XML.replace("svg", "txt");
+const OUT_SVG = SRC_XML.replace("xml", "svg");
 
 const initCommand = (src_file, xsl_file, out_file) => {
     return `java -jar ${JAR} -s:${src_file} -xsl:${XSLT_DIR}/${xsl_file} -o:${out_file}`;
@@ -60,10 +63,6 @@ module.exports = (grunt) => {
                 files: [file(XML_POMOCNICZY), file(XSL_SVG)],
                 tasks: ["exec:svg"],
             },
-            // all: {
-            //     files: [file(XML_POMOCNICZY)],
-            //     tasks: ["exec:xhtml", "exec:txt", "exec:svg"],
-            // },
         },
     });
 
