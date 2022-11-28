@@ -124,7 +124,7 @@ body > .stats::before {
 }
 
 .stats .waluta .ilosc::before {
-    content: "Ilość:";
+    content: "Albumy w tej walucie:";
 }
 
 .stats .waluta .min::before {
