@@ -197,7 +197,7 @@
     </xsl:template>
 
     <xsl:template match="*[name()='okladka']">
-        <xsl:variable name="coverImgUrl" select="'../covers/'" />
+        <xsl:variable name="coverImgUrl" select="'../assets/covers/'" />
         <xsl:variable name="imgSrc" select="@src" />
         <xsl:element name="okladka">
             <xsl:value-of select="concat($coverImgUrl, $imgSrc)" />
