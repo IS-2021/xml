@@ -1,5 +1,12 @@
 console.log("Game loaded");
 
+// Game constants
+const BALL_DIR_Y_UP = -1;
+const BALL_DIR_Y_DOWN = 1;
+const BALL_DIR_X_RIGHT = 1;
+const BALL_DIR_X_LEFT = -1;
+const GAME_STEP = 5;
+
 class SVGNode {
     constructor(selector) {
         this.node = document.querySelector(selector);
@@ -18,9 +25,33 @@ class SVGNode {
     }
 }
 
+class SVGBall extends SVGNode {
+    constructor(selector, xDir, yDir) {
+        super(selector);
+        this.xDir = xDir;
+        this.yDir = yDir;
+    }
+
+    switchXDir() {
+        if (this.xDir === BALL_DIR_X_LEFT) {
+            this.xDir = BALL_DIR_X_RIGHT;
+        } else {
+            this.xDir = BALL_DIR_X_LEFT;
+        }
+    }
+
+    switchYDir() {
+        if (this.yDir === BALL_DIR_Y_UP) {
+            this.yDir = BALL_DIR_Y_DOWN;
+        } else {
+            this.yDir = BALL_DIR_Y_UP;
+        }
+    }
+}
+
 // DOM elements
 const DOM = {
-    ball: new SVGNode("#ball"),
+    ball: new SVGBall("#ball", BALL_DIR_X_RIGHT, BALL_DIR_Y_UP),
     frame: {
         top: new SVGNode("#frame_top"),
         left: new SVGNode("#frame_left"),
@@ -29,19 +60,10 @@ const DOM = {
     bar: new SVGNode("#bar"),
 };
 
-// Game constants
-const BALL_DIR_Y_UP = -1;
-const BALL_DIR_Y_DOWN = 1;
-const BALL_DIR_X_RIGHT = 1;
-const BALL_DIR_X_LEFT = -1;
-let current_dir_y = BALL_DIR_Y_DOWN;
-let current_dir_x = BALL_DIR_X_LEFT;
-const GAME_STEP = 5;
-
 // Game functions
 function drawBall() {
-    const nextXPos = DOM.ball.get("x") + GAME_STEP * current_dir_x;
-    const nextYPos = DOM.ball.get("y") + GAME_STEP * current_dir_y;
+    const nextXPos = DOM.ball.get("x") + GAME_STEP * DOM.ball.xDir;
+    const nextYPos = DOM.ball.get("y") + GAME_STEP * DOM.ball.yDir;
     DOM.ball.set("x", nextXPos);
     DOM.ball.set("y", nextYPos);
 
@@ -50,25 +72,25 @@ function drawBall() {
         DOM.ball.get("y") <
         DOM.frame.top.get("y") + DOM.frame.top.get("height")
     ) {
-        current_dir_y = BALL_DIR_Y_DOWN;
+        DOM.ball.switchYDir();
     }
     // Right frame collision
     if (
         DOM.ball.get("x") >
         DOM.frame.right.get("x") - DOM.frame.right.get("width")
     ) {
-        current_dir_x = BALL_DIR_X_LEFT;
+        DOM.ball.switchXDir();
     }
     // Left frame collision
     if (
         DOM.ball.get("x") <
         DOM.frame.left.get("x") + DOM.frame.left.get("width")
     ) {
-        current_dir_x = BALL_DIR_X_RIGHT;
+        DOM.ball.switchXDir();
     }
     // Bar collision
     if (DOM.ball.get("y") === DOM.bar.get("y") - DOM.bar.get("height")) {
-        current_dir_y = BALL_DIR_Y_UP;
+        DOM.ball.switchYDir();
     }
 }
 
