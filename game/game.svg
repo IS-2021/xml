@@ -1,0 +1,22 @@
+<svg width="800" height="640" viewBox="0 0 800 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g id="game" clip-path="url(#clip0_28_8)">
+        <rect width="800" height="640" fill="black" />
+        <rect id="frame_left" y="40" width="20" height="600" fill="black" />
+        <rect id="frame_rigth" x="780" y="40" width="20" height="600" fill="black" />
+        <rect id="frame_top" x="20" y="40" width="760" height="20" fill="black" />
+        <path id="frame" fill-rule="evenodd" clip-rule="evenodd" d="M20 60L780 60V640H800V40H780L20 40L0 40V640H20V60Z" fill="url(#paint0_linear_28_8)" />
+        <rect id="bar" x="360" y="618" width="80" height="10" fill="#FF8A00" />
+        <rect id="ball" x="400" y="588" width="10" height="10" fill="#FF8A00" />
+    </g>
+    <defs>
+        <linearGradient id="paint0_linear_28_8" x1="400" y1="40" x2="400" y2="705" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#8F8F8F" />
+            <stop offset="0.9999" stop-color="#A8A8A8" stop-opacity="0" />
+            <stop offset="1" stop-color="#D9D9D9" stop-opacity="0" />
+        </linearGradient>
+        <clipPath id="clip0_28_8">
+            <rect width="800" height="640" fill="white" />
+        </clipPath>
+    </defs>
+    <script type="text/javascript" href="game.js"></script>
+</svg>
