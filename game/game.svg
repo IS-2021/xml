@@ -18,5 +18,6 @@
             <rect width="800" height="640" fill="white" />
         </clipPath>
     </defs>
+    <script type="text/javascript" href="lodash.custom.min.js"></script>
     <script type="text/javascript" href="game.js"></script>
 </svg>
