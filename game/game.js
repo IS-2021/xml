@@ -68,24 +68,15 @@ function drawBall() {
     DOM.ball.set("y", nextYPos);
 
     // Top frame collision
-    if (
-        DOM.ball.get("y") <
-        DOM.frame.top.get("y") + DOM.frame.top.get("height")
-    ) {
+    if (DOM.ball.get("y") < DOM.frame.top.get("y") + DOM.frame.top.get("height")) {
         DOM.ball.switchYDir();
     }
     // Right frame collision
-    if (
-        DOM.ball.get("x") >
-        DOM.frame.right.get("x") - DOM.frame.right.get("width")
-    ) {
+    if (DOM.ball.get("x") > DOM.frame.right.get("x") - DOM.frame.right.get("width")) {
         DOM.ball.switchXDir();
     }
     // Left frame collision
-    if (
-        DOM.ball.get("x") <
-        DOM.frame.left.get("x") + DOM.frame.left.get("width")
-    ) {
+    if (DOM.ball.get("x") < DOM.frame.left.get("x") + DOM.frame.left.get("width")) {
         DOM.ball.switchXDir();
     }
     // Bar collision
