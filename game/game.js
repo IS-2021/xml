@@ -6,6 +6,7 @@ const BALL_DIR_Y_DOWN = 1;
 const BALL_DIR_X_RIGHT = 1;
 const BALL_DIR_X_LEFT = -1;
 const GAME_STEP = 5;
+let barMoveEnabled = true;
 
 class SVGNode {
     constructor(selector) {
@@ -84,6 +85,29 @@ function drawBall() {
         DOM.ball.switchYDir();
     }
 }
+
+const moveBar = (e) => {
+    if (!barMoveEnabled) return;
+
+    const bar_w = DOM.bar.get("width");
+    const clientX = e.clientX - bar_w / 2;
+    const boundLeft = DOM.frame.left.get("width");
+    const boundRight = DOM.frame.right.get("x") - bar_w;
+
+    if (clientX > boundLeft && clientX < boundRight) {
+        DOM.bar.set("x", clientX);
+    }
+    // If the mouse moves out of bounds while the event
+    // is throttled - set the position to the end
+    else if (clientX <= boundLeft) {
+        DOM.bar.set("x", boundLeft);
+    } else if (clientX >= boundRight) {
+        DOM.bar.set("x", boundRight);
+    }
+};
+
+const moveBarThrottled = _.throttle(moveBar, 10);
+document.addEventListener("mousemove", moveBarThrottled);
 
 // Main game loop
 const drawGame = () => {
