@@ -59,6 +59,7 @@ const DOM = {
         right: new SVGNode("#frame_right"),
     },
     bar: new SVGNode("#bar"),
+    board: new SVGNode("svg"),
 };
 
 // Game functions
@@ -81,8 +82,26 @@ function drawBall() {
         DOM.ball.switchXDir();
     }
     // Bar collision
-    if (DOM.ball.get("y") === DOM.bar.get("y") - DOM.bar.get("height")) {
+    if (
+        DOM.ball.get("x") >= DOM.bar.get("x") &&
+        DOM.ball.get("x") <= DOM.bar.get("x") + DOM.bar.get("width") &&
+        DOM.ball.get("y") === DOM.bar.get("y")
+    ) {
         DOM.ball.switchYDir();
+
+        // Switch direction depending on the side the bar was hit
+        const barMid = DOM.bar.get("x") + DOM.bar.get("width") / 2;
+        console.log(DOM.ball.get("x"), barMid);
+        if (DOM.ball.get("x") < barMid) {
+            DOM.ball.xDir = BALL_DIR_X_LEFT;
+        } else {
+            DOM.ball.xDir = BALL_DIR_X_RIGHT;
+        }
+    }
+
+    // Bottom edge collision
+    if (DOM.ball.get("y") >= DOM.board.get("height")) {
+        console.log("game over");
     }
 }
 
