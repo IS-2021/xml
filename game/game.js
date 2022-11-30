@@ -82,57 +82,51 @@ class SVGBall extends SVGNode {
     }
 }
 
-// DOM elements
-const DOM = {
-    ball: new SVGBall("#ball", BALL_DIR_X_RIGHT, BALL_DIR_Y_UP),
-    frame: {
-        top: new SVGNode("#frame_top"),
-        left: new SVGNode("#frame_left"),
-        right: new SVGNode("#frame_right"),
-    },
-    bar: new SVGNode("#bar"),
-    board: new SVGNode("svg"),
+// SVG elements
+const ball = new SVGBall("#ball", BALL_DIR_X_RIGHT, BALL_DIR_Y_UP);
+const frame = {
+    top: new SVGNode("#frame_top"),
+    left: new SVGNode("#frame_left"),
+    right: new SVGNode("#frame_right"),
 };
+const bar = new SVGNode("#bar");
+const svg = new SVGNode("svg");
 
 // Game functions
 function drawBall() {
-    const nextXPos = DOM.ball.x + GAME_STEP * DOM.ball.xDir;
-    const nextYPos = DOM.ball.y + GAME_STEP * DOM.ball.yDir;
-    DOM.ball.x = nextXPos;
-    DOM.ball.y = nextYPos;
+    const nextXPos = ball.x + GAME_STEP * ball.xDir;
+    const nextYPos = ball.y + GAME_STEP * ball.yDir;
+    ball.x = nextXPos;
+    ball.y = nextYPos;
 
     // Top frame collision
-    if (DOM.ball.y < DOM.frame.top.y + DOM.frame.top.height) {
-        DOM.ball.switchYDir();
+    if (ball.y < frame.top.y + frame.top.height) {
+        ball.switchYDir();
     }
     // Right frame collision
-    if (DOM.ball.x > DOM.frame.right.x - DOM.frame.right.width) {
-        DOM.ball.switchXDir();
+    if (ball.x > frame.right.x - frame.right.width) {
+        ball.switchXDir();
     }
     // Left frame collision
-    if (DOM.ball.x < DOM.frame.left.x + DOM.frame.left.width) {
-        DOM.ball.switchXDir();
+    if (ball.x < frame.left.x + frame.left.width) {
+        ball.switchXDir();
     }
     // Bar collision
-    if (
-        DOM.ball.x >= DOM.bar.x &&
-        DOM.ball.x <= DOM.bar.x + DOM.bar.width &&
-        DOM.ball.y === DOM.bar.y
-    ) {
-        DOM.ball.switchYDir();
+    if (ball.x >= bar.x && ball.x <= bar.x + bar.width && ball.y === bar.y) {
+        ball.switchYDir();
 
         // Switch direction depending on the side the bar was hit
-        const barMid = DOM.bar.x + DOM.bar.width / 2;
-        console.log(DOM.ball.x, barMid);
-        if (DOM.ball.x < barMid) {
-            DOM.ball.xDir = BALL_DIR_X_LEFT;
+        const barMid = bar.x + bar.width / 2;
+        console.log(ball.x, barMid);
+        if (ball.x < barMid) {
+            ball.xDir = BALL_DIR_X_LEFT;
         } else {
-            DOM.ball.xDir = BALL_DIR_X_RIGHT;
+            ball.xDir = BALL_DIR_X_RIGHT;
         }
     }
 
     // Bottom edge collision
-    if (DOM.ball.y >= DOM.board.height) {
+    if (ball.y >= svg.height) {
         console.log("game over");
     }
 }
@@ -140,20 +134,20 @@ function drawBall() {
 const moveBar = (e) => {
     if (!barMoveEnabled) return;
 
-    const bar_w = DOM.bar.width;
+    const bar_w = bar.width;
     const clientX = e.clientX - bar_w / 2;
-    const boundLeft = DOM.frame.left.width;
-    const boundRight = DOM.frame.right.x - bar_w;
+    const boundLeft = frame.left.width;
+    const boundRight = frame.right.x - bar_w;
 
     if (clientX > boundLeft && clientX < boundRight) {
-        DOM.bar.x = clientX;
+        bar.x = clientX;
     }
     // If the mouse moves out of bounds while the event
     // is throttled - set the position to the end
     else if (clientX <= boundLeft) {
-        DOM.bar.x = boundLeft;
+        bar.x = boundLeft;
     } else if (clientX >= boundRight) {
-        DOM.bar.x = boundRight;
+        bar.x = boundRight;
     }
 };
 
