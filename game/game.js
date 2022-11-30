@@ -29,16 +29,32 @@ class SVGNode {
         return this.get("x");
     }
 
+    set x(value) {
+        this.set("x", value);
+    }
+
     get y() {
         return this.get("y");
+    }
+
+    set y(value) {
+        this.set("y", value);
     }
 
     get width() {
         return this.get("width");
     }
 
+    set width(value) {
+        this.set("width", value);
+    }
+
     get height() {
         return this.get("height");
+    }
+
+    set height(value) {
+        this.set("height", value);
     }
 }
 
@@ -82,8 +98,8 @@ const DOM = {
 function drawBall() {
     const nextXPos = DOM.ball.x + GAME_STEP * DOM.ball.xDir;
     const nextYPos = DOM.ball.y + GAME_STEP * DOM.ball.yDir;
-    DOM.ball.set("x", nextXPos);
-    DOM.ball.set("y", nextYPos);
+    DOM.ball.x = nextXPos;
+    DOM.ball.y = nextYPos;
 
     // Top frame collision
     if (DOM.ball.y < DOM.frame.top.y + DOM.frame.top.height) {
@@ -130,14 +146,14 @@ const moveBar = (e) => {
     const boundRight = DOM.frame.right.x - bar_w;
 
     if (clientX > boundLeft && clientX < boundRight) {
-        DOM.bar.set("x", clientX);
+        DOM.bar.x = clientX;
     }
     // If the mouse moves out of bounds while the event
     // is throttled - set the position to the end
     else if (clientX <= boundLeft) {
-        DOM.bar.set("x", boundLeft);
+        DOM.bar.x = boundLeft;
     } else if (clientX >= boundRight) {
-        DOM.bar.set("x", boundRight);
+        DOM.bar.x = boundRight;
     }
 };
 
