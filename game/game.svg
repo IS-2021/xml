@@ -84,6 +84,9 @@
         ]]>
         </style>
     </defs>
+    <script type="text/javascript" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/EasePack.min.js"></script>
+    <script type="text/javascript"
+        href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js" />
     <script type="text/javascript" href="lodash.custom.min.js"></script>
     <script type="text/javascript" href="svgnode.js"></script>
     <script type="text/javascript" href="game.js"></script>

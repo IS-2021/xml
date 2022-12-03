@@ -1,4 +1,5 @@
 console.log("Game loaded");
+gsap.registerPlugin(EasePack);
 
 const SVGNS = "http://www.w3.org/2000/svg";
 
@@ -33,6 +34,23 @@ let BALL_INITIAL_X = null;
 let BALL_INITIAL_Y = null;
 let paused = true;
 let barMoveEnabled = false;
+
+// Animation constants
+const cycleFill = {
+    attr: {
+        "fill-opacity": 0,
+    },
+    duration: 0.75,
+    ease: "none",
+    repeat: -1,
+    repeatDelay: 0.5,
+    yoyo: true,
+};
+const flicker = {
+    duration: 0.5,
+    opacity: 0,
+    ease: RoughEase.ease.config({ points: 30, strength: 3, clamp: true }),
+};
 
 class SVGBall extends SVGNode {
     constructor(obj, xDir, yDir) {
@@ -244,7 +262,8 @@ function cleanUpPreviousGame() {
     blocks.splice(0, blocks.length);
 
     showNode(ball);
-    topBar.hearts.forEach((h) => showNode(h));
+
+    topBar.hearts.forEach((h) => gsap.set(h.node, { attr: { "fill-opacity": 1 } }));
 }
 
 function prepareNewGame() {
@@ -278,10 +297,18 @@ function deathPitCollisionHandler() {
     barMoveEnabled = false;
     paused = true;
     hideNode(ball);
-    hideNode(topBar.hearts[livesLeft - 1]);
+
+    const heart = topBar.hearts[livesLeft - 1];
+
+    gsap.to(heart.node, {
+        duration: 0.5,
+        attr: { "fill-opacity": 0.5 },
+        ease: RoughEase.ease.config({ points: 10, strength: 3, clamp: true }),
+    });
+    gsap.set(heart.node, { attr: { "fill-opacity": 0 }, delay: 0.5 });
 
     if (livesLeft - 1 === 0) {
-        showNode(gameOverScreen);
+        setTimeout(() => showNode(gameOverScreen), 500);
         return;
     }
 
@@ -302,18 +329,27 @@ function respawn() {
         paused = false;
         barMoveEnabled = true;
     }, 500);
+
+    gsap.from(ball.node, flicker);
 }
 
 function startNewGame() {
-    barMoveEnabled = true;
-    paused = false;
-
+    livesLeft = 3;
     topBar.points.text = 0;
     topBar.blocksLeft.text = blocks.length;
 
+    showNode(ball);
+    showNode(bar);
     hideNode(startScreen);
     hideNode(gameOverScreen);
     hideNode(topBar.overlay);
+
+    gsap.from(ball.node, flicker);
+
+    setTimeout(() => {
+        barMoveEnabled = true;
+        paused = false;
+    }, 500);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -321,8 +357,19 @@ document.addEventListener("DOMContentLoaded", () => {
     BALL_INITIAL_Y = ball.y;
     BAR_INITIAL_X = bar.x;
 
+    hideNode(ball);
+    hideNode(bar);
     hideNode(gameOverScreen);
     showNode(topBar.overlay);
+
+    gsap.set(startScreen.btn, { attr: { "fill-opacity": 1 } });
+    gsap.set(gameOverScreen.btn, { attr: { "fill-opacity": 1 } });
+    // Start animations
+    gsap.to(startScreen.btn, cycleFill);
+    gsap.to(gameOverScreen.btn, {
+        ...cycleFill,
+        delay: 0.75,
+    });
 
     startScreen.btn.addEventListener("click", (e) => {
         prepareNewGame();
