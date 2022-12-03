@@ -124,6 +124,7 @@ const frame = {
 const bar = new SVGNode({ selector: "#bar" });
 const svg = new SVGNode({ selector: "svg" });
 const deathPit = new SVGNode({ selector: "#death_pit" });
+const blocks = [];
 
 // Game functions
 function createBlock(x, y, color = BLOCK_COLORS.DEFAULT) {
