@@ -6,7 +6,7 @@
         <rect id="frame_top" x="20" y="40" width="760" height="20" fill="black" />
         <path id="frame" fill-rule="evenodd" clip-rule="evenodd" d="M20 60L780 60V640H800V40H780L20 40L0 40V640H20V60Z" fill="url(#paint0_linear_28_8)" />
         <rect id="bar" x="360" y="618" width="80" height="10" fill="#FF8A00" />
-        <rect id="ball" x="400" y="588" width="10" height="10" fill="#FF8A00" />
+        <g id="blocks"></g>
     </g>
     <defs>
         <linearGradient id="paint0_linear_28_8" x1="400" y1="40" x2="400" y2="705" gradientUnits="userSpaceOnUse">

@@ -1,11 +1,29 @@
 console.log("Game loaded");
 
+const SVGNS = "http://www.w3.org/2000/svg";
+
 // Game constants
 const BALL_DIR_Y_UP = -1;
 const BALL_DIR_Y_DOWN = 1;
 const BALL_DIR_X_RIGHT = 1;
 const BALL_DIR_X_LEFT = -1;
 const GAME_STEP = 5;
+
+// Contants (do not change)
+const BLOCK_WIDTH = 70;
+const BLOCK_HEIGHT = 30;
+const BLOCK_COLORS = {
+    WHITE: "#cccccc",
+    RED: "#ff5d5d",
+    ORANGE: "#fdaf68",
+    YELLOW: "#ffd25d",
+    GREEN: "#86ffa8",
+    BLUE: "#87c5fe",
+};
+BLOCK_COLORS.DEFAULT = BLOCK_COLORS.WHITE;
+const BLOCK_ROW_COUNT = 5;
+
+// Game variables
 let barMoveEnabled = true;
 
 class SVGNode {
@@ -93,6 +111,45 @@ const bar = new SVGNode("#bar");
 const svg = new SVGNode("svg");
 
 // Game functions
+function createBlock(x, y, color = BLOCK_COLORS.DEFAULT) {
+    const rect = document.createElementNS(SVGNS, "rect");
+
+    // Position
+    rect.setAttribute("x", x);
+    rect.setAttribute("y", y);
+    rect.setAttribute("width", BLOCK_WIDTH);
+    rect.setAttribute("height", BLOCK_HEIGHT);
+    // Styling
+    rect.setAttribute("class", "block");
+    rect.setAttribute("fill", color);
+
+    return rect;
+}
+
+function createBlockRow(index = 0, color = BLOCK_COLORS.DEFAULT) {
+    const FIRST_BLOCK_X = 50;
+    const FIRST_BLOCK_Y = 90;
+    const Y_OFFSET = BLOCK_HEIGHT * index;
+
+    for (let i = 0; i < 10; i++) {
+        const x = FIRST_BLOCK_X + BLOCK_WIDTH * i;
+        const y = FIRST_BLOCK_Y + Y_OFFSET;
+
+        const block = createBlock(x, y, color);
+        const game = document.querySelector("#blocks");
+        game.appendChild(block);
+    }
+}
+
+function createAllBlocks() {
+    const colorCount = Object.keys(BLOCK_COLORS).length - 2;
+
+    for (let i = 0; i < BLOCK_ROW_COUNT; i++) {
+        const colorKey = Object.keys(BLOCK_COLORS)[1 + (i % colorCount)];
+        createBlockRow(i, BLOCK_COLORS[colorKey]);
+    }
+}
+
 function drawBall() {
     const nextXPos = ball.x + GAME_STEP * ball.xDir;
     const nextYPos = ball.y + GAME_STEP * ball.yDir;
@@ -117,7 +174,6 @@ function drawBall() {
 
         // Switch direction depending on the side the bar was hit
         const barMid = bar.x + bar.width / 2;
-        console.log(ball.x, barMid);
         if (ball.x < barMid) {
             ball.xDir = BALL_DIR_X_LEFT;
         } else {
@@ -154,6 +210,10 @@ const moveBar = (e) => {
 const moveBarThrottled = _.throttle(moveBar, 10);
 document.addEventListener("mousemove", moveBarThrottled);
 
+function startNewGame() {
+    createAllBlocks();
+}
+
 // Main game loop
 const drawGame = () => {
     drawBall();
@@ -161,4 +221,8 @@ const drawGame = () => {
     window.requestAnimationFrame(drawGame);
 };
 
-window.requestAnimationFrame(drawGame);
+document.addEventListener("DOMContentLoaded", () => {
+    startNewGame();
+
+    window.requestAnimationFrame(drawGame);
+});
