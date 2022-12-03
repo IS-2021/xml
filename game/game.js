@@ -9,9 +9,10 @@ const BALL_DIR_X_RIGHT = 1;
 const BALL_DIR_X_LEFT = -1;
 const GAME_STEP = 5;
 
-// Contants (do not change)
+// Constants (do not change)
 const BLOCK_WIDTH = 70;
 const BLOCK_HEIGHT = 30;
+const BLOCK_COUNT = 10;
 const BLOCK_COLORS = {
     WHITE: "#cccccc",
     RED: "#ff5d5d",
@@ -148,7 +149,7 @@ function createBlockRow(index = 0, color = BLOCK_COLORS.DEFAULT) {
     const FIRST_BLOCK_Y = 90;
     const Y_OFFSET = BLOCK_HEIGHT * index;
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < BLOCK_COUNT; i++) {
         const x = FIRST_BLOCK_X + BLOCK_WIDTH * i;
         const y = FIRST_BLOCK_Y + Y_OFFSET;
 
