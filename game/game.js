@@ -27,8 +27,12 @@ const BLOCK_ROW_COUNT = 5;
 let barMoveEnabled = true;
 
 class SVGNode {
-    constructor(selector) {
-        this.node = document.querySelector(selector);
+    constructor(obj) {
+        if (obj.selector) {
+            this.node = document.querySelector(obj.selector);
+        } else if (obj.domNode) {
+            this.node = obj.domNode;
+        }
     }
 
     getStringAttr(attrName) {
@@ -89,8 +93,8 @@ class SVGNode {
 }
 
 class SVGBall extends SVGNode {
-    constructor(selector, xDir, yDir) {
-        super(selector);
+    constructor(obj, xDir, yDir) {
+        super(obj);
         this.xDir = xDir;
         this.yDir = yDir;
     }
@@ -113,15 +117,15 @@ class SVGBall extends SVGNode {
 }
 
 // SVG elements
-const ball = new SVGBall("#ball", BALL_DIR_X_RIGHT, BALL_DIR_Y_UP);
+const ball = new SVGBall({ selector: "#ball" }, BALL_DIR_X_LEFT, BALL_DIR_Y_UP);
 const frame = {
-    top: new SVGNode("#frame_top"),
-    left: new SVGNode("#frame_left"),
-    right: new SVGNode("#frame_right"),
+    top: new SVGNode({ selector: "#frame_top" }),
+    left: new SVGNode({ selector: "#frame_left" }),
+    right: new SVGNode({ selector: "#frame_right" }),
 };
-const bar = new SVGNode("#bar");
-const svg = new SVGNode("svg");
-const deathPit = new SVGNode("#death_pit");
+const bar = new SVGNode({ selector: "#bar" });
+const svg = new SVGNode({ selector: "svg" });
+const deathPit = new SVGNode({ selector: "#death_pit" });
 
 // Game functions
 function createBlock(x, y, color = BLOCK_COLORS.DEFAULT) {
@@ -225,6 +229,10 @@ document.addEventListener("mousemove", moveBarThrottled);
 
 function startNewGame() {
     createAllBlocks();
+    // Add all blocks to game elements
+    document.querySelectorAll(".block").forEach((block) => {
+        blocks.push(new SVGNode({ domNode: block }));
+    });
 }
 
 // Main game loop
