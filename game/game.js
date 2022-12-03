@@ -309,6 +309,7 @@ function deathPitCollisionHandler() {
 
     if (livesLeft - 1 === 0) {
         setTimeout(() => showNode(gameOverScreen), 500);
+        svg.node.style.cursor = "pointer";
         return;
     }
 
@@ -334,6 +335,8 @@ function respawn() {
 }
 
 function startNewGame() {
+    svg.node.style.cursor = "none";
+
     livesLeft = 3;
     topBar.points.text = 0;
     topBar.blocksLeft.text = blocks.length;
