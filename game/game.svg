@@ -27,5 +27,6 @@
         </style>
     </defs>
     <script type="text/javascript" href="lodash.custom.min.js"></script>
+    <script type="text/javascript" href="svgnode.js"></script>
     <script type="text/javascript" href="game.js"></script>
 </svg>
