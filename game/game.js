@@ -7,6 +7,8 @@ const BALL_DIR_Y_UP = -1;
 const BALL_DIR_Y_DOWN = 1;
 const BALL_DIR_X_RIGHT = 1;
 const BALL_DIR_X_LEFT = -1;
+const BALL_INITIAL_X_DIR = BALL_DIR_X_RIGHT;
+const BALL_INITIAL_Y_DIR = BALL_DIR_Y_UP;
 const GAME_STEP = 5;
 
 // Constants (do not change)
@@ -25,7 +27,10 @@ BLOCK_COLORS.DEFAULT = BLOCK_COLORS.WHITE;
 const BLOCK_ROW_COUNT = 5;
 
 // Game variables
-let barMoveEnabled = true;
+let BALL_INITIAL_X = null;
+let BALL_INITIAL_Y = null;
+let paused = true;
+let barMoveEnabled = false;
 
 class SVGBall extends SVGNode {
     constructor(obj, xDir, yDir) {
@@ -51,6 +56,32 @@ class SVGBall extends SVGNode {
     }
 }
 
+class SVGText extends SVGNode {
+    constructor(obj) {
+        super(obj);
+        this.tspan = this.node.querySelector("tspan");
+
+        if (!this.tspan) {
+            throw "tspan not found.";
+        }
+    }
+
+    setText(text) {
+        this.tspan.textContent = text;
+    }
+}
+
+class SVGScreen extends SVGNode {
+    constructor(obj) {
+        super(obj);
+        this.btn = this.node.querySelector(".btn");
+
+        if (!this.btn) {
+            throw "The screen has no button.";
+        }
+    }
+}
+
 // SVG elements
 const ball = new SVGBall({ selector: "#ball" }, BALL_DIR_X_LEFT, BALL_DIR_Y_UP);
 const frame = {
@@ -62,6 +93,15 @@ const bar = new SVGNode({ selector: "#bar" });
 const svg = new SVGNode({ selector: "svg" });
 const deathPit = new SVGNode({ selector: "#death_pit" });
 const blocks = [];
+// Top bar elements
+const topBar = {
+    overlay: new SVGNode({ selector: "#topBarOverlay" }),
+    points: new SVGText({ selector: "#points" }),
+    blocksLeft: new SVGText({ selector: "#blocksLeft" }),
+};
+// Screens
+const startScreen = new SVGScreen({ selector: "#start_screen" });
+const gameOverScreen = new SVGScreen({ selector: "#game_over_screen" });
 
 // Game functions
 function createBlock(x, y, color = BLOCK_COLORS.DEFAULT) {
@@ -135,13 +175,13 @@ function drawBall() {
     }
     // Bottom edge collision
     else if (ball.collidesWith(deathPit)) {
-        console.log("game over");
+        deathPitCollisionHandler();
     }
     // Blocks collision
     checkBallBlocksCollision();
 }
 
-function checkBallBlocksCollision() {
+function checkBallBlocksCollision(distance) {
     for (let i = 0; i < blocks.length; i++) {
         const block = blocks[i];
 
@@ -180,23 +220,82 @@ const moveBar = (e) => {
 const moveBarThrottled = _.throttle(moveBar, 10);
 document.addEventListener("mousemove", moveBarThrottled);
 
-function startNewGame() {
+function cleanUpPreviousGame() {
+    ball.x = BALL_INITIAL_X;
+    ball.y = BALL_INITIAL_Y;
+    ball.xDir = BALL_INITIAL_X_DIR;
+    ball.yDir = BALL_INITIAL_Y_DIR;
+
+    document.querySelectorAll(".block").forEach((block) => block.remove());
+    blocks.splice(0, blocks.length);
+
+    showNode(ball);
+}
+
+function prepareNewGame() {
     createAllBlocks();
     // Add all blocks to game elements
     document.querySelectorAll(".block").forEach((block) => {
         blocks.push(new SVGNode({ domNode: block }));
     });
+
+    showNode(startScreen);
 }
 
 // Main game loop
 const drawGame = () => {
-    drawBall();
+    if (!paused) {
+        drawBall();
+    }
 
     window.requestAnimationFrame(drawGame);
 };
 
+function hideNode(node) {
+    node.set("display", "none");
+}
+
+function showNode(node) {
+    node.set("display", "block");
+}
+
+function deathPitCollisionHandler() {
+    barMoveEnabled = false;
+    paused = true;
+
+    hideNode(ball);
+    showNode(gameOverScreen);
+}
+
+function startNewGame() {
+    barMoveEnabled = true;
+    paused = false;
+
+    topBar.points.setText(0);
+    topBar.blocksLeft.setText(blocks.length);
+
+    hideNode(startScreen);
+    hideNode(gameOverScreen);
+    hideNode(topBar.overlay);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-    startNewGame();
+    BALL_INITIAL_X = ball.x;
+    BALL_INITIAL_Y = ball.y;
+
+    hideNode(gameOverScreen);
+    showNode(topBar.overlay);
+
+    startScreen.btn.addEventListener("click", (e) => {
+        prepareNewGame();
+        startNewGame();
+    });
+
+    gameOverScreen.btn.addEventListener("click", (e) => {
+        cleanUpPreviousGame();
+        prepareNewGame();
+        startNewGame();
+    });
 
     window.requestAnimationFrame(drawGame);
 });

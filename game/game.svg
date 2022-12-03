@@ -8,6 +8,38 @@
         <path id="frame" fill-rule="evenodd" clip-rule="evenodd" d="M20 60L780 60V640H800V40H780L20 40L0 40V640H20V60Z" fill="url(#paint0_linear_28_8)" />
         <rect id="ball" x="395" y="598" width="10" height="10" fill="#FF8A00" />
         <rect id="bar" x="360" y="618" width="80" height="10" fill="#FF8A00" />
+        <text id="pointsLabel" fill="white" xml:space="preserve" style="white-space: pre" font-family="Press Start 2P" font-size="14" letter-spacing="0em">
+            <tspan x="20" y="27">POINTS:</tspan>
+        </text>
+        <text id="points" fill="white" xml:space="preserve" style="white-space: pre" font-family="Press Start 2P" font-size="14" letter-spacing="0em">
+            <tspan x="118" y="27">0</tspan>
+        </text>
+        <text id="blocksLeft" fill="white" xml:space="preserve" style="white-space: pre" font-family="Press Start 2P" font-size="24" letter-spacing="0em">
+            <tspan x="376" y="32">40</tspan>
+        </text>
+        <g id="start_screen">
+            <g id="play_btn" class="btn">
+                <rect width="120" height="40" transform="translate(340 338)" fill="#38FF34" />
+                <text id="play" fill="black" fill-opacity="0.5" xml:space="preserve" style="white-space: pre" font-family="Press Start 2P" font-size="20" letter-spacing="0em">
+                    <tspan x="360" y="368">PLAY</tspan>
+                </text>
+            </g>
+            <text id="title" fill="white" xml:space="preserve" style="white-space: pre" font-family="Press Start 2P" font-size="20" letter-spacing="0em">
+                <tspan x="320" y="318">BREAKOUT</tspan>
+            </text>
+        </g>
+        <g id="game_over_screen">
+            <g id="play_again_btn" class="btn">
+                <rect width="240" height="40" transform="translate(280 358)" fill="#38FF34" />
+                <text id="play again" fill="black" fill-opacity="0.5" xml:space="preserve" style="white-space: pre" font-family="Press Start 2P" font-size="20" letter-spacing="0em">
+                    <tspan x="300" y="388">PLAY AGAIN</tspan>
+                </text>
+            </g>
+            <text id="title_2" fill="white" xml:space="preserve" style="white-space: pre" font-family="Press Start 2P" font-size="40" letter-spacing="0em">
+                <tspan x="220" y="338">GAME OVER</tspan>
+            </text>
+        </g>
+        <rect id="topBarOverlay" width="800" height="40" fill="black" />
         <g id="blocks"></g>
     </g>
     <defs>
