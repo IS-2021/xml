@@ -27,6 +27,8 @@ BLOCK_COLORS.DEFAULT = BLOCK_COLORS.WHITE;
 const BLOCK_ROW_COUNT = 5;
 
 // Game variables
+let livesLeft = 3;
+let BAR_INITIAL_X = null;
 let BALL_INITIAL_X = null;
 let BALL_INITIAL_Y = null;
 let paused = true;
@@ -102,6 +104,11 @@ const topBar = {
     overlay: new SVGNode({ selector: "#topBarOverlay" }),
     points: new SVGText({ selector: "#points" }),
     blocksLeft: new SVGText({ selector: "#blocksLeft" }),
+    hearts: [
+        new SVGNode({ selector: "#heart_1" }),
+        new SVGNode({ selector: "#heart_2" }),
+        new SVGNode({ selector: "#heart_3" }),
+    ],
 };
 // Screens
 const startScreen = new SVGScreen({ selector: "#start_screen" });
@@ -237,6 +244,7 @@ function cleanUpPreviousGame() {
     blocks.splice(0, blocks.length);
 
     showNode(ball);
+    topBar.hearts.forEach((h) => showNode(h));
 }
 
 function prepareNewGame() {
@@ -269,9 +277,31 @@ function showNode(node) {
 function deathPitCollisionHandler() {
     barMoveEnabled = false;
     paused = true;
-
     hideNode(ball);
-    showNode(gameOverScreen);
+    hideNode(topBar.hearts[livesLeft - 1]);
+
+    if (livesLeft - 1 === 0) {
+        showNode(gameOverScreen);
+        return;
+    }
+
+    livesLeft--;
+    setTimeout(respawn, 1000);
+}
+
+function respawn() {
+    showNode(ball);
+
+    bar.x = BAR_INITIAL_X;
+    ball.x = BALL_INITIAL_X;
+    ball.y = BALL_INITIAL_Y;
+    ball.xDir = BALL_INITIAL_X_DIR;
+    ball.yDir = BALL_INITIAL_Y_DIR;
+
+    setTimeout(() => {
+        paused = false;
+        barMoveEnabled = true;
+    }, 500);
 }
 
 function startNewGame() {
@@ -289,6 +319,7 @@ function startNewGame() {
 document.addEventListener("DOMContentLoaded", () => {
     BALL_INITIAL_X = ball.x;
     BALL_INITIAL_Y = ball.y;
+    BAR_INITIAL_X = bar.x;
 
     hideNode(gameOverScreen);
     showNode(topBar.overlay);
