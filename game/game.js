@@ -49,15 +49,12 @@ class SVGNode {
     }
 
     collidesWith(svg) {
-        if (
+        return (
             this.x + svg.width >= svg.x && // left-edge
             this.x <= svg.x + svg.width && // right-edge
             this.y + this.height >= svg.y && // top-edge
             this.y <= svg.y + svg.height // bottom-edge
-        ) {
-            return true;
-        }
-        return false;
+        );
     }
 
     get x() {
