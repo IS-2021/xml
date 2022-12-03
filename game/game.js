@@ -43,6 +43,18 @@ class SVGNode {
         return this.node.setAttribute(attrName, value);
     }
 
+    collidesWith(svg) {
+        if (
+            this.x + svg.width >= svg.x && // left-edge
+            this.x <= svg.x + svg.width && // right-edge
+            this.y + this.height >= svg.y && // top-edge
+            this.y <= svg.y + svg.height // bottom-edge
+        ) {
+            return true;
+        }
+        return false;
+    }
+
     get x() {
         return this.get("x");
     }
@@ -109,6 +121,7 @@ const frame = {
 };
 const bar = new SVGNode("#bar");
 const svg = new SVGNode("svg");
+const deathPit = new SVGNode("#death_pit");
 
 // Game functions
 function createBlock(x, y, color = BLOCK_COLORS.DEFAULT) {
@@ -157,19 +170,19 @@ function drawBall() {
     ball.y = nextYPos;
 
     // Top frame collision
-    if (ball.y < frame.top.y + frame.top.height) {
+    if (ball.collidesWith(frame.top)) {
         ball.switchYDir();
     }
     // Right frame collision
-    if (ball.x > frame.right.x - frame.right.width) {
+    else if (ball.collidesWith(frame.right)) {
         ball.switchXDir();
     }
     // Left frame collision
-    if (ball.x < frame.left.x + frame.left.width) {
+    else if (ball.collidesWith(frame.left)) {
         ball.switchXDir();
     }
     // Bar collision
-    if (ball.x >= bar.x && ball.x <= bar.x + bar.width && ball.y === bar.y) {
+    else if (ball.collidesWith(bar)) {
         ball.switchYDir();
 
         // Switch direction depending on the side the bar was hit
@@ -182,7 +195,7 @@ function drawBall() {
     }
 
     // Bottom edge collision
-    if (ball.y >= svg.height) {
+    if (ball.collidesWith(deathPit)) {
         console.log("game over");
     }
 }

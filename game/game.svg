@@ -1,6 +1,7 @@
 <svg width="800" height="640" viewBox="0 0 800 640" fill="none" xmlns="http://www.w3.org/2000/svg">
     <g id="game" clip-path="url(#clip0_28_8)">
         <rect width="800" height="640" fill="black" />
+        <rect id="death_pit" x="20" y="639" width="760" height="1" fill="black" />
         <rect id="frame_left" y="40" width="20" height="600" fill="black" />
         <rect id="frame_right" x="780" y="40" width="20" height="600" fill="black" />
         <rect id="frame_top" x="20" y="40" width="760" height="20" fill="black" />
