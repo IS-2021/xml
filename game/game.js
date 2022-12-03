@@ -66,8 +66,12 @@ class SVGText extends SVGNode {
         }
     }
 
-    setText(text) {
+    set text(text) {
         this.tspan.textContent = text;
+    }
+
+    get text() {
+        return this.tspan.textContent;
     }
 }
 
@@ -189,6 +193,9 @@ function checkBallBlocksCollision(distance) {
             block.node.remove();
             blocks.splice(i, 1);
 
+            topBar.blocksLeft.text = blocks.length;
+            topBar.points.text = Number(topBar.points.text) + 1;
+
             ball.switchYDir();
             ball.switchXDir();
 
@@ -271,8 +278,8 @@ function startNewGame() {
     barMoveEnabled = true;
     paused = false;
 
-    topBar.points.setText(0);
-    topBar.blocksLeft.setText(blocks.length);
+    topBar.points.text = 0;
+    topBar.blocksLeft.text = blocks.length;
 
     hideNode(startScreen);
     hideNode(gameOverScreen);
