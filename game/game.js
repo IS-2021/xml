@@ -198,10 +198,27 @@ function drawBall() {
             ball.xDir = BALL_DIR_X_RIGHT;
         }
     }
-
     // Bottom edge collision
-    if (ball.collidesWith(deathPit)) {
+    else if (ball.collidesWith(deathPit)) {
         console.log("game over");
+    }
+    // Blocks collision
+    checkBallBlocksCollision();
+}
+
+function checkBallBlocksCollision() {
+    for (let i = 0; i < blocks.length; i++) {
+        const block = blocks[i];
+
+        if (ball.collidesWith(block)) {
+            block.node.remove();
+            blocks.splice(i, 1);
+
+            ball.switchYDir();
+            ball.switchXDir();
+
+            return;
+        }
     }
 }
 
