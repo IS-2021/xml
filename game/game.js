@@ -267,22 +267,15 @@ function cleanUpPreviousGame() {
     ball.xDir = BALL_INITIAL_X_DIR;
     ball.yDir = BALL_INITIAL_Y_DIR;
 
+    bar.x = BAR_INITIAL_X;
+    livesLeft = 3;
+
     document.querySelectorAll(".block").forEach((block) => block.remove());
     blocks.splice(0, blocks.length);
 
     showNode(ball);
 
     topBar.hearts.forEach((h) => gsap.set(h.node, { attr: { "fill-opacity": 1 } }));
-}
-
-function prepareNewGame() {
-    createAllBlocks();
-    // Add all blocks to game elements
-    document.querySelectorAll(".block").forEach((block) => {
-        blocks.push(new SVGNode({ domNode: block }));
-    });
-
-    showNode(startScreen);
 }
 
 // Main game loop
@@ -344,9 +337,16 @@ function respawn() {
 }
 
 function startNewGame() {
+    createAllBlocks();
+    // Add all blocks to game elements
+    document.querySelectorAll(".block").forEach((block) => {
+        blocks.push(new SVGNode({ domNode: block }));
+    });
+
+    showNode(startScreen);
+
     svg.node.style.cursor = "none";
 
-    livesLeft = 3;
     topBar.points.text = 0;
     topBar.blocksLeft.text = blocks.length;
 
@@ -364,7 +364,7 @@ function startNewGame() {
     }, 500);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+function init() {
     BALL_INITIAL_X = ball.x;
     BALL_INITIAL_Y = ball.y;
     BAR_INITIAL_X = bar.x;
@@ -382,15 +382,17 @@ document.addEventListener("DOMContentLoaded", () => {
         ...cycleFill,
         delay: 0.75,
     });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    init();
 
     startScreen.btn.addEventListener("click", (e) => {
-        prepareNewGame();
         startNewGame();
     });
 
     gameOverScreen.btn.addEventListener("click", (e) => {
         cleanUpPreviousGame();
-        prepareNewGame();
         startNewGame();
     });
 
