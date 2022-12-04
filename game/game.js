@@ -74,6 +74,16 @@ class SVGBall extends SVGNode {
             this.yDir = BALL_DIR_Y_UP;
         }
     }
+
+    nextPos() {
+        const nextXPos = this.x + GAME_STEP * this.xDir;
+        const nextYPos = this.y + GAME_STEP * this.yDir;
+
+        return {
+            nextX: nextXPos,
+            nextY: nextYPos,
+        };
+    }
 }
 
 class SVGText extends SVGNode {
@@ -173,10 +183,9 @@ function createAllBlocks() {
 }
 
 function drawBall() {
-    const nextXPos = ball.x + GAME_STEP * ball.xDir;
-    const nextYPos = ball.y + GAME_STEP * ball.yDir;
-    ball.x = nextXPos;
-    ball.y = nextYPos;
+    const { nextX, nextY } = ball.nextPos();
+    ball.x = nextX;
+    ball.y = nextY;
 
     // Top frame collision
     if (ball.collidesWith(frame.top)) {
