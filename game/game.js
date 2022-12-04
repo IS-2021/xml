@@ -258,8 +258,71 @@ const moveBar = (e) => {
     }
 };
 
-const moveBarThrottled = _.throttle(moveBar, 10);
-document.addEventListener("mousemove", moveBarThrottled);
+// Helpers
+function hideNode(node) {
+    node.set("display", "none");
+}
+
+function showNode(node) {
+    node.set("display", "block");
+}
+
+// Main game loop
+const drawGame = () => {
+    if (!paused) {
+        drawBall();
+    }
+
+    window.requestAnimationFrame(drawGame);
+};
+
+function init() {
+    BALL_INITIAL_X = ball.x;
+    BALL_INITIAL_Y = ball.y;
+    BAR_INITIAL_X = bar.x;
+
+    hideNode(ball);
+    hideNode(bar);
+    hideNode(gameOverScreen);
+    showNode(topBar.overlay);
+
+    gsap.set(startScreen.btn, { attr: { "fill-opacity": 1 } });
+    gsap.set(gameOverScreen.btn, { attr: { "fill-opacity": 1 } });
+    // Start animations
+    gsap.to(startScreen.btn, cycleFill);
+    gsap.to(gameOverScreen.btn, {
+        ...cycleFill,
+        delay: 0.75,
+    });
+}
+
+function startNewGame() {
+    createAllBlocks();
+    // Add all blocks to game elements
+    document.querySelectorAll(".block").forEach((block) => {
+        blocks.push(new SVGNode({ domNode: block }));
+    });
+
+    showNode(startScreen);
+
+    svg.node.style.cursor = "none";
+
+    topBar.points.text = 0;
+    topBar.blocksLeft.text = blocks.length;
+
+    showNode(ball);
+    showNode(bar);
+    hideNode(startScreen);
+    hideNode(gameOverScreen);
+    hideNode(topBar.overlay);
+
+    gsap.from(ball.node, flicker);
+
+    setTimeout(() => {
+        barMoveEnabled = true;
+        paused = false;
+    }, 500);
+}
 
 function cleanUpPreviousGame() {
     ball.x = BALL_INITIAL_X;
@@ -276,23 +339,6 @@ function cleanUpPreviousGame() {
     showNode(ball);
 
     topBar.hearts.forEach((h) => gsap.set(h.node, { attr: { "fill-opacity": 1 } }));
-}
-
-// Main game loop
-const drawGame = () => {
-    if (!paused) {
-        drawBall();
-    }
-
-    window.requestAnimationFrame(drawGame);
-};
-
-function hideNode(node) {
-    node.set("display", "none");
-}
-
-function showNode(node) {
-    node.set("display", "block");
 }
 
 function deathPitCollisionHandler() {
@@ -336,56 +382,11 @@ function respawn() {
     gsap.from(ball.node, flicker);
 }
 
-function startNewGame() {
-    createAllBlocks();
-    // Add all blocks to game elements
-    document.querySelectorAll(".block").forEach((block) => {
-        blocks.push(new SVGNode({ domNode: block }));
-    });
-
-    showNode(startScreen);
-
-    svg.node.style.cursor = "none";
-
-    topBar.points.text = 0;
-    topBar.blocksLeft.text = blocks.length;
-
-    showNode(ball);
-    showNode(bar);
-    hideNode(startScreen);
-    hideNode(gameOverScreen);
-    hideNode(topBar.overlay);
-
-    gsap.from(ball.node, flicker);
-
-    setTimeout(() => {
-        barMoveEnabled = true;
-        paused = false;
-    }, 500);
-}
-
-function init() {
-    BALL_INITIAL_X = ball.x;
-    BALL_INITIAL_Y = ball.y;
-    BAR_INITIAL_X = bar.x;
-
-    hideNode(ball);
-    hideNode(bar);
-    hideNode(gameOverScreen);
-    showNode(topBar.overlay);
-
-    gsap.set(startScreen.btn, { attr: { "fill-opacity": 1 } });
-    gsap.set(gameOverScreen.btn, { attr: { "fill-opacity": 1 } });
-    // Start animations
-    gsap.to(startScreen.btn, cycleFill);
-    gsap.to(gameOverScreen.btn, {
-        ...cycleFill,
-        delay: 0.75,
-    });
-}
-
 document.addEventListener("DOMContentLoaded", () => {
     init();
+
+    const moveBarThrottled = _.throttle(moveBar, 10);
+    document.addEventListener("mousemove", moveBarThrottled);
 
     startScreen.btn.addEventListener("click", (e) => {
         startNewGame();
