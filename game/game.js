@@ -117,7 +117,7 @@ class SVGScreen extends SVGNode {
 }
 
 // SVG elements
-const ball = new SVGBall({ selector: "#ball" }, BALL_DIR_X_LEFT, BALL_DIR_Y_UP);
+const ball = new SVGBall({ selector: "#ball" }, BALL_INITIAL_X_DIR, BALL_INITIAL_Y_DIR);
 const frame = {
     top: new SVGNode({ selector: "#frame_top" }),
     left: new SVGNode({ selector: "#frame_left" }),
