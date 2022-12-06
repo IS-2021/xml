@@ -1,6 +1,15 @@
 import xmlString from "./data/xmlString.js";
 import { parseXML } from "./xml/parser.js";
 import { XMLReader } from "./xml/reader.js";
+import { createApp } from "vue";
+
+createApp({
+    data() {
+        return {
+            message: "Hello Vue!",
+        };
+    },
+}).mount("#app");
 
 document.addEventListener("DOMContentLoaded", () => {
     const xmlFileInput = document.querySelector("#xmlFileInput");
