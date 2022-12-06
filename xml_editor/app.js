@@ -1,5 +1,6 @@
 import { Autor } from "./datatypes/autor.js";
 import { Gatunek } from "./datatypes/gatunek.js";
+import { Klient } from "./datatypes/klient.js";
 
 function loadXMLFile(inputFile) {
     const url = URL.createObjectURL(inputFile);
@@ -21,12 +22,14 @@ function parseXML(root) {
     const autorParsed = new Autor(autor);
     const gatunkiParsed = [new Gatunek(gatunki[0])];
     gatunki.forEach((gatunek) => gatunkiParsed.push(new Gatunek(gatunek)));
+    const klienciParsed = [];
+    klienci.forEach((klient) => klienciParsed.push(new Klient(klient)));
 
     return {
         autor: autorParsed,
         gatunki: gatunkiParsed,
         albumy: albumy,
-        klienci: klienci,
+        klienci: klienciParsed,
     };
 }
 
