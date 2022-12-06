@@ -1,3 +1,5 @@
+import { Wypozyczenie } from "./Wypozyczenie.js";
+
 export class Klient {
     constructor(element) {
         this.parseKlient(element);
@@ -16,21 +18,9 @@ export class Klient {
         const wypozyczenia = [];
 
         wypozyczeniaEl.forEach((wypozyczenie) => {
-            wypozyczenia.push(this.parseWypozyczenie(wypozyczenie));
+            wypozyczenia.push(new Wypozyczenie(wypozyczenie));
         });
 
         return wypozyczenia;
-    }
-
-    parseWypozyczenie(element) {
-        const albumyID = element.querySelectorAll("album");
-        const dataRozpoczecia = element.querySelector("data_rozpoczecia");
-        const dataZakonczenia = element.querySelector("data_zakonczenia");
-
-        return {
-            albumyID,
-            dataRozpoczecia,
-            dataZakonczenia,
-        };
     }
 }
