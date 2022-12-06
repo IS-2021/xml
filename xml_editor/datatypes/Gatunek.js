@@ -1,5 +1,8 @@
-export class Gatunek {
+import { Base } from "./Base.js";
+
+export class Gatunek extends Base {
     constructor(element) {
+        super();
         this.gatunek = this.parseGatunek(element);
     }
 

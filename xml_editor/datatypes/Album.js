@@ -1,5 +1,8 @@
-export class Album {
+import { Base } from "./Base.js";
+
+export class Album extends Base {
     constructor(element) {
+        super();
         this.parseAlbum(element);
     }
 

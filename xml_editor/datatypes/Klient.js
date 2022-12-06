@@ -1,7 +1,9 @@
+import { Base } from "./Base.js";
 import { Wypozyczenie } from "./Wypozyczenie.js";
 
-export class Klient {
+export class Klient extends Base {
     constructor(element) {
+        super();
         this.parseKlient(element);
     }
 
