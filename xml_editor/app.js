@@ -1,6 +1,6 @@
-import { Autor } from "./datatypes/autor.js";
-import { Gatunek } from "./datatypes/gatunek.js";
-import { Klient } from "./datatypes/klient.js";
+import { Autor } from "./datatypes/Autor.js";
+import { Gatunek } from "./datatypes/Gatunek.js";
+import { Klient } from "./datatypes/Klient.js";
 
 function loadXMLFile(inputFile) {
     const url = URL.createObjectURL(inputFile);
