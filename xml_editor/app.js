@@ -1,5 +1,6 @@
 import { Autor } from "./datatypes/Autor.js";
 import { Gatunek } from "./datatypes/Gatunek.js";
+import { Album } from "./datatypes/Album.js";
 import { Klient } from "./datatypes/Klient.js";
 import { fromNodeList } from "./datatypes/helpers.js";
 
@@ -23,7 +24,7 @@ function parseXML(root) {
     return {
         autor: new Autor(autor),
         gatunki: fromNodeList(gatunki, Gatunek),
-        albumy: albumy,
+        albumy: fromNodeList(albumy, Album),
         klienci: fromNodeList(klienci, Klient),
     };
 }
