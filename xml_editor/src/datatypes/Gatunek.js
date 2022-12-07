@@ -2,14 +2,14 @@ import { Base } from "./Base.js";
 
 export class Gatunek extends Base {
     constructor(element) {
-        super();
-        this.gatunek = this.parseGatunek(element);
+        super(element);
     }
 
-    parseGatunek(el) {
-        return {
-            id: el.id,
-            nazwa: el.getAttribute("nazwa"),
-        };
+    get nazwa() {
+        return this.get("nazwa");
+    }
+
+    set nazwa(val) {
+        this.set("nazwa", val);
     }
 }
