@@ -22,7 +22,7 @@ const loadFromFileHandler = (onFileLoad) => {
     });
 };
 
-function FileLoadSection({ onFileLoad }) {
+function FileSection({ onFileLoad }) {
     useEffect(() => {
         loadDemoHandler(onFileLoad);
     }, []);
@@ -47,4 +47,4 @@ function FileLoadSection({ onFileLoad }) {
     );
 }
 
-export default FileLoadSection;
+export default FileSection;

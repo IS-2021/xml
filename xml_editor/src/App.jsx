@@ -1,4 +1,4 @@
-import FileLoadSection from "./sections/FileLoadSection";
+import FileSection from "./sections/FileSection.jsx";
 import { useState } from "react";
 import GenresSection from "./sections/GenresSection";
 
@@ -14,7 +14,7 @@ function App() {
 
     return (
         <div className="App">
-            <FileLoadSection onFileLoad={setXmlNodes} />
+            <FileSection onFileLoad={setXmlNodes} />
             {xmlNodes.gatunki.length !== 0 && <GenresSection genres={xmlNodes.gatunki} />}
         </div>
     );
