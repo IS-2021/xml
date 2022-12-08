@@ -13,6 +13,7 @@ const loadDemoHandler = (setXMLDocument, setIsLoaded) => {
 const loadFromFileHandler = (setXMLDocument, setIsLoaded) => {
     const element = document.createElement("input");
     element.type = "file";
+    element.accept = "text/xml";
     element.click();
 
     // Listen for the file to be selected
