@@ -11,12 +11,13 @@ const initialState = {
 };
 
 function App() {
+    const [isLoaded, setIsLoaded] = useState(false);
     const [loadedXML, setLoadedXML] = useState(initialState);
 
     return (
         <div className="App">
-            <FileSection xmlDraft={loadedXML} onFileLoad={setLoadedXML} />
-            {loadedXML.gatunki.length !== 0 && <GenresSection genres={loadedXML.gatunki} />}
+            <FileSection xmlDocument={loadedXML} setXMLDocument={setLoadedXML} isLoaded={isLoaded} setIsLoaded={setIsLoaded} />
+            {isLoaded && <GenresSection genres={loadedXML.gatunki} />}
         </div>
     );
 }

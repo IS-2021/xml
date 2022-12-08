@@ -4,12 +4,13 @@ import { XMLDao } from "../xml/dao.js";
 import demoXML from "../xml/demo";
 import { useEffect } from "react";
 
-const loadDemoHandler = (onFileLoad) => {
+const loadDemoHandler = (setXMLDocument, setIsLoaded) => {
     const xmlParsed = parseXML(XMLDao.fromString(demoXML));
-    onFileLoad(xmlParsed);
+    setXMLDocument(xmlParsed);
+    setIsLoaded(true);
 };
 
-const loadFromFileHandler = (onFileLoad) => {
+const loadFromFileHandler = (setXMLDocument, setIsLoaded) => {
     const element = document.createElement("input");
     element.type = "file";
     element.click();
@@ -18,13 +19,14 @@ const loadFromFileHandler = (onFileLoad) => {
     element.addEventListener("change", (e) => {
         const [file] = element.files;
         const xmlParsed = parseXML(XMLDao.fromFile(file));
-        onFileLoad(xmlParsed);
+        setXMLDocument(xmlParsed);
+        setIsLoaded(true);
     });
 };
 
-function FileSection({ xmlDocument, onFileLoad }) {
+function FileSection({ xmlDocument, setXMLDocument, isLoaded, setIsLoaded }) {
     useEffect(() => {
-        loadDemoHandler(onFileLoad);
+        loadDemoHandler(setXMLDocument, setIsLoaded);
     }, []);
 
     return (
@@ -34,19 +36,19 @@ function FileSection({ xmlDocument, onFileLoad }) {
             <div className="grid grid-cols-3 gap-2 max-w-fit">
                 <Button
                     text="Wczytaj z pliku"
-                    onClick={() => loadFromFileHandler(onFileLoad)}
+                    onClick={() => loadFromFileHandler(setXMLDocument, setIsLoaded)}
                     className={"clear-left"}
                 />
                 <Button
                     text="Wczytaj demo"
-                    onClick={() => loadDemoHandler(onFileLoad)}
+                    onClick={() => loadDemoHandler(setXMLDocument, setIsLoaded)}
                     className={"clear-left"}
                 />
-                <Button
+                {isLoaded && <Button
                   text="Zapisz"
                   onClick={() => XMLDao.save(xmlDocument)}
                   className={"clear-left"}
-                />
+                />}
             </div>
         </section>
     );
