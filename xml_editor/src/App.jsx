@@ -4,7 +4,10 @@ import GenresSection from "./sections/GenresSection";
 
 const initialState = {
     autor: {},
+    zadanie: {},
     gatunki: [],
+    albumy: [],
+    klienci: [],
 };
 
 function App() {

@@ -1,16 +1,6 @@
 import Pill from "../components/Pill";
 
 function GenresSection({ genres }) {
-    // let genresPills;
-
-    // if (genres) {
-    //     genresPills = genres.map((genre) => {
-    //         return <Pill key={genre.id} text={genre.nazwa} />;
-    //     });
-    // }
-
-    console.log(genres);
-
     return (
         <section>
             <h1>Gatunki</h1>
@@ -19,8 +9,7 @@ function GenresSection({ genres }) {
                     <p>Brak gatunkow</p>
                 ) : (
                     genres.map((genre) => {
-                        const { gatunek } = genre;
-                        return <Pill key={gatunek.id} text={gatunek.nazwa} />;
+                        return <Pill key={genre.id} text={genre.nazwa} />;
                     })
                 )}
             </div>
