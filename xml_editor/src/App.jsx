@@ -11,14 +11,12 @@ const initialState = {
 };
 
 function App() {
-    const [xmlNodes, setXmlNodes] = useState(initialState);
-
-    console.log(xmlNodes);
+    const [loadedXML, setLoadedXML] = useState(initialState);
 
     return (
         <div className="App">
-            <FileSection onFileLoad={setXmlNodes} />
-            {xmlNodes.gatunki.length !== 0 && <GenresSection genres={xmlNodes.gatunki} />}
+            <FileSection xmlDraft={loadedXML} onFileLoad={setLoadedXML} />
+            {loadedXML.gatunki.length !== 0 && <GenresSection genres={loadedXML.gatunki} />}
         </div>
     );
 }

@@ -1,8 +1,8 @@
-import { Autor } from "../datatypes/Autor.js";
-import { Zadanie } from "../datatypes/Zadanie.js";
-import { Gatunek } from "../datatypes/Gatunek.js";
-import { Album } from "../datatypes/Album.js";
-import { Klient } from "../datatypes/Klient.js";
+import { Autor } from "./datatypes/Autor.js";
+import { Zadanie } from "./datatypes/Zadanie.js";
+import { Gatunek } from "./datatypes/Gatunek.js";
+import { Album } from "./datatypes/Album.js";
+import { Klient } from "./datatypes/Klient.js";
 
 export function parseXML(root) {
     const autorZadanie = root.querySelector("autor");
