@@ -3,26 +3,40 @@ import { Wypozyczenie } from "./Wypozyczenie.js";
 
 export class Klient extends Base {
     constructor(element) {
-        super();
-        this.parseKlient(element);
+        super(element);
+
+        this.wypozyczenia = Wypozyczenie.fromNodeList(this.getNodeAll("wypozyczenie"));
     }
 
-    parseKlient(element) {
-        this.pesel = element.querySelector("pesel");
-        this.imie = element.querySelector("imie");
-        this.nazwisko = element.querySelector("nazwisko");
-        this.login = element.querySelector("login");
-        this.wypozyczenia = this.parseWypozyczenia(element.querySelector("wypozyczenia"));
+    get pesel() {
+        return this.getNodeText("pesel");
     }
 
-    parseWypozyczenia(element) {
-        const wypozyczeniaEl = element.querySelectorAll("wypozyczenie");
-        const wypozyczenia = [];
+    set pesel(val) {
+        this.setNodeText("pesel", val);
+    }
 
-        wypozyczeniaEl.forEach((wypozyczenie) => {
-            wypozyczenia.push(new Wypozyczenie(wypozyczenie));
-        });
+    get imie() {
+        return this.getNodeText("imie");
+    }
 
-        return wypozyczenia;
+    set imie(val) {
+        this.setNodeText("imie", val);
+    }
+
+    get nazwisko() {
+        return this.getNodeText("nazwisko");
+    }
+
+    set nazwisko(val) {
+        this.setNodeText("nazwisko", val);
+    }
+
+    get login() {
+        return this.getNodeText("login");
+    }
+
+    set login(val) {
+        this.setNodeText("login", val);
     }
 }

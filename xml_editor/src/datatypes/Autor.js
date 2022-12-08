@@ -1,21 +1,32 @@
-export class Autor {
+import { Base } from "./Base.js";
+
+export class Autor extends Base {
     constructor(element) {
-        this.student = this.parseStudent(element.querySelector("student"));
-        this.zadanie = this.parseZadanie(element.querySelector("zadanie"));
+        super(element);
     }
 
-    parseStudent(el) {
-        return {
-            imie: el.querySelector("imie"),
-            nazwisko: el.querySelector("nazwisko"),
-            indeks: el.querySelector("indeks"),
-        };
+    // Student
+    get imie() {
+        return this.getNodeText("imie");
     }
 
-    parseZadanie(el) {
-        return {
-            temat: el.querySelector("temat"),
-            nazwa: el.querySelector("nazwa"),
-        };
+    set imie(val) {
+        this.setNodeText("imie", val);
+    }
+
+    get nazwisko() {
+        return this.getNodeText("nazwisko");
+    }
+
+    set nazwisko(val) {
+        this.setNodeText("nazwisko", val);
+    }
+
+    get indeks() {
+        return this.getNodeText("indeks");
+    }
+
+    set indeks(val) {
+        this.setNodeText("indeks", val);
     }
 }

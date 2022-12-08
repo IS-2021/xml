@@ -1,17 +1,39 @@
-export class Wypozyczenie {
+import { Base } from "./Base.js";
+
+class Album extends Base {
     constructor(element) {
-        this.parseWypozyczenie(element);
+        super(element);
     }
 
-    parseWypozyczenie(element) {
-        this.albumy = element.querySelectorAll("album");
-        this.dataRozpoczecia = element.querySelector("data_rozpoczecia");
-        this.dataZakonczenia = element.querySelector("data_zakonczenia");
+    get numer() {
+        return this.get("numer");
     }
 
-    get albumIDs() {
-        const ids = [];
-        this.albumy.forEach((album) => ids.push(album.getAttribute("numer")));
-        return ids;
+    set numer(val) {
+        this.set("numer", val);
+    }
+}
+
+export class Wypozyczenie extends Base {
+    constructor(element) {
+        super(element);
+
+        this.albumy = Album.fromNodeList(this.getNodeAll("album"));
+    }
+
+    get dataRozpoczecia() {
+        return this.getNodeText("data_rozpoczecia");
+    }
+
+    set dataRozpoczecia(val) {
+        this.setNodeText("data_rozpoczecia", val);
+    }
+
+    get dataZakonczenia() {
+        return this.getNodeText("data_zakonczenia");
+    }
+
+    set dataZakonczenia(val) {
+        this.setNodeText("data_zakonczenia", val);
     }
 }
