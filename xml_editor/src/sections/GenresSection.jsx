@@ -1,6 +1,13 @@
 import Pill from "../components/Pill";
 
-function GenresSection({ genres }) {
+function GenresSection({ genres, addGenre }) {
+    function addNewGenre() {
+        const genre = prompt("Podaj nazwe gatunku")
+        if (genre === null) return;
+
+        addGenre(genre);
+    }
+
     return (
         <section>
             <h1>Gatunki</h1>
@@ -12,7 +19,7 @@ function GenresSection({ genres }) {
                         return <Pill key={genre.id} idx={genre.id} text={genre.nazwa} />;
                     })
                 )}
-              <Pill key="GEN_unique" text="Dodaj gatunek +" />
+              <Pill text="Dodaj gatunek +" onClick={addNewGenre} />
             </div>
         </section>
     );
