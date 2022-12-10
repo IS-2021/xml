@@ -9,9 +9,10 @@ function GenresSection({ genres }) {
                     <p>Brak gatunkow</p>
                 ) : (
                     genres.map((genre) => {
-                        return <Pill key={genre.id} text={genre.nazwa} />;
+                        return <Pill key={genre.id} idx={genre.id} text={genre.nazwa} />;
                     })
                 )}
+              <Pill key="GEN_unique" text="Dodaj gatunek +" />
             </div>
         </section>
     );
