@@ -1,39 +1,47 @@
 import Button from "../components/Button";
 import { XMLDao } from "../xml/dao.js";
 import demoXML from "../xml/demo";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
+import { XML_LOADED } from "../reducers/AppReducer.js";
 import { Plytoteka } from "../xml/datatypes/Plytoteka";
+import { StateContext } from "../contexts/StateContext.jsx";
 
-const loadDemoHandler = (setXMLDocument, setIsLoaded) => {
-    const original = XMLDao.fromString(demoXML);
-    setXMLDocument({
-      original: original,
-      refs: new Plytoteka(original)
+const dispatchLoadedXML = (dispatch, xml) => {
+    dispatch({
+        type: XML_LOADED,
+        payload: {
+            xml: {
+                original: xml,
+                refs: new Plytoteka(xml),
+            },
+        },
     });
-    setIsLoaded(true);
 };
 
-const loadFromFileHandler = (setXMLDocument, setIsLoaded) => {
+const loadDemoHandler = (dispatch) => {
+    const original = XMLDao.fromString(demoXML);
+    dispatchLoadedXML(dispatch, original);
+};
+
+const loadFromFileHandler = (dispatch) => {
     const element = document.createElement("input");
     element.type = "file";
     element.accept = "text/xml";
     element.click();
 
     // Listen for the file to be selected
-    element.addEventListener("change", (e) => {
+    element.addEventListener("change", () => {
         const [file] = element.files;
         const original = XMLDao.fromFile(file);
-        setXMLDocument({
-          original: original,
-          refs: new Plytoteka(original)
-        });
-        setIsLoaded(true);
+        dispatchLoadedXML(dispatch, original);
     });
 };
 
-function FileSection({ xmlToSave, setXMLDocument, isLoaded, setIsLoaded }) {
+function FileSection() {
+    const { state, dispatch } = useContext(StateContext);
+
     useEffect(() => {
-        loadDemoHandler(setXMLDocument, setIsLoaded);
+        loadDemoHandler(dispatch);
     }, []);
 
     return (
@@ -43,19 +51,21 @@ function FileSection({ xmlToSave, setXMLDocument, isLoaded, setIsLoaded }) {
             <div className="grid grid-cols-3 gap-2 max-w-fit">
                 <Button
                     text="Wczytaj z pliku"
-                    onClick={() => loadFromFileHandler(setXMLDocument, setIsLoaded)}
+                    onClick={() => loadFromFileHandler(dispatch)}
                     className={"clear-left"}
                 />
                 <Button
                     text="Wczytaj demo"
-                    onClick={() => loadDemoHandler(setXMLDocument, setIsLoaded)}
+                    onClick={() => loadDemoHandler(dispatch)}
                     className={"clear-left"}
                 />
-                {isLoaded && <Button
-                  text="Zapisz"
-                  onClick={() => XMLDao.save(xmlToSave)}
-                  className={"clear-left"}
-                />}
+                {state.isLoaded && (
+                    <Button
+                        text="Zapisz"
+                        onClick={() => XMLDao.save(state.xml.original)}
+                        className={"clear-left"}
+                    />
+                )}
             </div>
         </section>
     );
