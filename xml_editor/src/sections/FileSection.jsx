@@ -1,15 +1,14 @@
 import Button from "../components/Button";
-import { parseXML } from "../xml/parser";
 import { XMLDao } from "../xml/dao.js";
 import demoXML from "../xml/demo";
 import { useEffect } from "react";
-import {parseXML} from "../xml/parser.js";
+import { Plytoteka } from "../xml/datatypes/Plytoteka";
 
 const loadDemoHandler = (setXMLDocument, setIsLoaded) => {
     const original = XMLDao.fromString(demoXML);
     setXMLDocument({
       original: original,
-      refs: parseXML(original)
+      refs: new Plytoteka(original)
     });
     setIsLoaded(true);
 };
@@ -26,7 +25,7 @@ const loadFromFileHandler = (setXMLDocument, setIsLoaded) => {
         const original = XMLDao.fromFile(file);
         setXMLDocument({
           original: original,
-          refs: parseXML(original)
+          refs: new Plytoteka(original)
         });
         setIsLoaded(true);
     });

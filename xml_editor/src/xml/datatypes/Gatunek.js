@@ -13,3 +13,10 @@ export class Gatunek extends Base {
         this.set("nazwa", val);
     }
 }
+
+export function createGatunekElement(id, nazwa) {
+    const el = document.createElement("gatunek");
+    el.id = id.padStart(2, "0");
+    el.setAttribute("nazwa", nazwa);
+    return el;
+}
