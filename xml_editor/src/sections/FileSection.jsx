@@ -3,10 +3,14 @@ import { parseXML } from "../xml/parser";
 import { XMLDao } from "../xml/dao.js";
 import demoXML from "../xml/demo";
 import { useEffect } from "react";
+import {parseXML} from "../xml/parser.js";
 
 const loadDemoHandler = (setXMLDocument, setIsLoaded) => {
-    const xmlParsed = parseXML(XMLDao.fromString(demoXML));
-    setXMLDocument(xmlParsed);
+    const original = XMLDao.fromString(demoXML);
+    setXMLDocument({
+      original: original,
+      refs: parseXML(original)
+    });
     setIsLoaded(true);
 };
 
@@ -19,13 +23,16 @@ const loadFromFileHandler = (setXMLDocument, setIsLoaded) => {
     // Listen for the file to be selected
     element.addEventListener("change", (e) => {
         const [file] = element.files;
-        const xmlParsed = parseXML(XMLDao.fromFile(file));
-        setXMLDocument(xmlParsed);
+        const original = XMLDao.fromFile(file);
+        setXMLDocument({
+          original: original,
+          refs: parseXML(original)
+        });
         setIsLoaded(true);
     });
 };
 
-function FileSection({ xmlDocument, setXMLDocument, isLoaded, setIsLoaded }) {
+function FileSection({ xmlToSave, setXMLDocument, isLoaded, setIsLoaded }) {
     useEffect(() => {
         loadDemoHandler(setXMLDocument, setIsLoaded);
     }, []);
@@ -47,7 +54,7 @@ function FileSection({ xmlDocument, setXMLDocument, isLoaded, setIsLoaded }) {
                 />
                 {isLoaded && <Button
                   text="Zapisz"
-                  onClick={() => XMLDao.save(xmlDocument)}
+                  onClick={() => XMLDao.save(xmlToSave)}
                   className={"clear-left"}
                 />}
             </div>

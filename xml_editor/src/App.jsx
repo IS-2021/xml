@@ -2,7 +2,7 @@ import FileSection from "./sections/FileSection.jsx";
 import { useState } from "react";
 import GenresSection from "./sections/GenresSection";
 
-const initialState = {
+const initialParsedState = {
     autor: {},
     zadanie: {},
     gatunki: [],
@@ -10,14 +10,19 @@ const initialState = {
     klienci: [],
 };
 
+const initialXML = {
+    original: null,
+    refs: initialParsedState,
+};
+
 function App() {
     const [isLoaded, setIsLoaded] = useState(false);
-    const [loadedXML, setLoadedXML] = useState(initialState);
+    const [xmlDoc, setXmlDoc] = useState(initialXML);
 
     return (
         <div className="App">
-            <FileSection xmlDocument={loadedXML} setXMLDocument={setLoadedXML} isLoaded={isLoaded} setIsLoaded={setIsLoaded} />
-            {isLoaded && <GenresSection genres={loadedXML.gatunki} />}
+            <FileSection xmlToSave={xmlDoc.original} setXMLDocument={setXmlDoc} isLoaded={isLoaded} setIsLoaded={setIsLoaded} />
+            {isLoaded && <GenresSection genres={xmlDoc.refs.gatunki} />}
         </div>
     );
 }
