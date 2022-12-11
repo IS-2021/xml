@@ -10,7 +10,7 @@ function App() {
         <div className="App">
             <FileSection />
             {state.isLoaded && (
-                <GenresSection genres={state.xml.refs.gatunki} addGenre={() => null} />
+                <GenresSection genres={state.xml.refs.gatunki} />
             )}
         </div>
     );

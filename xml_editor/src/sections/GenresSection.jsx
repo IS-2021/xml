@@ -1,11 +1,19 @@
 import Pill from "../components/Pill";
+import { useContext } from "react";
+import { StateContext } from "../contexts/StateContext.jsx";
+import { ADD_GENRE } from "../reducers/AppReducer.js";
 
-function GenresSection({ genres, addGenre }) {
+function GenresSection({ genres }) {
+    const { dispatch } = useContext(StateContext);
+
     function addNewGenre() {
         const genre = prompt("Podaj nazwe gatunku")
         if (genre === null) return;
 
-        addGenre(genre);
+        dispatch({
+            type: ADD_GENRE,
+            payload: genre
+        });
     }
 
     return (
