@@ -1,0 +1,4 @@
+.client_card_grid {
+    display: flex;
+    gap: 1rem;
+}

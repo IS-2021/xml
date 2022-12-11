@@ -1,0 +1,28 @@
+.client_card {
+    min-width: 260px;
+    padding: 1rem;
+
+    border-radius: 4px;
+    background-color: #262626;
+    color: #969696;
+
+    box-shadow: none;
+    transition: 0.25s all ease;
+}
+
+.client_card:hover {
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+.client_card__name {
+    margin-bottom: 0.5rem;
+
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+.client_card__nick {
+    margin-bottom: 1rem;
+}
