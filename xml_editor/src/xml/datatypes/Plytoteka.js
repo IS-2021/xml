@@ -31,7 +31,7 @@ export class Plytoteka {
     }
 
     get albumy() {
-        return Album.fromNodeList(this._selectors.albumy);
+        return Album.fromNodeList(this._selectors.albumy());
     }
 
     get albumyCount() {
@@ -39,11 +39,10 @@ export class Plytoteka {
     }
 
     get klienci() {
-        return Klient.fromNodeList(this._selectors.klienci);
+        return Klient.fromNodeList(this._selectors.klienci());
     }
 
     get klienciCount() {
         return this.topLevelNodes.klienci.childElementCount;
     }
-
 }
