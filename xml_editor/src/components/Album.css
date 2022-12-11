@@ -22,11 +22,14 @@
 
 .album_card__title {
     flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     margin-bottom: 0.5rem;
     max-width: 200px;
+
+    /* Clip titles longer than 2 lines */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 
     text-align: center;
     font-weight: 700;
