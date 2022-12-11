@@ -1,4 +1,5 @@
 import FileSection from "./sections/FileSection.jsx";
+import AlbumsSection from "./sections/AlbumsSection.jsx";
 import { useContext } from "react";
 import GenresSection from "./sections/GenresSection";
 import { StateContext } from "./contexts/StateContext.jsx";
@@ -10,7 +11,10 @@ function App() {
         <div className="App">
             <FileSection />
             {state.isLoaded && (
-                <GenresSection genres={state.xml.refs.gatunki} />
+                <>
+                    <GenresSection genres={state.xml.refs.gatunki} />
+                    <AlbumsSection albums={state.xml.refs.albumy} />
+                </>
             )}
         </div>
     );

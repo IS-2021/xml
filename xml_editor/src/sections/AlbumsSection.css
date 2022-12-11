@@ -1,0 +1,12 @@
+.album_card_grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.album_card_grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, calc(200px + 2rem));
+    grid-gap: 1rem;
+}
