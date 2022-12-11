@@ -10,8 +10,8 @@ export class Plytoteka {
         this.autor = new Autor(root.querySelector("autor"));
         this.zadanie = new Zadanie(root.querySelector("autor"));
         this._selectors = {
-            gatunki: () => root.querySelectorAll("gatunek"),
-            albumy: () => root.querySelectorAll("album"),
+            gatunki: () => root.querySelectorAll("plytoteka > gatunki > gatunek"),
+            albumy: () => root.querySelectorAll("plytoteka > albumy > album"),
             klienci: () => root.querySelectorAll("klient"),
         };
         this.topLevelNodes = {
