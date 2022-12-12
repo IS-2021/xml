@@ -39,6 +39,17 @@
                 <tspan x="220" y="338">GAME OVER</tspan>
             </text>
         </g>
+        <g id="game_finished_screen" style="display: none;">
+            <g id="play_again_btn_2">
+                <rect width="240" height="40" transform="translate(280 358)" fill="#38FF34" />
+                <text id="play again_2" fill="black" fill-opacity="0.5" xml:space="preserve" style="white-space: pre" font-family="Press Start 2P" font-size="20" letter-spacing="0em">
+                    <tspan x="300" y="388">PLAY AGAIN</tspan>
+                </text>
+            </g>
+            <text id="title_3" fill="white" xml:space="preserve" style="white-space: pre" font-family="Press Start 2P" font-size="40" letter-spacing="0em">
+                <tspan x="240" y="338">YOU WON!</tspan>
+            </text>
+        </g>
         <g id="hearts">
             <g id="heart_1" clip-path="url(#clip1_28_8)" class="heart">
                 <g id="Group">
