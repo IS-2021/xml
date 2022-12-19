@@ -20,14 +20,12 @@ function GenresSection({ genres }) {
         <section>
             <h1>Gatunki</h1>
             <div className="flex flex-wrap gap-2">
-                {genres.length === 0 ? (
-                    <p>Brak gatunkow</p>
-                ) : (
+              <Pill text="Dodaj gatunek +" onClick={addNewGenre} />
+                {genres.length !== 0 &&
                     genres.map((genre) => {
                         return <Pill key={genre.id} idx={genre.id} text={genre.nazwa} />;
-                    })
+                    }
                 )}
-              <Pill text="Dodaj gatunek +" onClick={addNewGenre} />
             </div>
         </section>
     );

@@ -1,5 +1,6 @@
 .client_card {
     min-width: 260px;
+    min-height: 128px;
     padding: 1rem;
 
     border-radius: 4px;
@@ -25,4 +26,21 @@
 
 .client_card__nick {
     margin-bottom: 1rem;
+}
+
+.client_card--add {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+
+    padding: 0 1.5rem;
+}
+
+.client_card--add > .client_card__name {
+    margin-bottom: unset;
+}
+
+.client_card__plus {
+    font-size: 3rem;
+    font-weight: 300;
 }
