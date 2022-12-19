@@ -2,10 +2,14 @@ import Album from "../components/Album";
 import "./AlbumsSection.css";
 
 function AlbumsSection({ albums }) {
+    const styles = {
+        justifyContent: "space-evenly"
+    };
+
     return (
         <section>
             <h1>Albumy</h1>
-            <div className="album_card_grid">
+            <div className="album_card_grid" style={albums.length !== 0 ? styles : {}}>
                 <div className="album_card album_card--add">
                     <div className="album_card__cover">+</div>
                     <p className="album_card__title">Dodaj nowy</p>

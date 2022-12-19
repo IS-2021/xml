@@ -43,4 +43,10 @@
 .client_card__plus {
     font-size: 3rem;
     font-weight: 300;
+
+    transition: 200ms color ease-in;
+}
+
+.client_card--add:hover .client_card__plus {
+    color: var(--orange);
 }
