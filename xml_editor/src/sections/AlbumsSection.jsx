@@ -3,10 +3,10 @@ import "./AlbumsSection.css";
 import Modal from "../components/Modal.jsx";
 import { useContext } from "react";
 import { StateContext } from "../contexts/StateContext.jsx";
-import { CLOSE_MODAL, OPEN_MODAL } from "../reducers/AppReducer.js";
+import { OPEN_MODAL } from "../reducers/AppReducer.js";
 
 function AlbumsSection({ albums }) {
-    const { state, dispatch } = useContext(StateContext);
+    const { dispatch } = useContext(StateContext);
 
     const styles = {
         justifyContent: "space-evenly"
@@ -16,14 +16,10 @@ function AlbumsSection({ albums }) {
         dispatch({ type: OPEN_MODAL });
     }
 
-    function handleModalClose() {
-        dispatch({ type: CLOSE_MODAL });
-    }
-
     return (
         <section>
             <h1>Albumy</h1>
-            <Modal isOpen={state.isModalOpen} onClose={handleModalClose}>
+            <Modal>
                 <p>This is a modal.</p>
             </Modal>
             <div
