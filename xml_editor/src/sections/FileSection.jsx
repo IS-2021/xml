@@ -27,7 +27,7 @@ const loadDemoHandler = (dispatch) => {
 const loadEmptyHandler = (dispatch) => {
     const empty = XMLDao.fromString(emptyXML);
     dispatchLoadedXML(dispatch, empty);
-}
+};
 
 const loadFromFileHandler = (dispatch) => {
     const element = document.createElement("input");
@@ -73,7 +73,17 @@ function FileSection() {
                     />
                 )}
             </div>
-            <p className="text-gray-500">...lub wczytaj <a href="#" className="text-orange-400 hover:text-orange-600" onClick={() => loadDemoHandler(dispatch)}>demo</a>.</p>
+            <p className="text-gray-500">
+                ...lub wczytaj
+                <a
+                    href="#"
+                    className="text-orange-400 hover:text-orange-600"
+                    onClick={() => loadDemoHandler(dispatch)}
+                >
+                    demo
+                </a>
+                .
+            </p>
         </section>
     );
 }

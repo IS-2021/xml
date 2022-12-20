@@ -9,7 +9,7 @@ function AlbumsSection({ albums }) {
     const { dispatch } = useContext(StateContext);
 
     const styles = {
-        justifyContent: "space-evenly"
+        justifyContent: "space-evenly",
     };
 
     function addNewAlbum() {
@@ -22,10 +22,7 @@ function AlbumsSection({ albums }) {
             <Modal>
                 <p>This is a modal.</p>
             </Modal>
-            <div
-                className="album_card_grid"
-                style={albums.length !== 0 ? styles : {}}
-            >
+            <div className="album_card_grid" style={albums.length !== 0 ? styles : {}}>
                 <div className="album_card album_card--add" onClick={addNewAlbum}>
                     <div className="album_card__cover">+</div>
                     <p className="album_card__title">Dodaj nowy album</p>

@@ -8,7 +8,7 @@ import { StateContext } from "./contexts/StateContext.jsx";
 const blurStyle = {
     filter: "blur(1rem)",
     overflowY: "hidden",
-    transition: "300ms filter ease-out"
+    transition: "300ms filter ease-out",
 };
 
 function App() {

@@ -3,7 +3,7 @@ import "./Modal.css";
 import { useContext } from "react";
 import { StateContext } from "../contexts/StateContext.jsx";
 import { CLOSE_MODAL } from "../reducers/AppReducer.js";
-import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from "@mui/icons-material/Close";
 
 function Modal({ children, title, className }) {
     const { state, dispatch } = useContext(StateContext);
@@ -13,7 +13,6 @@ function Modal({ children, title, className }) {
     function handleModalClose() {
         dispatch({ type: CLOSE_MODAL });
     }
-
 
     return ReactDOM.createPortal(
         <>

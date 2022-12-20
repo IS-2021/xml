@@ -29,20 +29,20 @@ export const appReducer = (state, action) => {
         case TOGGLE_MODAL: {
             return {
                 ...state,
-                isModalOpen: !state.isModalOpen
-            }
+                isModalOpen: !state.isModalOpen,
+            };
         }
         case CLOSE_MODAL: {
             return {
                 ...state,
-                isModalOpen: false
-            }
+                isModalOpen: false,
+            };
         }
         case OPEN_MODAL: {
             return {
                 ...state,
-                isModalOpen: true
-            }
+                isModalOpen: true,
+            };
         }
         case XML_LOADED: {
             return {

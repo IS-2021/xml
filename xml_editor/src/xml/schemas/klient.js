@@ -1,7 +1,10 @@
 import { z } from "zod";
-import {nipSchema, peselSchema} from "./common.js";
+import { nipSchema, peselSchema } from "./common.js";
 
-const emailSchema = z.string().min(5, "Email musi posiadać min. 5 znaków").regex(/\w+@\w+\.\w+/, "Email nie spełnia wzoru");
+const emailSchema = z
+    .string()
+    .min(5, "Email musi posiadać min. 5 znaków")
+    .regex(/\w+@\w+\.\w+/, "Email nie spełnia wzoru");
 const nickSchema = z.string().min(3).max(16);
 
 export const clientSchema = z.object({

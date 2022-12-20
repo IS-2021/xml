@@ -1,16 +1,16 @@
 import Client from "../components/Client";
-import {useContext} from "react";
-import {StateContext} from "../contexts/StateContext.jsx";
+import { useContext } from "react";
+import { StateContext } from "../contexts/StateContext.jsx";
 import Modal from "../components/Modal.jsx";
 import AddClientForm from "../components/AddClientForm.jsx";
-import {OPEN_MODAL} from "../reducers/AppReducer.js";
+import { OPEN_MODAL } from "../reducers/AppReducer.js";
 import "./ClientsSection.css";
 
 function ClientsSection({ clients }) {
     const { dispatch } = useContext(StateContext);
 
     function showAddClientForm() {
-        dispatch({type: OPEN_MODAL});
+        dispatch({ type: OPEN_MODAL });
     }
 
     return (
@@ -23,10 +23,10 @@ function ClientsSection({ clients }) {
 
             <div className="client_card_grid">
                 <div className="client_card client_card--add" onClick={showAddClientForm}>
-                    <p><span className="client_card__plus">+</span></p>
-                    <p className="client_card__name">
-                        Dodaj klienta
+                    <p>
+                        <span className="client_card__plus">+</span>
                     </p>
+                    <p className="client_card__name">Dodaj klienta</p>
                 </div>
 
                 {clients.map((client) => (
