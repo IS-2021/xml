@@ -1,6 +1,6 @@
 .client_card {
     min-width: 260px;
-    min-height: 128px;
+    /*min-height: 128px;*/
     padding: 1rem;
 
     border-radius: 4px;
@@ -32,8 +32,6 @@
     display: flex;
     gap: 0.75rem;
     align-items: center;
-
-    padding: 0 1.5rem;
 }
 
 .client_card--add > .client_card__name {
