@@ -25,11 +25,10 @@ function AlbumsSection({ albums }) {
             <div
                 className="album_card_grid"
                 style={albums.length !== 0 ? styles : {}}
-                onClick={addNewAlbum}
             >
-                <div className="album_card album_card--add">
+                <div className="album_card album_card--add" onClick={addNewAlbum}>
                     <div className="album_card__cover">+</div>
-                    <p className="album_card__title">Dodaj nowy</p>
+                    <p className="album_card__title">Dodaj nowy album</p>
                 </div>
 
                 {albums.length !== 0 &&
