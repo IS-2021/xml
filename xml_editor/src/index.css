@@ -6,7 +6,8 @@
 @tailwind utilities;
 
 :root {
-    --dark: #1a1a1a;
+    --dark: #262626;
+    --darker: #1a1a1a;
     --orange: #ff8a00;
     --orange-15: rgba(255, 138, 0, 0.15);
     --gray: #656565;
@@ -19,7 +20,7 @@
 
     color-scheme: dark;
     /* color: rgba(255, 255, 255, 0.87); */
-    background-color: var(--dark);
+    background-color: var(--darker);
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;
