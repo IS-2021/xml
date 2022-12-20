@@ -23,14 +23,14 @@ function AlbumsSection({ albums }) {
     return (
         <section>
             <h1>Albumy</h1>
+            <Modal isOpen={state.isModalOpen} onClose={handleModalClose}>
+                <p>This is a modal.</p>
+            </Modal>
             <div
                 className="album_card_grid"
                 style={albums.length !== 0 ? styles : {}}
                 onClick={addNewAlbum}
             >
-                <Modal isOpen={state.isModalOpen} onClose={handleModalClose}>
-                    <p>This is a modal.</p>
-                </Modal>
                 <div className="album_card album_card--add">
                     <div className="album_card__cover">+</div>
                     <p className="album_card__title">Dodaj nowy</p>
