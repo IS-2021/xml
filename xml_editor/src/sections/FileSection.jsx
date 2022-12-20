@@ -1,6 +1,7 @@
 import Button from "../components/Button";
 import { XMLDao } from "../xml/dao.js";
 import demoXML from "../xml/demo";
+import emptyXML from "../xml/empty";
 import { useContext, useEffect } from "react";
 import { XML_LOADED } from "../reducers/AppReducer.js";
 import { Plytoteka } from "../xml/datatypes/Plytoteka";
@@ -23,6 +24,11 @@ const loadDemoHandler = (dispatch) => {
     dispatchLoadedXML(dispatch, original);
 };
 
+const loadEmptyHandler = (dispatch) => {
+    const empty = XMLDao.fromString(emptyXML);
+    dispatchLoadedXML(dispatch, empty);
+}
+
 const loadFromFileHandler = (dispatch) => {
     const element = document.createElement("input");
     element.type = "file";
@@ -41,22 +47,22 @@ function FileSection() {
     const { state, dispatch } = useContext(StateContext);
 
     useEffect(() => {
-        loadDemoHandler(dispatch);
+        loadEmptyHandler(dispatch);
     }, []);
 
     return (
         <section>
             <h1>Edytor XML</h1>
             <p className="mb-4">Aby zaczać wczytaj poprawny dokument XML.</p>
-            <div className="grid grid-cols-3 gap-2 max-w-fit">
+            <div className="grid grid-cols-3 gap-2 max-w-fit mb-2">
                 <Button
                     text="Wczytaj z pliku"
                     onClick={() => loadFromFileHandler(dispatch)}
                     className={"clear-left"}
                 />
                 <Button
-                    text="Wczytaj demo"
-                    onClick={() => loadDemoHandler(dispatch)}
+                    text="Utwórz nowy"
+                    onClick={() => loadEmptyHandler(dispatch)}
                     className={"clear-left"}
                 />
                 {state.isLoaded && (
@@ -67,6 +73,7 @@ function FileSection() {
                     />
                 )}
             </div>
+            <p className="text-gray-500">...lub wczytaj <a href="#" className="text-orange-400 hover:text-orange-600" onClick={() => loadDemoHandler(dispatch)}>demo</a>.</p>
         </section>
     );
 }
