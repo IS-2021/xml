@@ -5,11 +5,17 @@ import { useContext } from "react";
 import GenresSection from "./sections/GenresSection";
 import { StateContext } from "./contexts/StateContext.jsx";
 
+const blurStyle = {
+    filter: "blur(1rem)",
+    overflowY: "hidden",
+    transition: "300ms filter ease-out"
+};
+
 function App() {
-    const { state } = useContext(StateContext);
+    const { state, dispatch } = useContext(StateContext);
 
     return (
-        <div className="App">
+        <div className="App" style={state.isModalOpen ? blurStyle : {}}>
             <FileSection />
             {state.isLoaded && (
                 <>
