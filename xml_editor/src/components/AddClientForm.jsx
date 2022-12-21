@@ -2,15 +2,7 @@ import { Button, createTheme, Stack, TextField, ThemeProvider } from "@mui/mater
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { clientSchema } from "../xml/schemas/klient.js";
-
-const darkTheme = createTheme({
-    palette: {
-        mode: "dark",
-        action: {
-            active: "#ff8a00",
-        },
-    },
-});
+import { appMaterialTheme } from "./theme.js";
 
 function AddClientForm() {
     const {
@@ -25,7 +17,7 @@ function AddClientForm() {
     const onSubmit = (data) => console.log(data);
 
     return (
-        <ThemeProvider theme={darkTheme}>
+        <ThemeProvider theme={appMaterialTheme}>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <Stack spacing={1.5}>
                     <Controller
