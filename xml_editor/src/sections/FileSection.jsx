@@ -74,7 +74,7 @@ function FileSection() {
                 )}
             </div>
             <p className="text-gray-500">
-                ...lub wczytaj
+                ...lub wczytaj{" "}
                 <a
                     href="#"
                     className="text-orange-400 hover:text-orange-600"
