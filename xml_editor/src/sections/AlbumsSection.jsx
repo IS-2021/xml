@@ -1,27 +1,14 @@
 import Album from "../components/Album";
 import "./AlbumsSection.css";
 import Modal from "../components/Modal.jsx";
-import { useContext, useState } from "react";
-import { StateContext } from "../contexts/StateContext.jsx";
-import { CLOSE_MODAL, OPEN_MODAL } from "../reducers/AppReducer.js";
+import { useModalWithDispatch } from "../hooks/useModalWithDispatch.js";
 
 function AlbumsSection({ albums }) {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const { dispatch } = useContext(StateContext);
+    const { isModalOpen, openModal, closeModal } = useModalWithDispatch(false);
 
     const styles = {
         justifyContent: "space-evenly",
     };
-
-    function openModal() {
-        setIsModalOpen(true);
-        dispatch({ type: OPEN_MODAL });
-    }
-
-    function closeModal() {
-        setIsModalOpen(false);
-        dispatch({ type: CLOSE_MODAL });
-    }
 
     return (
         <section>

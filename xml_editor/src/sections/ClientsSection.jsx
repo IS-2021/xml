@@ -1,24 +1,11 @@
 import Client from "../components/Client";
-import { useContext, useState } from "react";
-import { StateContext } from "../contexts/StateContext.jsx";
 import Modal from "../components/Modal.jsx";
 import AddClientForm from "../components/AddClientForm.jsx";
-import { CLOSE_MODAL, OPEN_MODAL } from "../reducers/AppReducer.js";
 import "./ClientsSection.css";
+import { useModalWithDispatch } from "../hooks/useModalWithDispatch.js";
 
 function ClientsSection({ clients }) {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const { dispatch } = useContext(StateContext);
-
-    function openModal() {
-        setIsModalOpen(true);
-        dispatch({ type: OPEN_MODAL });
-    }
-
-    function closeModal() {
-        setIsModalOpen(false);
-        dispatch({ type: CLOSE_MODAL });
-    }
+    const { isModalOpen, openModal, closeModal } = useModalWithDispatch(false);
 
     return (
         <section>
