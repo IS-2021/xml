@@ -1,26 +1,17 @@
 import ReactDOM from "react-dom";
 import "./Modal.css";
-import { useContext } from "react";
-import { StateContext } from "../contexts/StateContext.jsx";
-import { CLOSE_MODAL } from "../reducers/AppReducer.js";
 import CloseIcon from "@mui/icons-material/Close";
 
-function Modal({ children, title, className }) {
-    const { state, dispatch } = useContext(StateContext);
-
-    if (!state.isModalOpen) return null;
-
-    function handleModalClose() {
-        dispatch({ type: CLOSE_MODAL });
-    }
+function Modal({ children, title, className, isOpen, onClose }) {
+    if (!isOpen) return null;
 
     return ReactDOM.createPortal(
         <>
-            <div className="modal__overlay" onClick={handleModalClose}></div>
+            <div className="modal__overlay" onClick={onClose}></div>
             <div className={`${className} modal`}>
                 <header>
                     <h1>{title}</h1>
-                    <button onClick={handleModalClose}>
+                    <button onClick={onClose}>
                         <CloseIcon fontSize="large" />
                     </button>
                 </header>
