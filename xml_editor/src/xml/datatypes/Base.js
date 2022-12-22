@@ -44,4 +44,8 @@ export class Base {
         nodeList.forEach((node) => instances.push(new this(node)));
         return instances;
     }
+
+    static createElementNS(tagName) {
+        return document.createElementNS("", tagName);
+    }
 }

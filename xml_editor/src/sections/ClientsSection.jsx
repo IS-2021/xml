@@ -17,7 +17,7 @@ function ClientsSection({ clients }) {
                 isOpen={isModalOpen}
                 onClose={closeModal}
             >
-                <AddClientForm />
+                <AddClientForm onSubmit={closeModal} />
             </Modal>
 
             <div className="client_card_grid">

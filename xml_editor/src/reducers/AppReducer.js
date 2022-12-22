@@ -6,6 +6,9 @@ export const ADD_GENRE = "ADD_GENRE";
 export const TOGGLE_MODAL = "TOGGLE_MODAL";
 export const OPEN_MODAL = "SHOW_MODAL";
 export const CLOSE_MODAL = "CLOSE_MODAL";
+export const CLIENT_ADD = "CLIENT_ADD";
+export const CLIENT_MODIFY = "CLIENT_MODIFY";
+export const CLIENT_REMOVE = "CLIENT_REMOVE";
 
 export const initialAppState = {
     isLoaded: false,
@@ -60,6 +63,11 @@ export const appReducer = (state, action) => {
             state.xml.refs.topLevelNodes.gatunki.appendChild(newGenre);
 
             // Refresh state?
+            return { ...state };
+        }
+        case CLIENT_ADD: {
+            state.xml.refs.topLevelNodes.klienci.appendChild(payload);
+
             return { ...state };
         }
         default:

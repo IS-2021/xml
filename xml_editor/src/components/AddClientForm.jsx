@@ -1,10 +1,16 @@
-import { Button, createTheme, Stack, TextField, ThemeProvider } from "@mui/material";
-import { useForm, Controller } from "react-hook-form";
+import { Button, Stack, TextField, ThemeProvider } from "@mui/material";
+import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { clientSchema } from "../xml/schemas/klient.js";
 import { appMaterialTheme } from "./theme.js";
+import { createKlientElement } from "../xml/datatypes/Klient.js";
+import { useContext } from "react";
+import { StateContext } from "../contexts/StateContext.jsx";
+import { CLIENT_ADD } from "../reducers/AppReducer.js";
 
-function AddClientForm() {
+function AddClientForm({ onSubmit }) {
+    const { dispatch } = useContext(StateContext);
+
     const {
         control,
         handleSubmit,
@@ -14,11 +20,20 @@ function AddClientForm() {
         reValidateMode: "onChange",
         resolver: zodResolver(clientSchema),
     });
-    const onSubmit = (data) => console.log(data);
+
+    const addClientToState = (client) => {
+        dispatch({ type: CLIENT_ADD, payload: client });
+    };
+
+    const handleFormSubmit = (data) => {
+        const clientElement = createKlientElement(data);
+        addClientToState(clientElement);
+        onSubmit();
+    };
 
     return (
         <ThemeProvider theme={appMaterialTheme}>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(handleFormSubmit)}>
                 <Stack spacing={1.5}>
                     <Controller
                         name="imie"

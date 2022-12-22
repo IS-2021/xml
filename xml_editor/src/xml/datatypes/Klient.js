@@ -8,6 +8,10 @@ export class Klient extends Base {
         this.wypozyczenia = Wypozyczenie.fromNodeList(this.getNodeAll("wypozyczenie"));
     }
 
+    static createElement() {
+        return this.createElementNS("klient");
+    }
+
     get pesel() {
         return this.getNodeText("pesel");
     }
@@ -39,4 +43,16 @@ export class Klient extends Base {
     set login(val) {
         this.setNodeText("login", val);
     }
+}
+
+export function createKlientElement(klient) {
+    const el = Klient.createElement();
+    el.innerHTML = `
+        <pesel>${klient.pesel}</pesel>
+        <imie>${klient.imie}</imie>
+        <nazwisko>${klient.nazwisko}</nazwisko>
+        <login>${klient.login}</login>
+        <wypozyczenia></wypozyczenia>
+    `;
+    return el;
 }
