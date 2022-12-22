@@ -1,0 +1,8 @@
+.client_card_grid {
+    display: flex;
+    gap: 1rem;
+}
+
+.client_add_modal {
+    min-width: 360px;
+}

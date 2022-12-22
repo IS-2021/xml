@@ -1,4 +1,4 @@
-export class XMLReader {
+export class XMLDao {
     static fromFile(file) {
         const url = URL.createObjectURL(file);
         const xhr = new XMLHttpRequest();

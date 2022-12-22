@@ -1,0 +1,52 @@
+.client_card {
+    min-width: 260px;
+    /*min-height: 128px;*/
+    padding: 1rem;
+
+    border-radius: 4px;
+    background-color: var(--dark);
+    color: #969696;
+
+    box-shadow: none;
+    transition: 0.25s all ease;
+}
+
+.client_card:hover {
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+.client_card__name {
+    margin-bottom: 0.5rem;
+
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+.client_card__nick {
+    margin-bottom: 1rem;
+}
+
+.client_card--add {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+
+    user-select: none;
+}
+
+.client_card--add > .client_card__name {
+    margin-bottom: unset;
+}
+
+.client_card__plus {
+    font-size: 3rem;
+    font-weight: 300;
+
+    transition: 200ms color ease-in;
+}
+
+.client_card--add:hover .client_card__plus {
+    color: var(--orange);
+}
