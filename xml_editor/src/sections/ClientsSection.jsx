@@ -4,11 +4,10 @@ import ClientForm from "../components/ClientForm.jsx";
 import "./ClientsSection.css";
 import { useModalWithDispatch } from "../hooks/useModalWithDispatch.js";
 import { useState } from "react";
-import { initialClient } from "../components/initialFormData.js";
 
 function ClientsSection({ clients }) {
     const [modalTitle, setModalTitle] = useState("");
-    const [selectedClient, setSelectedClient] = useState(initialClient);
+    const [selectedClient, setSelectedClient] = useState(null);
     const { isModalOpen, openModal, closeModal } = useModalWithDispatch(false);
 
     function getClientByPesel(pesel) {
@@ -33,7 +32,7 @@ function ClientsSection({ clients }) {
                     className="client_card client_card--add"
                     onClick={() => {
                         setModalTitle("Dodaj klienta");
-                        setSelectedClient(initialClient);
+                        setSelectedClient(null);
                         openModal();
                     }}
                 >
@@ -48,7 +47,6 @@ function ClientsSection({ clients }) {
                         key={client.pesel}
                         client={client}
                         onClick={(pesel) => {
-                            console.log(pesel);
                             setModalTitle("Edytuj klienta");
                             setSelectedClient(getClientByPesel(pesel).toObject());
                             openModal();

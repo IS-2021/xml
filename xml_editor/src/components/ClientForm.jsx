@@ -6,9 +6,10 @@ import { appMaterialTheme } from "./theme.js";
 import { createKlientElement } from "../xml/datatypes/Klient.js";
 import { useContext } from "react";
 import { StateContext } from "../contexts/StateContext.jsx";
-import { CLIENT_ADD } from "../reducers/AppReducer.js";
+import { CLIENT_ADD, CLIENT_UPDATE, CLIENT_DELETE } from "../reducers/AppReducer.js";
 import "./ClientForm.css";
 import { initialClient } from "./initialFormData.js";
+import { DevTool } from "@hookform/devtools";
 
 function ClientForm({ onSubmit, client }) {
     const { dispatch } = useContext(StateContext);
@@ -21,18 +22,42 @@ function ClientForm({ onSubmit, client }) {
         mode: "all",
         reValidateMode: "onChange",
         resolver: zodResolver(clientSchema),
-        defaultValues: { ...initialClient, ...client },
+        defaultValues: { ...initialClient, ...(client || {}) },
     });
 
-    const addClientToState = (client) => {
+    const addClient = (client) => {
         dispatch({ type: CLIENT_ADD, payload: client });
     };
 
-    const handleFormSubmit = (data) => {
-        const clientElement = createKlientElement(data);
-        addClientToState(clientElement);
+    const updateClient = (clientId, client) => {
+        dispatch({
+            type: CLIENT_UPDATE,
+            payload: {
+                id: clientId,
+                data: client,
+            },
+        });
         onSubmit();
     };
+
+    const deleteClient = (clientId) => {
+        dispatch({ type: CLIENT_DELETE, payload: { id: clientId } });
+        onSubmit();
+    };
+
+    const handleFormSubmit = (data) => {
+        if (client) {
+            updateClient(client.pesel, data);
+        } else {
+            const clientElement = createKlientElement(data);
+            addClient(clientElement);
+        }
+        onSubmit();
+    };
+
+    function isFormDataValid() {
+        return Object.keys(errors).length === 0;
+    }
 
     return (
         <ThemeProvider theme={appMaterialTheme}>
@@ -114,16 +139,38 @@ function ClientForm({ onSubmit, client }) {
                 </Grid>
 
                 <div className="client_form__buttons">
-                    {/* TODO: Modify button */}
-                    <Button
-                        fullWidth
-                        type="submit"
-                        variant="contained"
-                        disabled={Object.keys(errors).length !== 0}
-                    >
-                        {client.pesel === "" ? "Dodaj klienta" : "Zapisz zmiany"}
-                    </Button>
+                    {!client && (
+                        <Button
+                            fullWidth
+                            type="submit"
+                            variant="contained"
+                            disabled={!isFormDataValid()}
+                        >
+                            Dodaj klienta
+                        </Button>
+                    )}
+                    {client && (
+                        <>
+                            <Button
+                                fullWidth
+                                type="submit"
+                                variant="contained"
+                                disabled={!isFormDataValid()}
+                            >
+                                Zapisz zmiany
+                            </Button>
+                            <Button
+                                fullWidth
+                                variant="outlined"
+                                color="error"
+                                onClick={() => deleteClient(client.pesel)}
+                            >
+                                Usuń klienta
+                            </Button>
+                        </>
+                    )}
                 </div>
+                <DevTool control={control} />
             </form>
         </ThemeProvider>
     );

@@ -7,8 +7,8 @@ export const TOGGLE_MODAL = "TOGGLE_MODAL";
 export const OPEN_MODAL = "SHOW_MODAL";
 export const CLOSE_MODAL = "CLOSE_MODAL";
 export const CLIENT_ADD = "CLIENT_ADD";
-export const CLIENT_MODIFY = "CLIENT_MODIFY";
-export const CLIENT_REMOVE = "CLIENT_REMOVE";
+export const CLIENT_UPDATE = "CLIENT_MODIFY";
+export const CLIENT_DELETE = "CLIENT_REMOVE";
 
 export const initialAppState = {
     isLoaded: false,
@@ -67,6 +67,20 @@ export const appReducer = (state, action) => {
         }
         case CLIENT_ADD: {
             state.xml.refs.topLevelNodes.klienci.appendChild(payload);
+
+            return { ...state };
+        }
+        case CLIENT_UPDATE: {
+            const client = state.xml.refs.klienci.filter((client) => client.pesel === payload.id);
+
+            client[0].updateFromObject(payload.data);
+
+            return { ...state };
+        }
+        case CLIENT_DELETE: {
+            const client = state.xml.refs.klienci.filter((client) => client.pesel === payload.id);
+
+            client[0].node.remove();
 
             return { ...state };
         }

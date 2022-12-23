@@ -17,6 +17,15 @@ export class Klient extends Base {
         };
     }
 
+    updateFromObject(o) {
+        const newValues = { ...this.toObject(), ...o };
+
+        this.pesel = newValues.pesel;
+        this.imie = newValues.imie;
+        this.nazwisko = newValues.nazwisko;
+        this.login = newValues.login;
+    }
+
     get pesel() {
         return this.getNodeText("pesel");
     }
@@ -51,7 +60,6 @@ export class Klient extends Base {
 }
 
 export function createKlientElement(klient) {
-    console.log(Klient.createElement());
     const el = Klient.createElement();
     el.innerHTML = `
         <pesel>${klient.pesel}</pesel>
