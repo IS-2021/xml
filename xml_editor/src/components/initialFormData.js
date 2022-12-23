@@ -4,3 +4,7 @@ export const initialClient = {
     pesel: "",
     login: "",
 };
+
+export const initialGenre = {
+    nazwa: "",
+};

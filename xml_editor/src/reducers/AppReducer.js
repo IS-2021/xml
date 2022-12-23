@@ -2,10 +2,12 @@ import { createGatunekElement } from "../xml/datatypes/Gatunek.js";
 
 // ACTIONS
 export const XML_LOADED = "XML_LOADED";
-export const ADD_GENRE = "ADD_GENRE";
 export const TOGGLE_MODAL = "TOGGLE_MODAL";
 export const OPEN_MODAL = "SHOW_MODAL";
 export const CLOSE_MODAL = "CLOSE_MODAL";
+export const GENRE_ADD = "GENRE_ADD";
+export const GENRE_UPDATE = "GENRE_MODIFY";
+export const GENRE_DELETE = "GENRE_REMOVE";
 export const CLIENT_ADD = "CLIENT_ADD";
 export const CLIENT_UPDATE = "CLIENT_MODIFY";
 export const CLIENT_DELETE = "CLIENT_REMOVE";
@@ -54,7 +56,7 @@ export const appReducer = (state, action) => {
                 ...payload,
             };
         }
-        case ADD_GENRE: {
+        case GENRE_ADD: {
             // Create new element
             const lastId = state.xml.refs.gatunkiCount + 1;
             const newGenre = createGatunekElement(String(lastId), payload);
