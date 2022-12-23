@@ -18,7 +18,9 @@ export class XMLDao {
 
     static save(xmlDocument, outputName = "zmieniony.xml") {
         const serializer = new XMLSerializer();
-        const serializedString = serializer.serializeToString(xmlDocument);
+        const serializedString = serializer
+            .serializeToString(xmlDocument)
+            .replace(/ xmlns="http:\/\/www\.w3\.org\/1999\/xhtml"/g, "");
 
         // Create new temporary file
         const blob = new Blob([serializedString], { type: "text/xml" });
