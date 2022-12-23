@@ -1,8 +1,8 @@
 import "./Client.css";
 
-function Client({ client }) {
+function Client({ client, onClick }) {
     return (
-        <div className="client_card">
+        <div className="client_card" onClick={() => onClick(client.pesel)}>
             <p className="client_card__name">
                 {client.imie} {client.nazwisko}
             </p>

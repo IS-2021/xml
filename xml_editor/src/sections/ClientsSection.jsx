@@ -1,27 +1,42 @@
 import Client from "../components/Client";
 import Modal from "../components/Modal.jsx";
-import AddClientForm from "../components/AddClientForm.jsx";
+import ClientForm from "../components/ClientForm.jsx";
 import "./ClientsSection.css";
 import { useModalWithDispatch } from "../hooks/useModalWithDispatch.js";
+import { useState } from "react";
+import { initialClient } from "../components/initialFormData.js";
 
 function ClientsSection({ clients }) {
+    const [modalTitle, setModalTitle] = useState("");
+    const [selectedClient, setSelectedClient] = useState(initialClient);
     const { isModalOpen, openModal, closeModal } = useModalWithDispatch(false);
+
+    function getClientByPesel(pesel) {
+        return clients.filter((client) => client.pesel === pesel)[0];
+    }
 
     return (
         <section>
             <h1>Klienci</h1>
 
             <Modal
-                title="Dodaj klienta"
+                title={modalTitle}
                 className="client_add_modal"
                 isOpen={isModalOpen}
                 onClose={closeModal}
             >
-                <AddClientForm onSubmit={closeModal} />
+                <ClientForm onSubmit={closeModal} client={selectedClient} />
             </Modal>
 
             <div className="client_card_grid">
-                <div className="client_card client_card--add" onClick={openModal}>
+                <div
+                    className="client_card client_card--add"
+                    onClick={() => {
+                        setModalTitle("Dodaj klienta");
+                        setSelectedClient(initialClient);
+                        openModal();
+                    }}
+                >
                     <p>
                         <span className="client_card__plus">+</span>
                     </p>
@@ -29,7 +44,16 @@ function ClientsSection({ clients }) {
                 </div>
 
                 {clients.map((client) => (
-                    <Client key={client.pesel} client={client} />
+                    <Client
+                        key={client.pesel}
+                        client={client}
+                        onClick={(pesel) => {
+                            console.log(pesel);
+                            setModalTitle("Edytuj klienta");
+                            setSelectedClient(getClientByPesel(pesel).toObject());
+                            openModal();
+                        }}
+                    />
                 ))}
             </div>
         </section>

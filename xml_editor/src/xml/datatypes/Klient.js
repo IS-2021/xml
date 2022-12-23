@@ -12,6 +12,15 @@ export class Klient extends Base {
         return this.createElementNS("klient");
     }
 
+    toObject() {
+        return {
+            pesel: this.pesel,
+            imie: this.imie,
+            nazwisko: this.nazwisko,
+            login: this.login,
+        };
+    }
+
     get pesel() {
         return this.getNodeText("pesel");
     }
@@ -46,6 +55,7 @@ export class Klient extends Base {
 }
 
 export function createKlientElement(klient) {
+    console.log(Klient.createElement());
     const el = Klient.createElement();
     el.innerHTML = `
         <pesel>${klient.pesel}</pesel>
