@@ -7,7 +7,7 @@ import { createKlientElement } from "../xml/datatypes/Klient.js";
 import { useContext } from "react";
 import { StateContext } from "../contexts/StateContext.jsx";
 import { CLIENT_ADD, CLIENT_UPDATE, CLIENT_DELETE } from "../reducers/AppReducer.js";
-import "./ClientForm.css";
+import "./Form.css";
 import { initialClient } from "./initialFormData.js";
 import { DevTool } from "@hookform/devtools";
 
@@ -65,7 +65,7 @@ function ClientForm({ onSubmit, client }) {
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <Stack spacing={1.5}>
-                            <p className="section__header">Dane klienta</p>
+                            <p className="form__header">Dane klienta</p>
                             <Controller
                                 name="imie"
                                 control={control}
@@ -138,7 +138,7 @@ function ClientForm({ onSubmit, client }) {
                     </Grid>
                 </Grid>
 
-                <div className="client_form__buttons">
+                <div className="form__buttons">
                     {!client && (
                         <Button
                             fullWidth

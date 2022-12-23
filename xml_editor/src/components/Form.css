@@ -1,10 +1,10 @@
-.section__header {
+.form__header {
     font-size: 1.25rem;
     font-weight: 600;
     margin-bottom: 0.75rem;
 }
 
-.client_form__buttons {
+.form__buttons {
     display: flex;
     gap: 0.5rem;
 
