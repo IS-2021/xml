@@ -45,7 +45,7 @@ export class Base {
         return instances;
     }
 
-    static createElementNS(tagName) {
-        return document.createElementNS("", tagName);
+    static createElement() {
+        return document.createElementNS("", this.name.toLowerCase());
     }
 }

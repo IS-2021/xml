@@ -8,10 +8,6 @@ export class Klient extends Base {
         this.wypozyczenia = Wypozyczenie.fromNodeList(this.getNodeAll("wypozyczenie"));
     }
 
-    static createElement() {
-        return this.createElementNS("klient");
-    }
-
     toObject() {
         return {
             pesel: this.pesel,
