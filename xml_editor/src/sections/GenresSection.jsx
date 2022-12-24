@@ -47,7 +47,6 @@ function GenresSection({ genres }) {
                         return (
                             <Pill
                                 key={genre.id}
-                                idx={genre.id}
                                 text={genre.nazwa}
                                 onClick={() => {
                                     setModalTitle("Edytuj gatunek");
