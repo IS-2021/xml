@@ -13,7 +13,11 @@ function GenresSection({ genres }) {
     const { state, dispatch } = useContext(StateContext);
 
     const getNextGenreId = () => {
-        const nextId = String(state.xml.refs.gatunkiCount + 1 || 0);
+        const gatunki = state.xml.refs.gatunki;
+        console.log(gatunki, gatunki.length);
+        if (!gatunki.length) return "GAT_01";
+
+        const nextId = String(Number(gatunki[gatunki.length - 1].node.id.replace("GAT_", "")) + 1);
         return `GAT_${nextId.padStart(2, "0")}`;
     };
 
