@@ -27,7 +27,6 @@ export class Gatunek extends Base {
 }
 
 export function createGatunekElement(id, nazwa) {
-    console.log(id, nazwa);
     const el = document.createElement("gatunek");
     el.id = id;
     el.setAttribute("nazwa", nazwa);

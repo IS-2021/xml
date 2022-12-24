@@ -1,7 +1,6 @@
 import Pill from "../components/Pill";
 import { useContext, useState } from "react";
 import { StateContext } from "../contexts/StateContext.jsx";
-import { GENRE_ADD } from "../reducers/AppReducer.js";
 import { useModalWithDispatch } from "../hooks/useModalWithDispatch.js";
 import Modal from "../components/Modal.jsx";
 import GenreForm from "../components/GenreForm.jsx";
@@ -10,11 +9,10 @@ function GenresSection({ genres }) {
     const [modalTitle, setModalTitle] = useState("");
     const [selectedGenre, setSelectedGenre] = useState(null);
     const { isModalOpen, openModal, closeModal } = useModalWithDispatch(false);
-    const { state, dispatch } = useContext(StateContext);
+    const { state } = useContext(StateContext);
 
     const getNextGenreId = () => {
         const gatunki = state.xml.refs.gatunki;
-        console.log(gatunki, gatunki.length);
         if (!gatunki.length) return "GAT_01";
 
         const nextId = String(Number(gatunki[gatunki.length - 1].node.id.replace("GAT_", "")) + 1);
@@ -22,7 +20,6 @@ function GenresSection({ genres }) {
     };
 
     function getGenreById(id) {
-        console.log(id);
         return genres.filter((genre) => genre.id === id)[0];
     }
 

@@ -70,7 +70,6 @@ export const appReducer = (state, action) => {
         }
         case GENRE_DELETE: {
             const genre = state.xml.refs.gatunki.filter((genre) => genre.id === payload.id);
-            console.log(genre, payload);
 
             genre[0].node.remove();
 

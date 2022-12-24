@@ -6,14 +6,7 @@ import { appMaterialTheme } from "./theme.js";
 import { createGatunekElement } from "../xml/datatypes/Gatunek.js";
 import { useContext } from "react";
 import { StateContext } from "../contexts/StateContext.jsx";
-import {
-    GENRE_ADD,
-    GENRE_UPDATE,
-    GENRE_DELETE,
-    CLIENT_ADD,
-    CLIENT_UPDATE,
-    CLIENT_DELETE,
-} from "../reducers/AppReducer.js";
+import { GENRE_ADD, GENRE_UPDATE, GENRE_DELETE } from "../reducers/AppReducer.js";
 import { initialGenre } from "./initialFormData.js";
 import "./Form.css";
 
