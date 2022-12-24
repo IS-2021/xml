@@ -9,7 +9,6 @@ import { StateContext } from "../contexts/StateContext.jsx";
 import { CLIENT_ADD, CLIENT_UPDATE, CLIENT_DELETE } from "../reducers/AppReducer.js";
 import "./Form.css";
 import { initialClient } from "./initialFormData.js";
-import { DevTool } from "@hookform/devtools";
 
 function ClientForm({ onSubmit, client }) {
     const { dispatch } = useContext(StateContext);
@@ -170,7 +169,6 @@ function ClientForm({ onSubmit, client }) {
                         </>
                     )}
                 </div>
-                <DevTool control={control} />
             </form>
         </ThemeProvider>
     );

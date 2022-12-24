@@ -15,7 +15,6 @@ import {
     CLIENT_DELETE,
 } from "../reducers/AppReducer.js";
 import { initialGenre } from "./initialFormData.js";
-import { DevTool } from "@hookform/devtools";
 import "./Form.css";
 
 function GenreForm({ onSubmit, genre, nextId }) {
@@ -131,7 +130,6 @@ function GenreForm({ onSubmit, genre, nextId }) {
                         </>
                     )}
                 </div>
-                <DevTool control={control} />
             </form>
         </ThemeProvider>
     );
