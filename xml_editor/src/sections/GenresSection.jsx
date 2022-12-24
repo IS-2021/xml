@@ -17,10 +17,15 @@ function GenresSection({ genres }) {
         return `GAT_${nextId.padStart(2, "0")}`;
     };
 
+    function getGenreById(id) {
+        console.log(id);
+        return genres.filter((genre) => genre.id === id)[0];
+    }
+
     return (
         <section>
             <Modal title={modalTitle} isOpen={isModalOpen} onClose={closeModal}>
-                <GenreForm genre={selectedGenre} nextId={getNextGenreId()} />
+                <GenreForm genre={selectedGenre} nextId={getNextGenreId()} onSubmit={closeModal} />
             </Modal>
 
             <h1>Gatunki</h1>
@@ -29,6 +34,7 @@ function GenresSection({ genres }) {
                     text="Dodaj gatunek +"
                     onClick={() => {
                         setModalTitle("Dodaj gatunek");
+                        setSelectedGenre(null);
                         openModal();
                     }}
                 />
@@ -39,8 +45,9 @@ function GenresSection({ genres }) {
                                 key={genre.id}
                                 idx={genre.id}
                                 text={genre.nazwa}
-                                onClick={(gatunekId) => {
+                                onClick={() => {
                                     setModalTitle("Edytuj gatunek");
+                                    setSelectedGenre(getGenreById(genre.id).toObject());
                                     openModal();
                                 }}
                             />

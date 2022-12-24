@@ -6,7 +6,14 @@ import { appMaterialTheme } from "./theme.js";
 import { createGatunekElement } from "../xml/datatypes/Gatunek.js";
 import { useContext } from "react";
 import { StateContext } from "../contexts/StateContext.jsx";
-import { GENRE_ADD, GENRE_UPDATE, GENRE_DELETE } from "../reducers/AppReducer.js";
+import {
+    GENRE_ADD,
+    GENRE_UPDATE,
+    GENRE_DELETE,
+    CLIENT_ADD,
+    CLIENT_UPDATE,
+    CLIENT_DELETE,
+} from "../reducers/AppReducer.js";
 import { initialGenre } from "./initialFormData.js";
 import { DevTool } from "@hookform/devtools";
 import "./Form.css";
@@ -22,24 +29,34 @@ function GenreForm({ onSubmit, genre, nextId }) {
         mode: "all",
         reValidateMode: "onChange",
         resolver: zodResolver(genreSchema),
-        defaultValues: { ...initialGenre, ...(genre || {}), ...{ id: nextId } },
+        defaultValues: { ...initialGenre, ...{ id: nextId }, ...(genre || {}) },
     });
 
-    const addGenre = (genre) => {};
+    const addGenre = (genre) => {
+        dispatch({ type: GENRE_ADD, payload: genre });
+    };
 
     const updateGenre = (genreId, genre) => {
+        dispatch({
+            type: GENRE_UPDATE,
+            payload: {
+                id: genreId,
+                data: genre,
+            },
+        });
         onSubmit();
     };
 
     const deleteGenre = (genreId) => {
+        dispatch({ type: GENRE_DELETE, payload: { id: genreId } });
         onSubmit();
     };
 
     const handleFormSubmit = (data) => {
         if (genre) {
-            updateGenre(genre.pesel, data);
+            updateGenre(genre.id, data);
         } else {
-            addGenre(createGatunekElement(data));
+            addGenre(createGatunekElement(data.id, data.nazwa));
         }
         onSubmit();
     };
@@ -107,7 +124,7 @@ function GenreForm({ onSubmit, genre, nextId }) {
                                 fullWidth
                                 variant="outlined"
                                 color="error"
-                                onClick={() => deleteGenre()}
+                                onClick={() => deleteGenre(genre.id)}
                             >
                                 Usuń gatunek
                             </Button>

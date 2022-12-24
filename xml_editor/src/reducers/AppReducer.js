@@ -57,14 +57,23 @@ export const appReducer = (state, action) => {
             };
         }
         case GENRE_ADD: {
-            // Create new element
-            const lastId = state.xml.refs.gatunkiCount + 1;
-            const newGenre = createGatunekElement(String(lastId), payload);
+            state.xml.refs.topLevelNodes.gatunki.appendChild(payload);
 
-            // Append node to the XML
-            state.xml.refs.topLevelNodes.gatunki.appendChild(newGenre);
+            return { ...state };
+        }
+        case GENRE_UPDATE: {
+            const genre = state.xml.refs.gatunki.filter((genre) => genre.id === payload.id);
 
-            // Refresh state?
+            genre[0].updateFromObject(payload.data);
+
+            return { ...state };
+        }
+        case GENRE_DELETE: {
+            const genre = state.xml.refs.gatunki.filter((genre) => genre.id === payload.id);
+            console.log(genre, payload);
+
+            genre[0].node.remove();
+
             return { ...state };
         }
         case CLIENT_ADD: {

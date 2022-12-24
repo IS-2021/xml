@@ -18,6 +18,7 @@ export default `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
     </autor>
 
     <gatunki>
+        <gatunek id="GAT_01" nazwa="Pop"/>
     </gatunki>
 
     <albumy>
