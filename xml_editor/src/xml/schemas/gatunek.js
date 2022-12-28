@@ -1,6 +1,7 @@
 import { z } from "zod";
+import { genreIDSchema } from "./common.js";
 
 export const genreSchema = z.object({
-    id: z.string().regex(/GAT_\d+/, "ID nie spełnia wzoru"),
+    id: genreIDSchema,
     nazwa: z.string().min(3, "Nazwa musi mieć min. 3 znaki"),
 });

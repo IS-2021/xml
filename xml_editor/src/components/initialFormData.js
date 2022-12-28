@@ -8,3 +8,39 @@ export const initialClient = {
 export const initialGenre = {
     nazwa: "",
 };
+
+export const initialAlbum = {
+    id: "",
+    gatunek: "",
+    nazwa: "",
+    okladka: "",
+    wykonawcy: [
+        {
+            czyZagraniczny: false,
+            nazwa: "",
+        },
+    ],
+    producent: "",
+    dystrybutor: "",
+    opakowanie: "",
+    plyty: [
+        {
+            cd: 1,
+            utwory: [
+                {
+                    numer: 0,
+                    nazwa: "",
+                    dlugosc: "",
+                },
+            ],
+        },
+    ],
+    data_premiery: "",
+    cena: {
+        waluta: "PLN",
+        wartosc: "",
+    },
+    ocena: "",
+    naklad: "",
+    sprzedaneEgzemplarze: "",
+};

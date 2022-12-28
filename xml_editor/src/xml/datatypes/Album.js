@@ -10,6 +10,37 @@ export class Album extends Base {
         this.wykonawcy = Wykonawca.fromNodeList(this.getNodeAll("wykonawca"));
     }
 
+    toObject() {
+        return {
+            id: this.node.id,
+            gatunek: this.gatunek,
+            nazwa: this.nazwa,
+            okladka: this.okladka,
+            // wykonawcy
+            producent: this.producent,
+            dystrybutor: this.dystrybutor,
+            opakowanie: this.opakowanie,
+            // plyty
+            // data_premiery
+            cena: {
+                wartosc: this.cena,
+                waluta: this.waluta,
+            },
+            ocena: this.ocena,
+            naklad: this.naklad,
+            sprzedaneEgzemplarze: this.sprzedaneEgzemplarze,
+        };
+    }
+
+    updateFromObject(o) {
+        const newValues = { ...this.toObject(), ...o };
+
+        this.id = newValues.id;
+        this.gatunek = newValues.gatunek;
+        this.nazwa = newValues.nazwa;
+        this.okladka = newValues.okladka;
+    }
+
     // Attributes
     get gatunek() {
         return this.get("gatunek");
@@ -107,4 +138,15 @@ export class Album extends Base {
     set sprzedaneEgzemplarze(val) {
         this.setNodeText("sprzedaneEgzemplarze", val);
     }
+}
+
+export function createAlbumElement(id, gatunek, album) {
+    const el = Album.createElement();
+    el.id = id;
+    el.setAttribute("gatunek", gatunek);
+    el.innerHTML = `
+        <nazwa>${album.nazwa}</nazwa>
+        <okladka src="${album.okladka}" />
+    `;
+    return el;
 }

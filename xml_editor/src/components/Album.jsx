@@ -1,8 +1,8 @@
 import "./Album.css";
 
-function Album({ album }) {
+function Album({ album, onClick }) {
     return (
-        <div className="album_card">
+        <div className="album_card" onClick={onClick}>
             <img
                 className="album_card__cover"
                 src={`./assets/covers/${album.okladka}`}
