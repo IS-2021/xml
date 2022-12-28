@@ -40,7 +40,17 @@ export class Album extends Base {
         this.gatunek = newValues.gatunek;
         this.nazwa = newValues.nazwa;
         this.okladka = newValues.okladka;
+        // wykonawcy
+        this.producent = newValues.producent;
+        this.dystrybutor = newValues.dystrybutor;
+        this.opakowanie = newValues.opakowanie;
+        // plyty
         this.dataPremiery = newValues.dataPremiery;
+        this.cena = newValues.cena.wartosc;
+        this.waluta = newValues.cena.waluta;
+        this.ocena = newValues.ocena;
+        this.naklad = newValues.naklad;
+        this.sprzedaneEgzemplarze = newValues.sprzedaneEgzemplarze;
     }
 
     // Attributes
