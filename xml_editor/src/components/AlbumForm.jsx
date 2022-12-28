@@ -79,6 +79,7 @@ function AlbumForm({ onSubmit, album, nextId }) {
     };
 
     const updateAlbum = (genreId, album) => {
+        album.dataPremiery = album.dataPremiery.format("YYYY/MM/DD");
         dispatch({
             type: ALBUM_UPDATE,
             payload: {

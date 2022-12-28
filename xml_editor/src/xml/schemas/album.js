@@ -14,7 +14,7 @@ export const albumSchema = z.object({
     dystrybutor: min2Chars,
     opakowanie: z.enum(ALBUM_CASE_TYPES),
     // plyty
-    dataPremiery: z.coerce.string(),
+    dataPremiery: z.any(),
     cena: z.object({
         waluta: z.enum(CURRENCIES),
         wartosc: z.coerce.number().min(0, "Cena nie może być ujemna"),
