@@ -20,6 +20,8 @@ import { ALBUM_ADD, ALBUM_UPDATE, ALBUM_DELETE } from "../reducers/AppReducer.js
 import { initialAlbum } from "./initialFormData.js";
 import { DevTool } from "@hookform/devtools";
 import PropTypes from "prop-types";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import "./Form.css";
 
 function TabPanel(props) {
@@ -355,17 +357,24 @@ function AlbumForm({ onSubmit, album, nextId }) {
                                     name="dataPremiery"
                                     control={control}
                                     render={({ field }) => (
-                                        <TextField
-                                            {...field}
-                                            label="Data premiery"
-                                            placeholder="Podaj datę premiery"
-                                            error={field.isDirty || !!errors[field.name]}
-                                            helperText={
-                                                field.isDirty || !!errors[field.name]
-                                                    ? errors[field.name].message
-                                                    : ""
-                                            }
-                                        />
+                                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                            <DatePicker
+                                                {...field}
+                                                label="Data premiery"
+                                                placeholder="Podaj datę premiery"
+                                                views={["year", "month", "day"]}
+                                                onChange={(newDate) => {
+                                                    field.onChange(newDate.format("YYYY/MM/DD"));
+                                                }}
+                                                error={field.isDirty || !!errors[field.name]}
+                                                helperText={
+                                                    field.isDirty || !!errors[field.name]
+                                                        ? errors[field.name].message
+                                                        : ""
+                                                }
+                                                renderInput={(params) => <TextField {...params} />}
+                                            />
+                                        </LocalizationProvider>
                                     )}
                                 />
                                 <Controller

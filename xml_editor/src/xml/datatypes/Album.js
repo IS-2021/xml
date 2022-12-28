@@ -1,6 +1,7 @@
 import { Base } from "./Base.js";
 import { Plyta } from "./Plyta.js";
 import { Wykonawca } from "./Wykonawca.js";
+import dayjs from "dayjs";
 
 export class Album extends Base {
     constructor(element) {
@@ -21,7 +22,7 @@ export class Album extends Base {
             dystrybutor: this.dystrybutor,
             opakowanie: this.opakowanie,
             // plyty
-            // data_premiery
+            dataPremiery: dayjs(this.dataPremiery),
             cena: {
                 wartosc: this.cena,
                 waluta: this.waluta,
@@ -39,6 +40,7 @@ export class Album extends Base {
         this.gatunek = newValues.gatunek;
         this.nazwa = newValues.nazwa;
         this.okladka = newValues.okladka;
+        this.dataPremiery = newValues.dataPremiery;
     }
 
     // Attributes
