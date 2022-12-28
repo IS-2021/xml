@@ -35,7 +35,7 @@ export const initialAlbum = {
             ],
         },
     ],
-    data_premiery: "",
+    dataPremiery: "",
     cena: {
         waluta: "PLN",
         wartosc: "",

@@ -352,7 +352,7 @@ function AlbumForm({ onSubmit, album, nextId }) {
                                     )}
                                 />
                                 <Controller
-                                    name="data_premiery"
+                                    name="dataPremiery"
                                     control={control}
                                     render={({ field }) => (
                                         <TextField
