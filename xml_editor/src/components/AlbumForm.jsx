@@ -527,7 +527,7 @@ function AlbumForm({ onSubmit, album, nextId }) {
                             variant="contained"
                             disabled={!isFormDataValid()}
                         >
-                            Dodaj album
+                            {isFormDataValid() ? "Dodaj album" : "Wypełnij poprawnie wymagane pola"}
                         </Button>
                     )}
                     {album && (
