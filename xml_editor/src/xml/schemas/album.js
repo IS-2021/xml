@@ -10,7 +10,7 @@ export const albumSchema = z.object({
     gatunek: genreIDSchema,
     nazwa: min2Chars,
     okladka: z.string().min(1, "Wymagany min. 1 znak"),
-    wykonawcy: z.array(wykonawcaSchema),
+    wykonawcy: z.array(wykonawcaSchema).min(1, "Album musi mieć min. jednego wykonawcę"),
     producent: min2Chars,
     dystrybutor: min2Chars,
     opakowanie: z.enum(ALBUM_CASE_TYPES),
