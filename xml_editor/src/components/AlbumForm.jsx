@@ -12,14 +12,21 @@ import {
     TextField,
     ThemeProvider,
 } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ALBUM_CASE_TYPES, albumSchema } from "../xml/schemas/album.js";
 import { appMaterialTheme } from "./theme.js";
 import { createGatunekElement } from "../xml/datatypes/Gatunek.js";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { StateContext } from "../contexts/StateContext.jsx";
-import { ALBUM_ADD, ALBUM_UPDATE, ALBUM_DELETE } from "../reducers/AppReducer.js";
+import {
+    ALBUM_ADD,
+    ALBUM_UPDATE,
+    ALBUM_DELETE,
+    ALBUM_AUTHOR_DELETE,
+} from "../reducers/AppReducer.js";
 import { initialAlbum } from "./initialFormData.js";
 import { DevTool } from "@hookform/devtools";
 import PropTypes from "prop-types";
@@ -57,18 +64,15 @@ function a11yProps(index) {
 }
 
 function AlbumForm({ onSubmit, album, nextId }) {
-    const { state, dispatch } = useContext(StateContext);
-    const [selectedTab, setSelectedTab] = useState(1);
-
-    const handleTabChange = (event, newTab) => {
-        setSelectedTab(newTab);
-    };
+    const getWykonawcyFromState = () =>
+        state.xml.refs.albumy.filter((sAlbum) => sAlbum.id === album?.id)[0]?.wykonawcy ?? [];
 
     const {
         control,
         handleSubmit,
         formState: { errors },
         watch,
+        getValues,
     } = useForm({
         mode: "all",
         reValidateMode: "onChange",
@@ -76,6 +80,20 @@ function AlbumForm({ onSubmit, album, nextId }) {
         defaultValues: { ...initialAlbum, ...{ id: nextId }, ...(album || {}) },
     });
     const okladkaWatch = watch("okladka", initialAlbum.okladka);
+    const { state, dispatch } = useContext(StateContext);
+    const [selectedTab, setSelectedTab] = useState(1);
+    const [wykonawcy, setWykonawcy] = useState([getValues("wykonawcy[0]")]);
+    // This is for triggering re-render, as internal references aren't changing:
+    const [updateCounter, setUpdateCounter] = useState(0);
+
+    const handleTabChange = (event, newTab) => {
+        setSelectedTab(newTab);
+    };
+
+    useEffect(() => {
+        if (updateCounter === 0) return;
+        setWykonawcy(getWykonawcyFromState());
+    }, [updateCounter]);
 
     const addAlbum = (album) => {
         dispatch({ type: ALBUM_ADD, payload: album });
@@ -109,6 +127,17 @@ function AlbumForm({ onSubmit, album, nextId }) {
 
     function isFormDataValid() {
         return Object.keys(errors).length === 0;
+    }
+
+    function handleDeleteAuthor(albumId, authorIndex) {
+        dispatch({
+            type: ALBUM_AUTHOR_DELETE,
+            payload: {
+                albumId: albumId,
+                authorIndex: authorIndex,
+            },
+        });
+        setUpdateCounter((prev) => prev + 1);
     }
 
     return (
@@ -286,8 +315,8 @@ function AlbumForm({ onSubmit, album, nextId }) {
                 <TabPanel index={selectedTab} value={1}>
                     <Box sx={{ height: 408, width: "100%" }}>
                         <Grid spacing={1.5} container direction="column">
-                            {album &&
-                                album.wykonawcy.map((wykonawca, idx) => (
+                            {wykonawcy &&
+                                wykonawcy.map((wykonawca, idx) => (
                                     <Grid item key={`TabPanel1_${wykonawca.nazwa}${idx}`}>
                                         <Grid container alignItems="center" columnSpacing={2}>
                                             <Grid item>
@@ -345,6 +374,12 @@ function AlbumForm({ onSubmit, album, nextId }) {
                                                         </FormGroup>
                                                     )}
                                                 />
+                                            </Grid>
+                                            <Grid
+                                                item
+                                                onClick={() => handleDeleteAuthor(album.id, idx)}
+                                            >
+                                                {wykonawcy.length > 1 && <DeleteIcon />}
                                             </Grid>
                                         </Grid>
                                     </Grid>
