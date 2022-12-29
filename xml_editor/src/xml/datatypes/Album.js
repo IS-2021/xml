@@ -17,7 +17,7 @@ export class Album extends Base {
             gatunek: this.gatunek,
             nazwa: this.nazwa,
             okladka: this.okladka,
-            // wykonawcy
+            wykonawcy: this.wykonawcy.map((wykonawca) => wykonawca.toObject()),
             producent: this.producent,
             dystrybutor: this.dystrybutor,
             opakowanie: this.opakowanie,
@@ -40,7 +40,8 @@ export class Album extends Base {
         this.gatunek = newValues.gatunek;
         this.nazwa = newValues.nazwa;
         this.okladka = newValues.okladka;
-        // wykonawcy
+        // TODO: Removing/adding singers
+        this.wykonawcy.forEach((w, idx) => w.updateFromObject(newValues.wykonawcy[idx]));
         this.producent = newValues.producent;
         this.dystrybutor = newValues.dystrybutor;
         this.opakowanie = newValues.opakowanie;

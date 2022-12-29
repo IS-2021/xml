@@ -22,6 +22,7 @@ import { DevTool } from "@hookform/devtools";
 import PropTypes from "prop-types";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DataGrid } from "@mui/x-data-grid";
 import "./Form.css";
 
 function TabPanel(props) {
@@ -53,9 +54,35 @@ function a11yProps(index) {
     };
 }
 
+const columns = [
+    { field: "id" },
+    {
+        field: "nazwa",
+        headerName: "Nazwa",
+        flex: 0.8,
+        editable: true,
+        disableColumnMenu: true,
+    },
+    {
+        field: "czyZagraniczny",
+        headerName: "Zagraniczny",
+        type: "boolean",
+        flex: 0.2,
+        editable: true,
+        disableColumnMenu: true,
+        sortable: false,
+    },
+];
+
 function AlbumForm({ onSubmit, album, nextId }) {
     const { state, dispatch } = useContext(StateContext);
     const [selectedTab, setSelectedTab] = useState(0);
+
+    const rows = album.wykonawcy.map((w, idx) => ({
+        ...w,
+        id: `DATAGRID_AUTHOR_${idx}`,
+        czyZagraniczny: w.czyZagraniczny,
+    }));
 
     const handleTabChange = (event, newTab) => {
         setSelectedTab(newTab);
@@ -106,6 +133,15 @@ function AlbumForm({ onSubmit, album, nextId }) {
 
     function isFormDataValid() {
         return Object.keys(errors).length === 0;
+    }
+
+    function handleAuthorsRowUpdate(newRow, formField) {
+        const { id, field, value } = newRow;
+        const row = rows.filter((row) => row.id === id)[0];
+        if (!row) return;
+
+        row[field] = value;
+        formField.onChange(rows);
     }
 
     return (
@@ -281,11 +317,36 @@ function AlbumForm({ onSubmit, album, nextId }) {
 
                 {/* Authors */}
                 <TabPanel index={selectedTab} value={1}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <Stack spacing={1.5}></Stack>
-                        </Grid>
-                    </Grid>
+                    <Box sx={{ height: 396, width: "100%" }}>
+                        <Controller
+                            name="wykonawcy"
+                            control={control}
+                            render={({ field }) => (
+                                <DataGrid
+                                    {...field}
+                                    label="Wykonawcy"
+                                    placeholder="Podaj wykonawcow"
+                                    error={field.isDirty || !!errors[field.name]}
+                                    helperText={
+                                        field.isDirty || !!errors[field.name]
+                                            ? errors[field.name].message
+                                            : ""
+                                    }
+                                    initialState={{
+                                        columns: {
+                                            columnVisibilityModel: {
+                                                id: false,
+                                            },
+                                        },
+                                    }}
+                                    columns={columns}
+                                    rows={rows}
+                                    onCellEditCommit={(row) => handleAuthorsRowUpdate(row, field)}
+                                    hideFooter={true}
+                                />
+                            )}
+                        />
+                    </Box>
                 </TabPanel>
 
                 {/* Płyty */}

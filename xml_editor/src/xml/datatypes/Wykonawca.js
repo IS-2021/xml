@@ -5,6 +5,20 @@ export class Wykonawca extends Base {
         super(element);
     }
 
+    toObject() {
+        return {
+            nazwa: this.nazwa,
+            czyZagraniczny: this.czyZagranicznyBool,
+        };
+    }
+
+    updateFromObject(o) {
+        const newValues = { ...this.toObject(), ...o };
+
+        this.nazwa = newValues.nazwa;
+        this.czyZagranicznyBool = newValues.czyZagraniczny;
+    }
+
     get nazwa() {
         return this.node.textContent;
     }
@@ -19,5 +33,13 @@ export class Wykonawca extends Base {
 
     set czyZagraniczny(val) {
         this.set("czyZagraniczny", val);
+    }
+
+    get czyZagranicznyBool() {
+        return this.czyZagraniczny === "tak";
+    }
+
+    set czyZagranicznyBool(val) {
+        this.czyZagraniczny = val === true ? "tak" : "nie";
     }
 }

@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { albumIDSchema, CURRENCIES, genreIDSchema, min2Chars } from "./common.js";
+import { wykonawcaSchema } from "./wykonawca.js";
 
 export const rating05 = "Ocena musi być z zakresu od 0 do 5";
 export const ALBUM_CASE_TYPES = ["Digipack", "Digibook", "Jewel Case", "Standard"];
@@ -9,7 +10,7 @@ export const albumSchema = z.object({
     gatunek: genreIDSchema,
     nazwa: min2Chars,
     okladka: z.string().min(1, "Wymagany min. 1 znak"),
-    // wykonawcy
+    wykonawcy: z.array(wykonawcaSchema),
     producent: min2Chars,
     dystrybutor: min2Chars,
     opakowanie: z.enum(ALBUM_CASE_TYPES),
