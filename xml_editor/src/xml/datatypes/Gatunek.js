@@ -6,7 +6,6 @@ export class Gatunek extends Base {
     }
 
     toObject() {
-        console.log(this.getOwnGetters());
         return {
             id: this.node.id,
             nazwa: this.nazwa,
