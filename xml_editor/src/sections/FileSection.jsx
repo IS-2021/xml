@@ -4,18 +4,15 @@ import demoXML from "../xml/demo";
 import emptyXML from "../xml/empty";
 import { useContext, useEffect } from "react";
 import { XML_LOADED } from "../reducers/AppReducer.js";
-import { Plytoteka } from "../xml/datatypes/Plytoteka";
 import { StateContext } from "../contexts/StateContext.jsx";
+import { Plytoteka } from "../xml/datatypes/Plytoteka.js";
 
 const dispatchLoadedXML = (dispatch, xml) => {
+    const xmlReferences = new Plytoteka(xml);
+
     dispatch({
         type: XML_LOADED,
-        payload: {
-            xml: {
-                original: xml,
-                refs: new Plytoteka(xml),
-            },
-        },
+        payload: xmlReferences.toObject(),
     });
 };
 

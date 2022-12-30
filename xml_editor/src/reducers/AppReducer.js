@@ -20,7 +20,6 @@ export const initialAppState = {
     isLoaded: false,
     isModalOpen: false,
     xml: {
-        original: null,
         refs: {
             autor: {},
             zadanie: {},
@@ -57,7 +56,11 @@ export const appReducer = (state, action) => {
             return {
                 ...state,
                 isLoaded: true,
-                ...payload,
+                xml: {
+                    refs: {
+                        ...payload,
+                    },
+                },
             };
         }
         case GENRE_ADD: {
