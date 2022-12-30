@@ -91,8 +91,11 @@ function AlbumForm({ onSubmit, album, nextId }) {
     };
 
     useEffect(() => {
-        if (updateCounter === 0) return;
-        setWykonawcy(getWykonawcyFromState());
+        const wykonawcy = getWykonawcyFromState();
+
+        if (wykonawcy.length === 0) return setWykonawcy(initialAlbum.wykonawcy);
+
+        setWykonawcy(wykonawcy);
     }, [updateCounter]);
 
     const addAlbum = (album) => {
