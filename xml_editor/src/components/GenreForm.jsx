@@ -1,5 +1,5 @@
-import { Button, Grid, Stack, TextField, ThemeProvider } from "@mui/material";
-import { Controller, useForm } from "react-hook-form";
+import { Button, Grid, Stack, ThemeProvider } from "@mui/material";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { genreSchema } from "../xml/schemas/gatunek.js";
 import { appMaterialTheme } from "./theme.js";
@@ -9,6 +9,7 @@ import { StateContext } from "../contexts/StateContext.jsx";
 import { GENRE_ADD, GENRE_UPDATE, GENRE_DELETE } from "../reducers/AppReducer.js";
 import { initialGenre } from "./initialFormData.js";
 import "./Form.css";
+import ControlledTextField from "./ControlledTextField.jsx";
 
 function GenreForm({ onSubmit, genre, nextId }) {
     const { dispatch } = useContext(StateContext);
@@ -63,29 +64,19 @@ function GenreForm({ onSubmit, genre, nextId }) {
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <Stack spacing={1.5}>
-                            <Controller
+                            <ControlledTextField
                                 name="id"
                                 control={control}
-                                render={({ field }) => (
-                                    <TextField {...field} label="ID" disabled={true} />
-                                )}
+                                errors={errors}
+                                textFieldProps={{
+                                    disabled: true,
+                                }}
                             />
-                            <Controller
+                            <ControlledTextField
                                 name="nazwa"
+                                placeholder="Podaj nazwę"
                                 control={control}
-                                render={({ field }) => (
-                                    <TextField
-                                        {...field}
-                                        label="Nazwa"
-                                        placeholder="Podaj nazwę"
-                                        error={field.isDirty || !!errors[field.name]}
-                                        helperText={
-                                            field.isDirty || !!errors[field.name]
-                                                ? errors[field.name].message
-                                                : ""
-                                        }
-                                    />
-                                )}
+                                errors={errors}
                             />
                         </Stack>
                     </Grid>

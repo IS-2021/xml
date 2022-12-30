@@ -33,6 +33,7 @@ import PropTypes from "prop-types";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import "./Form.css";
+import ControlledTextField from "./ControlledTextField.jsx";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -63,6 +64,21 @@ function a11yProps(index) {
     };
 }
 
+function authorFieldHasErrors(field, errors, params) {
+    const { index } = params;
+    return (
+        field.isDirty ||
+        (!!errors.wykonawcy &&
+            Object.keys({
+                ...errors.wykonawcy[index],
+            }).indexOf("nazwa") !== -1)
+    );
+}
+
+function getAuthorFieldError(field, errors, params) {
+    return errors.wykonawcy[params.index].nazwa.message;
+}
+
 function AlbumForm({ onSubmit, album, nextId }) {
     const getWykonawcyFromState = () =>
         state.xml.refs.albumy.filter((sAlbum) => sAlbum.id === album?.id)[0]?.wykonawcy ?? [];
@@ -81,10 +97,12 @@ function AlbumForm({ onSubmit, album, nextId }) {
     });
     const okladkaWatch = watch("okladka", initialAlbum.okladka);
     const { state, dispatch } = useContext(StateContext);
-    const [selectedTab, setSelectedTab] = useState(1);
+    const [selectedTab, setSelectedTab] = useState(0);
     const [wykonawcy, setWykonawcy] = useState([getValues("wykonawcy[0]")]);
     // This is for triggering re-render, as internal references aren't changing:
     const [updateCounter, setUpdateCounter] = useState(0);
+
+    const commonFieldProps = () => ({ control: control, errors: errors });
 
     const handleTabChange = (event, newTab) => {
         setSelectedTab(newTab);
@@ -174,140 +192,60 @@ function AlbumForm({ onSubmit, album, nextId }) {
                         </Grid>
                         <Grid item xs={6}>
                             <Stack spacing={1.5}>
-                                <Controller
+                                <ControlledTextField
                                     name="id"
-                                    control={control}
-                                    render={({ field }) => (
-                                        <TextField {...field} label="ID" disabled={true} />
-                                    )}
+                                    {...commonFieldProps()}
+                                    textFieldProps={{ disabled: true }}
                                 />
-                                <Controller
+                                <ControlledTextField
                                     name="gatunek"
-                                    control={control}
-                                    render={({ field }) => (
-                                        <TextField
-                                            {...field}
-                                            label="Gatunek"
-                                            placeholder="Wybierz nazwę"
-                                            select
-                                            error={field.isDirty || !!errors[field.name]}
-                                            helperText={
-                                                field.isDirty || !!errors[field.name]
-                                                    ? errors[field.name].message
-                                                    : ""
-                                            }
-                                        >
-                                            {state.xml.refs.gatunki.map((genre) => (
-                                                <MenuItem
-                                                    key={`SELECT_${genre.id}`}
-                                                    value={genre.id}
-                                                >
-                                                    {genre.nazwa}
-                                                </MenuItem>
-                                            ))}
-                                        </TextField>
-                                    )}
-                                />
-                                <Controller
+                                    {...commonFieldProps()}
+                                    textFieldProps={{ select: true }}
+                                >
+                                    {state.xml.refs.gatunki.map((genre) => (
+                                        <MenuItem key={`SELECT_${genre.id}`} value={genre.id}>
+                                            {genre.nazwa}
+                                        </MenuItem>
+                                    ))}
+                                </ControlledTextField>
+                                <ControlledTextField
                                     name="nazwa"
-                                    control={control}
-                                    render={({ field }) => (
-                                        <TextField
-                                            {...field}
-                                            label="Nazwa"
-                                            placeholder="Podaj nazwę"
-                                            error={field.isDirty || !!errors[field.name]}
-                                            helperText={
-                                                field.isDirty || !!errors[field.name]
-                                                    ? errors[field.name].message
-                                                    : ""
-                                            }
-                                        />
-                                    )}
+                                    placeholder="Podaj nazwę"
+                                    {...commonFieldProps()}
                                 />
-                                <Controller
+                                <ControlledTextField
                                     name="okladka"
-                                    control={control}
-                                    render={({ field }) => (
-                                        <TextField
-                                            {...field}
-                                            label="Okladka (URL)"
-                                            placeholder="Podaj URL"
-                                            error={field.isDirty || !!errors[field.name]}
-                                            helperText={
-                                                field.isDirty || !!errors[field.name]
-                                                    ? errors[field.name].message
-                                                    : ""
-                                            }
-                                        />
-                                    )}
+                                    placeholder="Podaj okładkę"
+                                    {...commonFieldProps()}
                                 />
                                 <Grid container>
                                     <Grid item xs={9}>
-                                        <Controller
+                                        <ControlledTextField
                                             name="cena.wartosc"
-                                            control={control}
-                                            render={({ field }) => (
-                                                <TextField
-                                                    {...field}
-                                                    label="Cena"
-                                                    placeholder="Podaj cenę"
-                                                    type="number"
-                                                    mr={2}
-                                                    error={field.isDirty || !!errors[field.name]}
-                                                    helperText={
-                                                        field.isDirty || !!errors[field.name]
-                                                            ? errors[field.name].message
-                                                            : ""
-                                                    }
-                                                />
-                                            )}
+                                            label="Cena"
+                                            placeholder="Podaj cenę"
+                                            textFieldProps={{ type: "number", fullWidth: true }}
+                                            {...commonFieldProps()}
                                         />
                                     </Grid>
                                     <Grid item xs={3}>
-                                        <Controller
+                                        <ControlledTextField
                                             name="cena.waluta"
-                                            control={control}
-                                            render={({ field }) => (
-                                                <TextField
-                                                    {...field}
-                                                    label="Waluta"
-                                                    placeholder="Podaj walutę"
-                                                    select
-                                                    fullWidth
-                                                    error={field.isDirty || !!errors[field.name]}
-                                                    helperText={
-                                                        field.isDirty || !!errors[field.name]
-                                                            ? errors[field.name].message
-                                                            : ""
-                                                    }
-                                                >
-                                                    <MenuItem value="PLN">ZŁ</MenuItem>
-                                                    <MenuItem value="USD">$</MenuItem>
-                                                    <MenuItem value="EUR">€</MenuItem>
-                                                </TextField>
-                                            )}
-                                        />
+                                            placeholder="Podaj walutę"
+                                            textFieldProps={{ select: true }}
+                                            {...commonFieldProps()}
+                                        >
+                                            <MenuItem value="PLN">ZŁ</MenuItem>
+                                            <MenuItem value="USD">$</MenuItem>
+                                            <MenuItem value="EUR">€</MenuItem>
+                                        </ControlledTextField>
                                     </Grid>
                                 </Grid>
-
-                                <Controller
+                                <ControlledTextField
                                     name="ocena"
-                                    control={control}
-                                    render={({ field }) => (
-                                        <TextField
-                                            {...field}
-                                            label="Ocena"
-                                            placeholder="Podaj ocenę"
-                                            type="number"
-                                            error={field.isDirty || !!errors[field.name]}
-                                            helperText={
-                                                field.isDirty || !!errors[field.name]
-                                                    ? errors[field.name].message
-                                                    : ""
-                                            }
-                                        />
-                                    )}
+                                    placeholder="Podaj ocenę"
+                                    textFieldProps={{ type: "number" }}
+                                    {...commonFieldProps()}
                                 />
                             </Stack>
                         </Grid>
@@ -323,40 +261,16 @@ function AlbumForm({ onSubmit, album, nextId }) {
                                     <Grid item key={`TabPanel1_${wykonawca.nazwa}${idx}`}>
                                         <Grid container alignItems="center" columnSpacing={2}>
                                             <Grid item>
-                                                <Controller
+                                                <ControlledTextField
                                                     name={`wykonawcy[${idx}].nazwa`}
-                                                    control={control}
-                                                    render={({ field }) => (
-                                                        <>
-                                                            <TextField
-                                                                {...field}
-                                                                fullWidth
-                                                                label="Wykonawca"
-                                                                placeholder="Podaj wykonawcę"
-                                                                error={
-                                                                    field.isDirty ||
-                                                                    (!!errors.wykonawcy &&
-                                                                        Object.keys({
-                                                                            ...errors.wykonawcy[
-                                                                                idx
-                                                                            ],
-                                                                        }).indexOf("nazwa") !== -1)
-                                                                }
-                                                                helperText={
-                                                                    field.isDirty ||
-                                                                    (!!errors.wykonawcy &&
-                                                                        Object.keys({
-                                                                            ...errors.wykonawcy[
-                                                                                idx
-                                                                            ],
-                                                                        }).indexOf("nazwa") !== -1)
-                                                                        ? errors.wykonawcy[idx]
-                                                                              .nazwa.message
-                                                                        : ""
-                                                                }
-                                                            />
-                                                        </>
-                                                    )}
+                                                    label="Wykonawca"
+                                                    placeholder="Podaj wykonawcę"
+                                                    {...commonFieldProps()}
+                                                    textFieldProps={{ fullWidth: true }}
+                                                    error={authorFieldHasErrors}
+                                                    errorParams={{ index: idx }}
+                                                    helper={getAuthorFieldError}
+                                                    helperTextParams={{ index: idx }}
                                                 />
                                             </Grid>
                                             <Grid item>
@@ -399,64 +313,28 @@ function AlbumForm({ onSubmit, album, nextId }) {
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <Stack spacing={1.5}>
-                                <Controller
+                                <ControlledTextField
                                     name="producent"
-                                    control={control}
-                                    render={({ field }) => (
-                                        <TextField
-                                            {...field}
-                                            label="Producent"
-                                            placeholder="Podaj producenta"
-                                            error={field.isDirty || !!errors[field.name]}
-                                            helperText={
-                                                field.isDirty || !!errors[field.name]
-                                                    ? errors[field.name].message
-                                                    : ""
-                                            }
-                                        />
-                                    )}
+                                    placeholder="Podaj producenta"
+                                    {...commonFieldProps()}
                                 />
-                                <Controller
+                                <ControlledTextField
                                     name="dystrybutor"
-                                    control={control}
-                                    render={({ field }) => (
-                                        <TextField
-                                            {...field}
-                                            label="Dystrybutor"
-                                            placeholder="Podaj dystrybutora"
-                                            error={field.isDirty || !!errors[field.name]}
-                                            helperText={
-                                                field.isDirty || !!errors[field.name]
-                                                    ? errors[field.name].message
-                                                    : ""
-                                            }
-                                        />
-                                    )}
+                                    placeholder="Podaj dystrybutora"
+                                    {...commonFieldProps()}
                                 />
-                                <Controller
+                                <ControlledTextField
                                     name="opakowanie"
-                                    control={control}
-                                    render={({ field }) => (
-                                        <TextField
-                                            {...field}
-                                            label="Opakowanie"
-                                            placeholder="Podaj dystrybutora"
-                                            select
-                                            error={field.isDirty || !!errors[field.name]}
-                                            helperText={
-                                                field.isDirty || !!errors[field.name]
-                                                    ? errors[field.name].message
-                                                    : ""
-                                            }
-                                        >
-                                            {ALBUM_CASE_TYPES.map((caseType) => (
-                                                <MenuItem key={caseType} value={caseType}>
-                                                    {caseType}
-                                                </MenuItem>
-                                            ))}
-                                        </TextField>
-                                    )}
-                                />
+                                    placeholder="Podaj opakowanie"
+                                    textFieldProps={{ select: true }}
+                                    {...commonFieldProps()}
+                                >
+                                    {ALBUM_CASE_TYPES.map((caseType) => (
+                                        <MenuItem key={caseType} value={caseType}>
+                                            {caseType}
+                                        </MenuItem>
+                                    ))}
+                                </ControlledTextField>
                                 <Controller
                                     name="dataPremiery"
                                     control={control}
@@ -481,41 +359,18 @@ function AlbumForm({ onSubmit, album, nextId }) {
                                         </LocalizationProvider>
                                     )}
                                 />
-                                <Controller
+                                <ControlledTextField
                                     name="naklad"
-                                    control={control}
-                                    render={({ field }) => (
-                                        <TextField
-                                            {...field}
-                                            label="Nakład"
-                                            placeholder="Podaj nakład"
-                                            type="number"
-                                            error={field.isDirty || !!errors[field.name]}
-                                            helperText={
-                                                field.isDirty || !!errors[field.name]
-                                                    ? errors[field.name].message
-                                                    : ""
-                                            }
-                                        />
-                                    )}
+                                    placeholder="Podaj nakład"
+                                    textFieldProps={{ type: "number" }}
+                                    {...commonFieldProps()}
                                 />
-                                <Controller
+                                <ControlledTextField
                                     name="sprzedaneEgzemplarze"
-                                    control={control}
-                                    render={({ field }) => (
-                                        <TextField
-                                            {...field}
-                                            label="Sprzedano"
-                                            placeholder="Podaj ile albumów sprzedano"
-                                            type="number"
-                                            error={field.isDirty || !!errors[field.name]}
-                                            helperText={
-                                                field.isDirty || !!errors[field.name]
-                                                    ? errors[field.name].message
-                                                    : ""
-                                            }
-                                        />
-                                    )}
+                                    label="Sprzedano"
+                                    placeholder="Podaj ile albumów sprzedano"
+                                    textFieldProps={{ type: "number" }}
+                                    {...commonFieldProps()}
                                 />
                             </Stack>
                         </Grid>

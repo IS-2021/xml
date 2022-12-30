@@ -1,5 +1,5 @@
-import { Button, Grid, Stack, TextField, ThemeProvider } from "@mui/material";
-import { Controller, useForm } from "react-hook-form";
+import { Button, Grid, Stack, ThemeProvider } from "@mui/material";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { clientSchema } from "../xml/schemas/klient.js";
 import { appMaterialTheme } from "./theme.js";
@@ -9,6 +9,7 @@ import { StateContext } from "../contexts/StateContext.jsx";
 import { CLIENT_ADD, CLIENT_UPDATE, CLIENT_DELETE } from "../reducers/AppReducer.js";
 import "./Form.css";
 import { initialClient } from "./initialFormData.js";
+import ControlledTextField from "./ControlledTextField.jsx";
 
 function ClientForm({ onSubmit, client }) {
     const { dispatch } = useContext(StateContext);
@@ -65,73 +66,31 @@ function ClientForm({ onSubmit, client }) {
                     <Grid item xs={12}>
                         <Stack spacing={1.5}>
                             <p className="form__header">Dane klienta</p>
-                            <Controller
+                            <ControlledTextField
                                 name="imie"
+                                label="Imię"
+                                placeholder="Podaj imię"
                                 control={control}
-                                render={({ field }) => (
-                                    <TextField
-                                        {...field}
-                                        label="Imię"
-                                        placeholder="Podaj imię"
-                                        error={field.isDirty || !!errors[field.name]}
-                                        helperText={
-                                            field.isDirty || !!errors[field.name]
-                                                ? errors[field.name].message
-                                                : ""
-                                        }
-                                    />
-                                )}
+                                errors={errors}
                             />
-                            <Controller
+                            <ControlledTextField
                                 name="nazwisko"
+                                placeholder="Podaj nazwisko"
                                 control={control}
-                                render={({ field }) => (
-                                    <TextField
-                                        {...field}
-                                        label="Nazwisko"
-                                        placeholder="Podaj nazwisko"
-                                        error={field.isDirty || !!errors[field.name]}
-                                        helperText={
-                                            field.isDirty || !!errors[field.name]
-                                                ? errors[field.name].message
-                                                : ""
-                                        }
-                                    />
-                                )}
+                                errors={errors}
                             />
-                            <Controller
+                            <ControlledTextField
                                 name="pesel"
+                                label="PESEL / NIP"
+                                placeholder="Podaj PESEL lub NIP"
                                 control={control}
-                                render={({ field }) => (
-                                    <TextField
-                                        {...field}
-                                        label="PESEL / NIP"
-                                        placeholder="Podaj PESEL lub NIP"
-                                        error={field.isDirty || !!errors[field.name]}
-                                        helperText={
-                                            field.isDirty || !!errors[field.name]
-                                                ? errors[field.name].message
-                                                : ""
-                                        }
-                                    />
-                                )}
+                                errors={errors}
                             />
-                            <Controller
+                            <ControlledTextField
                                 name="login"
+                                placeholder="Podaj login"
                                 control={control}
-                                render={({ field }) => (
-                                    <TextField
-                                        {...field}
-                                        label="Login"
-                                        placeholder="Podaj login"
-                                        error={field.isDirty || !!errors[field.name]}
-                                        helperText={
-                                            field.isDirty || !!errors[field.name]
-                                                ? errors[field.name].message
-                                                : ""
-                                        }
-                                    />
-                                )}
+                                errors={errors}
                             />
                         </Stack>
                     </Grid>
