@@ -15,7 +15,7 @@ function GenresSection({ genres }) {
         const gatunki = state.xml.refs.gatunki;
         if (!gatunki.length) return "GAT_01";
 
-        const nextId = String(Number(gatunki[gatunki.length - 1].node.id.replace("GAT_", "")) + 1);
+        const nextId = String(Number(gatunki[gatunki.length - 1].id.replace("GAT_", "")) + 1);
         return `GAT_${nextId.padStart(2, "0")}`;
     };
 
@@ -47,7 +47,7 @@ function GenresSection({ genres }) {
                                 text={genre.nazwa}
                                 onClick={() => {
                                     setModalTitle("Edytuj gatunek");
-                                    setSelectedGenre(getGenreById(genre.id).toObject());
+                                    setSelectedGenre(getGenreById(genre.id));
                                     openModal();
                                 }}
                             />

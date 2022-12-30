@@ -64,23 +64,25 @@ export const appReducer = (draft, action) => {
             };
         }
         case GENRE_ADD: {
-            state.xml.refs.topLevelNodes.gatunki.appendChild(payload);
-
-            return { ...state };
+            draft.xml.refs.gatunki.push(payload);
+            break;
         }
         case GENRE_UPDATE: {
-            const genre = draft.xml.refs.gatunki.filter((genre) => genre.id === payload.id);
+            const genres = draft.xml.refs.gatunki;
 
-            genre[0].updateFromObject(payload.data);
-
-            return { ...draft };
+            for (let i = 0; i < genres.length; i++) {
+                if (genres[i].id === payload.id) {
+                    genres[i] = payload.data;
+                    break;
+                }
+            }
+            break;
         }
         case GENRE_DELETE: {
-            const genre = draft.xml.refs.gatunki.filter((genre) => genre.id === payload.id);
-
-            genre[0].node.remove();
-
-            return { ...draft };
+            draft.xml.refs.gatunki = draft.xml.refs.gatunki.filter(
+                (genre) => genre.id !== payload.id
+            );
+            break;
         }
         case ALBUM_ADD: {
             draft.xml.refs.topLevelNodes.albumy.appendChild(payload);

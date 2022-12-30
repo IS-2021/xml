@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { genreSchema } from "../../xml/schemas/gatunek.js";
 import { appMaterialTheme } from "./theme.js";
-import { createGatunekElement } from "../../xml/datatypes/Gatunek.js";
 import { useContext } from "react";
 import { StateContext } from "../../contexts/StateContext.jsx";
 import { FormContext } from "../../contexts/FormContext.jsx";
@@ -50,7 +49,7 @@ function GenreForm({ onSubmit, genre, nextId }) {
         if (genre) {
             updateGenre(genre.id, data);
         } else {
-            addGenre(createGatunekElement(data.id, data.nazwa));
+            addGenre({ id: data.id, nazwa: data.nazwa });
         }
         onSubmit();
     };
