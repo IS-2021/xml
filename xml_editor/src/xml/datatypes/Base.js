@@ -24,7 +24,7 @@ export class Base {
     }
 
     getNodeText(selector) {
-        return this.getNode(selector).textContent;
+        return this.getNode(selector)?.textContent;
     }
 
     setNodeText(selector, text) {
