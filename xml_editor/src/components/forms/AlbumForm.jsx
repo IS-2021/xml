@@ -211,7 +211,7 @@ function AlbumForm({ onSubmit, album, nextId }) {
                                     <Grid container>
                                         <Grid item xs={9}>
                                             <ControlledTextField
-                                                name="cena.wartosc"
+                                                name="cena"
                                                 label="Cena"
                                                 placeholder="Podaj cenę"
                                                 textFieldProps={{ type: "number", fullWidth: true }}
@@ -219,7 +219,7 @@ function AlbumForm({ onSubmit, album, nextId }) {
                                         </Grid>
                                         <Grid item xs={3}>
                                             <ControlledTextField
-                                                name="cena.waluta"
+                                                name="waluta"
                                                 placeholder="Podaj walutę"
                                                 textFieldProps={{ select: true }}
                                             >

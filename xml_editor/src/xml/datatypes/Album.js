@@ -23,10 +23,8 @@ export class Album extends Base {
             opakowanie: this.opakowanie,
             // plyty
             dataPremiery: dayjs(this.dataPremiery),
-            cena: {
-                wartosc: this.cena,
-                waluta: this.waluta,
-            },
+            cena: this.cena,
+            waluta: this.waluta,
             ocena: this.ocena,
             naklad: this.naklad,
             sprzedaneEgzemplarze: this.sprzedaneEgzemplarze,
@@ -47,8 +45,8 @@ export class Album extends Base {
         this.opakowanie = newValues.opakowanie;
         // plyty
         this.dataPremiery = newValues.dataPremiery;
-        this.cena = newValues.cena.wartosc;
-        this.waluta = newValues.cena.waluta;
+        this.cena = newValues.cena;
+        this.waluta = newValues.waluta;
         this.ocena = newValues.ocena;
         this.naklad = newValues.naklad;
         this.sprzedaneEgzemplarze = newValues.sprzedaneEgzemplarze;

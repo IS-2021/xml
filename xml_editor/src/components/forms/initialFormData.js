@@ -36,10 +36,8 @@ export const initialAlbum = {
         },
     ],
     dataPremiery: "",
-    cena: {
-        waluta: "PLN",
-        wartosc: "",
-    },
+    waluta: "PLN",
+    cena: "",
     ocena: "",
     naklad: "",
     sprzedaneEgzemplarze: "",

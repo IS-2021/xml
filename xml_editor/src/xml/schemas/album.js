@@ -16,10 +16,8 @@ export const albumSchema = z.object({
     opakowanie: z.enum(ALBUM_CASE_TYPES),
     // plyty
     dataPremiery: z.any(),
-    cena: z.object({
-        waluta: z.enum(CURRENCIES),
-        wartosc: z.coerce.number().min(0, "Cena nie może być ujemna"),
-    }),
+    waluta: z.enum(CURRENCIES),
+    cena: z.coerce.number().min(0, "Cena nie może być ujemna"),
     ocena: z.coerce.number().min(0, rating05).max(5, rating05),
     naklad: z.coerce.number().positive("Nakład musi być dodatni").int("Wymagana liczba całkowita"),
     sprzedaneEgzemplarze: z.coerce
