@@ -3,10 +3,7 @@ import { Controller } from "react-hook-form";
 import PropTypes from "prop-types";
 import { useContext } from "react";
 import { FormContext } from "../../../contexts/FormContext.jsx";
-
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
+import { capitalizeFirstLetter } from "./helpers.js";
 
 function hasErrors(field, errors) {
     return field.isDirty || !!errors[field.name];
@@ -19,7 +16,7 @@ function getFieldError(field, errors) {
 function ControlledTextField({
     children,
     name,
-    placeholder,
+    placeholder = "",
     label,
     textFieldProps,
     error,
@@ -46,7 +43,7 @@ function ControlledTextField({
                     {...field}
                     {...textFieldProps}
                     label={label ?? capitalizeFirstLetter(name)}
-                    placeholder={placeholder ?? ""}
+                    placeholder={placeholder}
                     error={_hasErrors(field)}
                     helperText={_hasErrors(field) ? _getFieldError(field) : ""}
                 >

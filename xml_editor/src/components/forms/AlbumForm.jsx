@@ -9,10 +9,8 @@ import {
     Stack,
     Tab,
     Tabs,
-    TextField,
     ThemeProvider,
 } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -31,10 +29,9 @@ import {
 import { initialAlbum } from "./initialFormData.js";
 import { DevTool } from "@hookform/devtools";
 import PropTypes from "prop-types";
-import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import "../Form.css";
 import ControlledTextField from "./fields/ControlledTextField.jsx";
+import ControlledDatePicker from "./fields/ControlledDatePicker.jsx";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -323,33 +320,10 @@ function AlbumForm({ onSubmit, album, nextId }) {
                                             </MenuItem>
                                         ))}
                                     </ControlledTextField>
-                                    <Controller
+                                    <ControlledDatePicker
                                         name="dataPremiery"
-                                        control={control}
-                                        render={({ field }) => (
-                                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                                <DatePicker
-                                                    {...field}
-                                                    label="Data premiery"
-                                                    placeholder="Podaj datę premiery"
-                                                    views={["year", "month", "day"]}
-                                                    onChange={(newDate) => {
-                                                        field.onChange(
-                                                            newDate.format("YYYY/MM/DD")
-                                                        );
-                                                    }}
-                                                    error={field.isDirty || !!errors[field.name]}
-                                                    helperText={
-                                                        field.isDirty || !!errors[field.name]
-                                                            ? errors[field.name].message
-                                                            : ""
-                                                    }
-                                                    renderInput={(params) => (
-                                                        <TextField {...params} />
-                                                    )}
-                                                />
-                                            </LocalizationProvider>
-                                        )}
+                                        label="Data premiery"
+                                        placeholder="Podaj datę premiery"
                                     />
                                     <ControlledTextField
                                         name="naklad"
