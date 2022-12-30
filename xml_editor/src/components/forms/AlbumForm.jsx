@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { albumSchema } from "../../xml/schemas/album.js";
 import { appMaterialTheme } from "./theme.js";
-import { createGatunekElement } from "../../xml/datatypes/Gatunek.js";
 import { useContext, useEffect, useState } from "react";
 import { StateContext } from "../../contexts/StateContext.jsx";
 import { FormContext } from "../../contexts/FormContext.jsx";
@@ -62,22 +61,6 @@ function AlbumForm({ onSubmit, album, nextId }) {
         setWykonawcy(wykonawcy);
     }, [updateCounter]);
 
-    const addAlbum = (album) => {
-        dispatch({ type: ALBUM_ADD, payload: album });
-    };
-
-    const updateAlbum = (genreId, album) => {
-        album.dataPremiery = album.dataPremiery.format("YYYY/MM/DD");
-        dispatch({
-            type: ALBUM_UPDATE,
-            payload: {
-                id: genreId,
-                data: album,
-            },
-        });
-        onSubmit();
-    };
-
     const deleteAlbum = (genreId) => {
         dispatch({ type: ALBUM_DELETE, payload: { id: genreId } });
         onSubmit();
@@ -85,9 +68,16 @@ function AlbumForm({ onSubmit, album, nextId }) {
 
     const handleFormSubmit = (data) => {
         if (album) {
-            updateAlbum(album.id, data);
+            data.dataPremiery = dayjs(data.dataPremiery).format("YYYY/MM/DD");
+            dispatch({
+                type: ALBUM_UPDATE,
+                payload: {
+                    id: album.id,
+                    data: data,
+                },
+            });
         } else {
-            addAlbum(createGatunekElement(data.id, data.nazwa));
+            dispatch({ type: ALBUM_ADD, payload: data });
         }
         onSubmit();
     };

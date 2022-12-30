@@ -20,7 +20,7 @@ function AlbumsSection({ albums }) {
         const albums = state.xml.refs.albumy;
         if (!albums.length) return "AL_01";
 
-        const nextId = String(Number(albums[albums.length - 1].node.id.replace("AL_", "")) + 1);
+        const nextId = String(Number(albums[albums.length - 1].id.replace("AL_", "")) + 1);
         return `AL_${nextId.padStart(2, "0")}`;
     }
 
@@ -55,7 +55,7 @@ function AlbumsSection({ albums }) {
                             key={album.id}
                             onClick={() => {
                                 setModalTitle("Edytuj album");
-                                setSelectedAlbum(getAlbumById(album.id).toObject());
+                                setSelectedAlbum(getAlbumById(album.id));
                                 openModal();
                             }}
                         />

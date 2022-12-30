@@ -85,23 +85,26 @@ export const appReducer = (draft, action) => {
             break;
         }
         case ALBUM_ADD: {
-            draft.xml.refs.topLevelNodes.albumy.appendChild(payload);
-
-            return { ...draft };
+            draft.xml.refs.albumy.push(payload);
+            break;
         }
         case ALBUM_UPDATE: {
-            const album = draft.xml.refs.albumy.filter((album) => album.id === payload.id);
+            const albums = draft.xml.refs.albumy;
 
-            album[0].updateFromObject(payload.data);
+            for (let i = 0; i < albums.length; i++) {
+                if (albums[i].id === payload.id) {
+                    albums[i] = payload.data;
+                    break;
+                }
+            }
 
-            return { ...draft };
+            break;
         }
         case ALBUM_DELETE: {
-            const album = draft.xml.refs.albumy.filter((album) => album.id === payload.id);
-
-            album[0].node.remove();
-
-            return { ...draft };
+            draft.xml.refs.albumy = draft.xml.refs.albumy.filter(
+                (album) => album.id !== payload.id
+            );
+            break;
         }
         case ALBUM_AUTHOR_DELETE: {
             const album = draft.xml.refs.albumy.filter((album) => album.id === payload.albumId)[0];
