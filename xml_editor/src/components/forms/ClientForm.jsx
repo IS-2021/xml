@@ -26,21 +26,6 @@ function ClientForm({ onSubmit, client }) {
         defaultValues: { ...initialClient, ...(client || {}) },
     });
 
-    const addClient = (client) => {
-        dispatch({ type: CLIENT_ADD, payload: client });
-    };
-
-    const updateClient = (clientId, client) => {
-        dispatch({
-            type: CLIENT_UPDATE,
-            payload: {
-                id: clientId,
-                data: client,
-            },
-        });
-        onSubmit();
-    };
-
     const deleteClient = (clientId) => {
         dispatch({ type: CLIENT_DELETE, payload: { id: clientId } });
         onSubmit();
@@ -48,10 +33,15 @@ function ClientForm({ onSubmit, client }) {
 
     const handleFormSubmit = (data) => {
         if (client) {
-            updateClient(client.pesel, data);
+            dispatch({
+                type: CLIENT_UPDATE,
+                payload: {
+                    id: client.pesel,
+                    data: data,
+                },
+            });
         } else {
-            const clientElement = createKlientElement(data);
-            addClient(clientElement);
+            dispatch({ type: CLIENT_ADD, payload: data });
         }
         onSubmit();
     };

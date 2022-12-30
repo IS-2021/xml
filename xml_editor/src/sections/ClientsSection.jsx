@@ -48,7 +48,7 @@ function ClientsSection({ clients }) {
                         client={client}
                         onClick={(pesel) => {
                             setModalTitle("Edytuj klienta");
-                            setSelectedClient(getClientByPesel(pesel).toObject());
+                            setSelectedClient(getClientByPesel(pesel));
                             openModal();
                         }}
                     />

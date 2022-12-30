@@ -112,23 +112,32 @@ export const appReducer = (draft, action) => {
             return { ...draft };
         }
         case CLIENT_ADD: {
-            draft.xml.refs.topLevelNodes.klienci.appendChild(payload);
-
-            return { ...draft };
+            draft.xml.refs.klienci.push({
+                ...payload,
+                wypozyczenia: [],
+            });
+            break;
         }
         case CLIENT_UPDATE: {
-            const client = draft.xml.refs.klienci.filter((client) => client.pesel === payload.id);
+            const clients = draft.xml.refs.klienci;
 
-            client[0].updateFromObject(payload.data);
+            for (let i = 0; i < clients.length; i++) {
+                if (clients[i].pesel === payload.id) {
+                    clients[i] = {
+                        ...clients[i],
+                        ...payload.data,
+                    };
+                    break;
+                }
+            }
 
-            return { ...draft };
+            break;
         }
         case CLIENT_DELETE: {
-            const client = draft.xml.refs.klienci.filter((client) => client.pesel === payload.id);
-
-            client[0].node.remove();
-
-            return { ...draft };
+            draft.xml.refs.klienci = draft.xml.refs.klienci.filter(
+                (client) => client.pesel !== payload.id
+            );
+            break;
         }
         default:
             throw new Error(`Action ${type} not found in appReducer.`);
