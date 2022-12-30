@@ -21,6 +21,7 @@ import { appMaterialTheme } from "./theme.js";
 import { createGatunekElement } from "../xml/datatypes/Gatunek.js";
 import { useContext, useEffect, useState } from "react";
 import { StateContext } from "../contexts/StateContext.jsx";
+import { FormContext } from "../contexts/FormContext.jsx";
 import {
     ALBUM_ADD,
     ALBUM_UPDATE,
@@ -102,8 +103,6 @@ function AlbumForm({ onSubmit, album, nextId }) {
     // This is for triggering re-render, as internal references aren't changing:
     const [updateCounter, setUpdateCounter] = useState(0);
 
-    const commonFieldProps = () => ({ control: control, errors: errors });
-
     const handleTabChange = (event, newTab) => {
         setSelectedTab(newTab);
     };
@@ -162,256 +161,250 @@ function AlbumForm({ onSubmit, album, nextId }) {
     }
 
     return (
-        <ThemeProvider theme={appMaterialTheme}>
-            <form onSubmit={handleSubmit(handleFormSubmit)} className="form__album">
-                <Tabs
-                    orientation="horizontal"
-                    value={selectedTab}
-                    onChange={handleTabChange}
-                    sx={{ marginBottom: "1rem" }}
-                >
-                    <Tab label="Informacje" {...a11yProps(0)} />
-                    <Tab label="Autorzy" {...a11yProps(1)} />
-                    <Tab label="Płyty" {...a11yProps(2)} />
-                    <Tab label="Produkcja" {...a11yProps(3)} />
-                </Tabs>
+        <FormContext.Provider value={{ control, errors }}>
+            <ThemeProvider theme={appMaterialTheme}>
+                <form onSubmit={handleSubmit(handleFormSubmit)} className="form__album">
+                    <Tabs
+                        orientation="horizontal"
+                        value={selectedTab}
+                        onChange={handleTabChange}
+                        sx={{ marginBottom: "1rem" }}
+                    >
+                        <Tab label="Informacje" {...a11yProps(0)} />
+                        <Tab label="Autorzy" {...a11yProps(1)} />
+                        <Tab label="Płyty" {...a11yProps(2)} />
+                        <Tab label="Produkcja" {...a11yProps(3)} />
+                    </Tabs>
 
-                {/* General info */}
-                <TabPanel value={selectedTab} index={0}>
-                    <Grid container spacing={2}>
-                        <Grid
-                            item
-                            xs={6}
-                            // sx={{ border: 1, borderColor: "divider", borderRadius: 1 }}
-                        >
-                            <img
-                                className="form__album__image"
-                                src={`./assets/covers/${okladkaWatch}`}
-                                alt="Podgląd okładki albumu"
-                            />
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Stack spacing={1.5}>
-                                <ControlledTextField
-                                    name="id"
-                                    {...commonFieldProps()}
-                                    textFieldProps={{ disabled: true }}
+                    {/* General info */}
+                    <TabPanel value={selectedTab} index={0}>
+                        <Grid container spacing={2}>
+                            <Grid
+                                item
+                                xs={6}
+                                // sx={{ border: 1, borderColor: "divider", borderRadius: 1 }}
+                            >
+                                <img
+                                    className="form__album__image"
+                                    src={`./assets/covers/${okladkaWatch}`}
+                                    alt="Podgląd okładki albumu"
                                 />
-                                <ControlledTextField
-                                    name="gatunek"
-                                    {...commonFieldProps()}
-                                    textFieldProps={{ select: true }}
-                                >
-                                    {state.xml.refs.gatunki.map((genre) => (
-                                        <MenuItem key={`SELECT_${genre.id}`} value={genre.id}>
-                                            {genre.nazwa}
-                                        </MenuItem>
-                                    ))}
-                                </ControlledTextField>
-                                <ControlledTextField
-                                    name="nazwa"
-                                    placeholder="Podaj nazwę"
-                                    {...commonFieldProps()}
-                                />
-                                <ControlledTextField
-                                    name="okladka"
-                                    placeholder="Podaj okładkę"
-                                    {...commonFieldProps()}
-                                />
-                                <Grid container>
-                                    <Grid item xs={9}>
-                                        <ControlledTextField
-                                            name="cena.wartosc"
-                                            label="Cena"
-                                            placeholder="Podaj cenę"
-                                            textFieldProps={{ type: "number", fullWidth: true }}
-                                            {...commonFieldProps()}
-                                        />
-                                    </Grid>
-                                    <Grid item xs={3}>
-                                        <ControlledTextField
-                                            name="cena.waluta"
-                                            placeholder="Podaj walutę"
-                                            textFieldProps={{ select: true }}
-                                            {...commonFieldProps()}
-                                        >
-                                            <MenuItem value="PLN">ZŁ</MenuItem>
-                                            <MenuItem value="USD">$</MenuItem>
-                                            <MenuItem value="EUR">€</MenuItem>
-                                        </ControlledTextField>
-                                    </Grid>
-                                </Grid>
-                                <ControlledTextField
-                                    name="ocena"
-                                    placeholder="Podaj ocenę"
-                                    textFieldProps={{ type: "number" }}
-                                    {...commonFieldProps()}
-                                />
-                            </Stack>
-                        </Grid>
-                    </Grid>
-                </TabPanel>
-
-                {/* Authors */}
-                <TabPanel index={selectedTab} value={1}>
-                    <Box sx={{ height: 408, width: "100%" }}>
-                        <Grid spacing={1.5} container direction="column">
-                            {wykonawcy &&
-                                wykonawcy.map((wykonawca, idx) => (
-                                    <Grid item key={`TabPanel1_${wykonawca.nazwa}${idx}`}>
-                                        <Grid container alignItems="center" columnSpacing={2}>
-                                            <Grid item>
-                                                <ControlledTextField
-                                                    name={`wykonawcy[${idx}].nazwa`}
-                                                    label="Wykonawca"
-                                                    placeholder="Podaj wykonawcę"
-                                                    {...commonFieldProps()}
-                                                    textFieldProps={{ fullWidth: true }}
-                                                    error={authorFieldHasErrors}
-                                                    errorParams={{ index: idx }}
-                                                    helper={getAuthorFieldError}
-                                                    helperTextParams={{ index: idx }}
-                                                />
-                                            </Grid>
-                                            <Grid item>
-                                                <Controller
-                                                    name={`wykonawcy[${idx}].czyZagraniczny`}
-                                                    control={control}
-                                                    render={({ field }) => (
-                                                        <FormGroup>
-                                                            <FormControlLabel
-                                                                control={
-                                                                    <Checkbox
-                                                                        {...field}
-                                                                        checked={field.value}
-                                                                    />
-                                                                }
-                                                                label="Zagraniczny"
-                                                            />
-                                                        </FormGroup>
-                                                    )}
-                                                />
-                                            </Grid>
-                                            <Grid
-                                                item
-                                                onClick={() => handleDeleteAuthor(album.id, idx)}
+                            </Grid>
+                            <Grid item xs={6}>
+                                <Stack spacing={1.5}>
+                                    <ControlledTextField
+                                        name="id"
+                                        textFieldProps={{ disabled: true }}
+                                    />
+                                    <ControlledTextField
+                                        name="gatunek"
+                                        textFieldProps={{ select: true }}
+                                    >
+                                        {state.xml.refs.gatunki.map((genre) => (
+                                            <MenuItem key={`SELECT_${genre.id}`} value={genre.id}>
+                                                {genre.nazwa}
+                                            </MenuItem>
+                                        ))}
+                                    </ControlledTextField>
+                                    <ControlledTextField name="nazwa" placeholder="Podaj nazwę" />
+                                    <ControlledTextField
+                                        name="okladka"
+                                        placeholder="Podaj okładkę"
+                                    />
+                                    <Grid container>
+                                        <Grid item xs={9}>
+                                            <ControlledTextField
+                                                name="cena.wartosc"
+                                                label="Cena"
+                                                placeholder="Podaj cenę"
+                                                textFieldProps={{ type: "number", fullWidth: true }}
+                                            />
+                                        </Grid>
+                                        <Grid item xs={3}>
+                                            <ControlledTextField
+                                                name="cena.waluta"
+                                                placeholder="Podaj walutę"
+                                                textFieldProps={{ select: true }}
                                             >
-                                                {wykonawcy.length > 1 && <DeleteIcon />}
-                                            </Grid>
+                                                <MenuItem value="PLN">ZŁ</MenuItem>
+                                                <MenuItem value="USD">$</MenuItem>
+                                                <MenuItem value="EUR">€</MenuItem>
+                                            </ControlledTextField>
                                         </Grid>
                                     </Grid>
-                                ))}
+                                    <ControlledTextField
+                                        name="ocena"
+                                        placeholder="Podaj ocenę"
+                                        textFieldProps={{ type: "number" }}
+                                    />
+                                </Stack>
+                            </Grid>
                         </Grid>
-                    </Box>
-                </TabPanel>
+                    </TabPanel>
 
-                {/* Płyty */}
-                <TabPanel index={selectedTab} value={2}></TabPanel>
-
-                {/* Produkcja */}
-                <TabPanel index={selectedTab} value={3}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <Stack spacing={1.5}>
-                                <ControlledTextField
-                                    name="producent"
-                                    placeholder="Podaj producenta"
-                                    {...commonFieldProps()}
-                                />
-                                <ControlledTextField
-                                    name="dystrybutor"
-                                    placeholder="Podaj dystrybutora"
-                                    {...commonFieldProps()}
-                                />
-                                <ControlledTextField
-                                    name="opakowanie"
-                                    placeholder="Podaj opakowanie"
-                                    textFieldProps={{ select: true }}
-                                    {...commonFieldProps()}
-                                >
-                                    {ALBUM_CASE_TYPES.map((caseType) => (
-                                        <MenuItem key={caseType} value={caseType}>
-                                            {caseType}
-                                        </MenuItem>
+                    {/* Authors */}
+                    <TabPanel index={selectedTab} value={1}>
+                        <Box sx={{ height: 408, width: "100%" }}>
+                            <Grid spacing={1.5} container direction="column">
+                                {wykonawcy &&
+                                    wykonawcy.map((wykonawca, idx) => (
+                                        <Grid item key={`TabPanel1_${wykonawca.nazwa}${idx}`}>
+                                            <Grid container alignItems="center" columnSpacing={2}>
+                                                <Grid item>
+                                                    <ControlledTextField
+                                                        name={`wykonawcy[${idx}].nazwa`}
+                                                        label="Wykonawca"
+                                                        placeholder="Podaj wykonawcę"
+                                                        textFieldProps={{ fullWidth: true }}
+                                                        error={authorFieldHasErrors}
+                                                        errorParams={{ index: idx }}
+                                                        helper={getAuthorFieldError}
+                                                        helperTextParams={{ index: idx }}
+                                                    />
+                                                </Grid>
+                                                <Grid item>
+                                                    <Controller
+                                                        name={`wykonawcy[${idx}].czyZagraniczny`}
+                                                        control={control}
+                                                        render={({ field }) => (
+                                                            <FormGroup>
+                                                                <FormControlLabel
+                                                                    control={
+                                                                        <Checkbox
+                                                                            {...field}
+                                                                            checked={field.value}
+                                                                        />
+                                                                    }
+                                                                    label="Zagraniczny"
+                                                                />
+                                                            </FormGroup>
+                                                        )}
+                                                    />
+                                                </Grid>
+                                                <Grid
+                                                    item
+                                                    onClick={() =>
+                                                        handleDeleteAuthor(album.id, idx)
+                                                    }
+                                                >
+                                                    {wykonawcy.length > 1 && <DeleteIcon />}
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
                                     ))}
-                                </ControlledTextField>
-                                <Controller
-                                    name="dataPremiery"
-                                    control={control}
-                                    render={({ field }) => (
-                                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                            <DatePicker
-                                                {...field}
-                                                label="Data premiery"
-                                                placeholder="Podaj datę premiery"
-                                                views={["year", "month", "day"]}
-                                                onChange={(newDate) => {
-                                                    field.onChange(newDate.format("YYYY/MM/DD"));
-                                                }}
-                                                error={field.isDirty || !!errors[field.name]}
-                                                helperText={
-                                                    field.isDirty || !!errors[field.name]
-                                                        ? errors[field.name].message
-                                                        : ""
-                                                }
-                                                renderInput={(params) => <TextField {...params} />}
-                                            />
-                                        </LocalizationProvider>
-                                    )}
-                                />
-                                <ControlledTextField
-                                    name="naklad"
-                                    placeholder="Podaj nakład"
-                                    textFieldProps={{ type: "number" }}
-                                    {...commonFieldProps()}
-                                />
-                                <ControlledTextField
-                                    name="sprzedaneEgzemplarze"
-                                    label="Sprzedano"
-                                    placeholder="Podaj ile albumów sprzedano"
-                                    textFieldProps={{ type: "number" }}
-                                    {...commonFieldProps()}
-                                />
-                            </Stack>
-                        </Grid>
-                    </Grid>
-                </TabPanel>
+                            </Grid>
+                        </Box>
+                    </TabPanel>
 
-                <div className="form__buttons">
-                    {!album && (
-                        <Button
-                            fullWidth
-                            type="submit"
-                            variant="contained"
-                            disabled={!isFormDataValid()}
-                        >
-                            {isFormDataValid() ? "Dodaj album" : "Wypełnij poprawnie wymagane pola"}
-                        </Button>
-                    )}
-                    {album && (
-                        <>
+                    {/* Płyty */}
+                    <TabPanel index={selectedTab} value={2}></TabPanel>
+
+                    {/* Produkcja */}
+                    <TabPanel index={selectedTab} value={3}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                                <Stack spacing={1.5}>
+                                    <ControlledTextField
+                                        name="producent"
+                                        placeholder="Podaj producenta"
+                                    />
+                                    <ControlledTextField
+                                        name="dystrybutor"
+                                        placeholder="Podaj dystrybutora"
+                                    />
+                                    <ControlledTextField
+                                        name="opakowanie"
+                                        placeholder="Podaj opakowanie"
+                                        textFieldProps={{ select: true }}
+                                    >
+                                        {ALBUM_CASE_TYPES.map((caseType) => (
+                                            <MenuItem key={caseType} value={caseType}>
+                                                {caseType}
+                                            </MenuItem>
+                                        ))}
+                                    </ControlledTextField>
+                                    <Controller
+                                        name="dataPremiery"
+                                        control={control}
+                                        render={({ field }) => (
+                                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                                <DatePicker
+                                                    {...field}
+                                                    label="Data premiery"
+                                                    placeholder="Podaj datę premiery"
+                                                    views={["year", "month", "day"]}
+                                                    onChange={(newDate) => {
+                                                        field.onChange(
+                                                            newDate.format("YYYY/MM/DD")
+                                                        );
+                                                    }}
+                                                    error={field.isDirty || !!errors[field.name]}
+                                                    helperText={
+                                                        field.isDirty || !!errors[field.name]
+                                                            ? errors[field.name].message
+                                                            : ""
+                                                    }
+                                                    renderInput={(params) => (
+                                                        <TextField {...params} />
+                                                    )}
+                                                />
+                                            </LocalizationProvider>
+                                        )}
+                                    />
+                                    <ControlledTextField
+                                        name="naklad"
+                                        placeholder="Podaj nakład"
+                                        textFieldProps={{ type: "number" }}
+                                    />
+                                    <ControlledTextField
+                                        name="sprzedaneEgzemplarze"
+                                        label="Sprzedano"
+                                        placeholder="Podaj ile albumów sprzedano"
+                                        textFieldProps={{ type: "number" }}
+                                    />
+                                </Stack>
+                            </Grid>
+                        </Grid>
+                    </TabPanel>
+
+                    <div className="form__buttons">
+                        {!album && (
                             <Button
                                 fullWidth
                                 type="submit"
                                 variant="contained"
                                 disabled={!isFormDataValid()}
                             >
-                                Zapisz zmiany
+                                {isFormDataValid()
+                                    ? "Dodaj album"
+                                    : "Wypełnij poprawnie wymagane pola"}
                             </Button>
-                            <Button
-                                fullWidth
-                                variant="outlined"
-                                color="error"
-                                onClick={() => deleteAlbum(album.id)}
-                            >
-                                Usuń album
-                            </Button>
-                        </>
-                    )}
-                </div>
-                <DevTool control={control} />
-            </form>
-        </ThemeProvider>
+                        )}
+                        {album && (
+                            <>
+                                <Button
+                                    fullWidth
+                                    type="submit"
+                                    variant="contained"
+                                    disabled={!isFormDataValid()}
+                                >
+                                    Zapisz zmiany
+                                </Button>
+                                <Button
+                                    fullWidth
+                                    variant="outlined"
+                                    color="error"
+                                    onClick={() => deleteAlbum(album.id)}
+                                >
+                                    Usuń album
+                                </Button>
+                            </>
+                        )}
+                    </div>
+                    <DevTool control={control} />
+                </form>
+            </ThemeProvider>
+        </FormContext.Provider>
     );
 }
 

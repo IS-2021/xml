@@ -6,6 +6,7 @@ import { appMaterialTheme } from "./theme.js";
 import { createGatunekElement } from "../xml/datatypes/Gatunek.js";
 import { useContext } from "react";
 import { StateContext } from "../contexts/StateContext.jsx";
+import { FormContext } from "../contexts/FormContext.jsx";
 import { GENRE_ADD, GENRE_UPDATE, GENRE_DELETE } from "../reducers/AppReducer.js";
 import { initialGenre } from "./initialFormData.js";
 import "./Form.css";
@@ -59,63 +60,58 @@ function GenreForm({ onSubmit, genre, nextId }) {
     }
 
     return (
-        <ThemeProvider theme={appMaterialTheme}>
-            <form onSubmit={handleSubmit(handleFormSubmit)}>
-                <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                        <Stack spacing={1.5}>
-                            <ControlledTextField
-                                name="id"
-                                control={control}
-                                errors={errors}
-                                textFieldProps={{
-                                    disabled: true,
-                                }}
-                            />
-                            <ControlledTextField
-                                name="nazwa"
-                                placeholder="Podaj nazwę"
-                                control={control}
-                                errors={errors}
-                            />
-                        </Stack>
+        <FormContext.Provider value={{ control, errors }}>
+            <ThemeProvider theme={appMaterialTheme}>
+                <form onSubmit={handleSubmit(handleFormSubmit)}>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                            <Stack spacing={1.5}>
+                                <ControlledTextField
+                                    name="id"
+                                    textFieldProps={{
+                                        disabled: true,
+                                    }}
+                                />
+                                <ControlledTextField name="nazwa" placeholder="Podaj nazwę" />
+                            </Stack>
+                        </Grid>
                     </Grid>
-                </Grid>
 
-                <div className="form__buttons">
-                    {!genre && (
-                        <Button
-                            fullWidth
-                            type="submit"
-                            variant="contained"
-                            disabled={!isFormDataValid()}
-                        >
-                            Dodaj gatunek
-                        </Button>
-                    )}
-                    {genre && (
-                        <>
+                    <div className="form__buttons">
+                        {!genre && (
                             <Button
                                 fullWidth
                                 type="submit"
                                 variant="contained"
                                 disabled={!isFormDataValid()}
                             >
-                                Zapisz zmiany
+                                Dodaj gatunek
                             </Button>
-                            <Button
-                                fullWidth
-                                variant="outlined"
-                                color="error"
-                                onClick={() => deleteGenre(genre.id)}
-                            >
-                                Usuń gatunek
-                            </Button>
-                        </>
-                    )}
-                </div>
-            </form>
-        </ThemeProvider>
+                        )}
+                        {genre && (
+                            <>
+                                <Button
+                                    fullWidth
+                                    type="submit"
+                                    variant="contained"
+                                    disabled={!isFormDataValid()}
+                                >
+                                    Zapisz zmiany
+                                </Button>
+                                <Button
+                                    fullWidth
+                                    variant="outlined"
+                                    color="error"
+                                    onClick={() => deleteGenre(genre.id)}
+                                >
+                                    Usuń gatunek
+                                </Button>
+                            </>
+                        )}
+                    </div>
+                </form>
+            </ThemeProvider>
+        </FormContext.Provider>
     );
 }
 

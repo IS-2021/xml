@@ -1,6 +1,8 @@
 import { TextField } from "@mui/material";
 import { Controller } from "react-hook-form";
 import PropTypes from "prop-types";
+import { useContext } from "react";
+import { FormContext } from "../contexts/FormContext.jsx";
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -19,14 +21,14 @@ function ControlledTextField({
     name,
     placeholder,
     label,
-    control,
-    errors,
     textFieldProps,
     error,
     errorParams = {},
     helper,
     helperTextParams = {},
 }) {
+    const { errors, control } = useContext(FormContext);
+
     function _hasErrors(field) {
         return error ? error(field, errors, errorParams) : hasErrors(field, errors);
     }
@@ -59,8 +61,6 @@ ControlledTextField.propTypes = {
     name: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
     label: PropTypes.string,
-    control: PropTypes.any.isRequired,
-    errors: PropTypes.any.isRequired,
     // textFieldProps: PropTypes.shape({
     //     type: PropTypes.string,
     //     select: PropTypes.bool,

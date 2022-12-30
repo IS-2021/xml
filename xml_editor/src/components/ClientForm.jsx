@@ -6,6 +6,7 @@ import { appMaterialTheme } from "./theme.js";
 import { createKlientElement } from "../xml/datatypes/Klient.js";
 import { useContext } from "react";
 import { StateContext } from "../contexts/StateContext.jsx";
+import { FormContext } from "../contexts/FormContext.jsx";
 import { CLIENT_ADD, CLIENT_UPDATE, CLIENT_DELETE } from "../reducers/AppReducer.js";
 import "./Form.css";
 import { initialClient } from "./initialFormData.js";
@@ -60,76 +61,64 @@ function ClientForm({ onSubmit, client }) {
     }
 
     return (
-        <ThemeProvider theme={appMaterialTheme}>
-            <form onSubmit={handleSubmit(handleFormSubmit)}>
-                <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                        <Stack spacing={1.5}>
-                            <p className="form__header">Dane klienta</p>
-                            <ControlledTextField
-                                name="imie"
-                                label="Imię"
-                                placeholder="Podaj imię"
-                                control={control}
-                                errors={errors}
-                            />
-                            <ControlledTextField
-                                name="nazwisko"
-                                placeholder="Podaj nazwisko"
-                                control={control}
-                                errors={errors}
-                            />
-                            <ControlledTextField
-                                name="pesel"
-                                label="PESEL / NIP"
-                                placeholder="Podaj PESEL lub NIP"
-                                control={control}
-                                errors={errors}
-                            />
-                            <ControlledTextField
-                                name="login"
-                                placeholder="Podaj login"
-                                control={control}
-                                errors={errors}
-                            />
-                        </Stack>
+        <FormContext.Provider value={{ control, errors }}>
+            <ThemeProvider theme={appMaterialTheme}>
+                <form onSubmit={handleSubmit(handleFormSubmit)}>
+                    <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                            <Stack spacing={1.5}>
+                                <p className="form__header">Dane klienta</p>
+                                <ControlledTextField
+                                    name="imie"
+                                    label="Imię"
+                                    placeholder="Podaj imię"
+                                />
+                                <ControlledTextField name="nazwisko" placeholder="Podaj nazwisko" />
+                                <ControlledTextField
+                                    name="pesel"
+                                    label="PESEL / NIP"
+                                    placeholder="Podaj PESEL lub NIP"
+                                />
+                                <ControlledTextField name="login" placeholder="Podaj login" />
+                            </Stack>
+                        </Grid>
                     </Grid>
-                </Grid>
 
-                <div className="form__buttons">
-                    {!client && (
-                        <Button
-                            fullWidth
-                            type="submit"
-                            variant="contained"
-                            disabled={!isFormDataValid()}
-                        >
-                            Dodaj klienta
-                        </Button>
-                    )}
-                    {client && (
-                        <>
+                    <div className="form__buttons">
+                        {!client && (
                             <Button
                                 fullWidth
                                 type="submit"
                                 variant="contained"
                                 disabled={!isFormDataValid()}
                             >
-                                Zapisz zmiany
+                                Dodaj klienta
                             </Button>
-                            <Button
-                                fullWidth
-                                variant="outlined"
-                                color="error"
-                                onClick={() => deleteClient(client.pesel)}
-                            >
-                                Usuń klienta
-                            </Button>
-                        </>
-                    )}
-                </div>
-            </form>
-        </ThemeProvider>
+                        )}
+                        {client && (
+                            <>
+                                <Button
+                                    fullWidth
+                                    type="submit"
+                                    variant="contained"
+                                    disabled={!isFormDataValid()}
+                                >
+                                    Zapisz zmiany
+                                </Button>
+                                <Button
+                                    fullWidth
+                                    variant="outlined"
+                                    color="error"
+                                    onClick={() => deleteClient(client.pesel)}
+                                >
+                                    Usuń klienta
+                                </Button>
+                            </>
+                        )}
+                    </div>
+                </form>
+            </ThemeProvider>
+        </FormContext.Provider>
     );
 }
 
