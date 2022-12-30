@@ -1,6 +1,6 @@
 import Client from "../components/Client";
 import Modal from "../components/Modal.jsx";
-import ClientForm from "../components/ClientForm.jsx";
+import ClientForm from "../components/forms/ClientForm.jsx";
 import "./ClientsSection.css";
 import { useModalWithDispatch } from "../hooks/useModalWithDispatch.js";
 import { useState } from "react";

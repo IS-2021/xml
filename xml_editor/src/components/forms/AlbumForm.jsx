@@ -16,25 +16,25 @@ import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ALBUM_CASE_TYPES, albumSchema } from "../xml/schemas/album.js";
+import { ALBUM_CASE_TYPES, albumSchema } from "../../xml/schemas/album.js";
 import { appMaterialTheme } from "./theme.js";
-import { createGatunekElement } from "../xml/datatypes/Gatunek.js";
+import { createGatunekElement } from "../../xml/datatypes/Gatunek.js";
 import { useContext, useEffect, useState } from "react";
-import { StateContext } from "../contexts/StateContext.jsx";
-import { FormContext } from "../contexts/FormContext.jsx";
+import { StateContext } from "../../contexts/StateContext.jsx";
+import { FormContext } from "../../contexts/FormContext.jsx";
 import {
     ALBUM_ADD,
     ALBUM_UPDATE,
     ALBUM_DELETE,
     ALBUM_AUTHOR_DELETE,
-} from "../reducers/AppReducer.js";
+} from "../../reducers/AppReducer.js";
 import { initialAlbum } from "./initialFormData.js";
 import { DevTool } from "@hookform/devtools";
 import PropTypes from "prop-types";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import "./Form.css";
-import ControlledTextField from "./ControlledTextField.jsx";
+import "../Form.css";
+import ControlledTextField from "./fields/ControlledTextField.jsx";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;

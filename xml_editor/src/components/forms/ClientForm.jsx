@@ -1,18 +1,18 @@
 import { Button, Grid, Stack, ThemeProvider } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { genreSchema } from "../xml/schemas/gatunek.js";
+import { clientSchema } from "../../xml/schemas/klient.js";
 import { appMaterialTheme } from "./theme.js";
-import { createGatunekElement } from "../xml/datatypes/Gatunek.js";
+import { createKlientElement } from "../../xml/datatypes/Klient.js";
 import { useContext } from "react";
-import { StateContext } from "../contexts/StateContext.jsx";
-import { FormContext } from "../contexts/FormContext.jsx";
-import { GENRE_ADD, GENRE_UPDATE, GENRE_DELETE } from "../reducers/AppReducer.js";
-import { initialGenre } from "./initialFormData.js";
-import "./Form.css";
-import ControlledTextField from "./ControlledTextField.jsx";
+import { StateContext } from "../../contexts/StateContext.jsx";
+import { FormContext } from "../../contexts/FormContext.jsx";
+import { CLIENT_ADD, CLIENT_UPDATE, CLIENT_DELETE } from "../../reducers/AppReducer.js";
+import "../Form.css";
+import { initialClient } from "./initialFormData.js";
+import ControlledTextField from "./fields/ControlledTextField.jsx";
 
-function GenreForm({ onSubmit, genre, nextId }) {
+function ClientForm({ onSubmit, client }) {
     const { dispatch } = useContext(StateContext);
 
     const {
@@ -22,35 +22,36 @@ function GenreForm({ onSubmit, genre, nextId }) {
     } = useForm({
         mode: "all",
         reValidateMode: "onChange",
-        resolver: zodResolver(genreSchema),
-        defaultValues: { ...initialGenre, ...{ id: nextId }, ...(genre || {}) },
+        resolver: zodResolver(clientSchema),
+        defaultValues: { ...initialClient, ...(client || {}) },
     });
 
-    const addGenre = (genre) => {
-        dispatch({ type: GENRE_ADD, payload: genre });
+    const addClient = (client) => {
+        dispatch({ type: CLIENT_ADD, payload: client });
     };
 
-    const updateGenre = (genreId, genre) => {
+    const updateClient = (clientId, client) => {
         dispatch({
-            type: GENRE_UPDATE,
+            type: CLIENT_UPDATE,
             payload: {
-                id: genreId,
-                data: genre,
+                id: clientId,
+                data: client,
             },
         });
         onSubmit();
     };
 
-    const deleteGenre = (genreId) => {
-        dispatch({ type: GENRE_DELETE, payload: { id: genreId } });
+    const deleteClient = (clientId) => {
+        dispatch({ type: CLIENT_DELETE, payload: { id: clientId } });
         onSubmit();
     };
 
     const handleFormSubmit = (data) => {
-        if (genre) {
-            updateGenre(genre.id, data);
+        if (client) {
+            updateClient(client.pesel, data);
         } else {
-            addGenre(createGatunekElement(data.id, data.nazwa));
+            const clientElement = createKlientElement(data);
+            addClient(clientElement);
         }
         onSubmit();
     };
@@ -66,29 +67,35 @@ function GenreForm({ onSubmit, genre, nextId }) {
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <Stack spacing={1.5}>
+                                <p className="form__header">Dane klienta</p>
                                 <ControlledTextField
-                                    name="id"
-                                    textFieldProps={{
-                                        disabled: true,
-                                    }}
+                                    name="imie"
+                                    label="Imię"
+                                    placeholder="Podaj imię"
                                 />
-                                <ControlledTextField name="nazwa" placeholder="Podaj nazwę" />
+                                <ControlledTextField name="nazwisko" placeholder="Podaj nazwisko" />
+                                <ControlledTextField
+                                    name="pesel"
+                                    label="PESEL / NIP"
+                                    placeholder="Podaj PESEL lub NIP"
+                                />
+                                <ControlledTextField name="login" placeholder="Podaj login" />
                             </Stack>
                         </Grid>
                     </Grid>
 
                     <div className="form__buttons">
-                        {!genre && (
+                        {!client && (
                             <Button
                                 fullWidth
                                 type="submit"
                                 variant="contained"
                                 disabled={!isFormDataValid()}
                             >
-                                Dodaj gatunek
+                                Dodaj klienta
                             </Button>
                         )}
-                        {genre && (
+                        {client && (
                             <>
                                 <Button
                                     fullWidth
@@ -102,9 +109,9 @@ function GenreForm({ onSubmit, genre, nextId }) {
                                     fullWidth
                                     variant="outlined"
                                     color="error"
-                                    onClick={() => deleteGenre(genre.id)}
+                                    onClick={() => deleteClient(client.pesel)}
                                 >
-                                    Usuń gatunek
+                                    Usuń klienta
                                 </Button>
                             </>
                         )}
@@ -115,4 +122,4 @@ function GenreForm({ onSubmit, genre, nextId }) {
     );
 }
 
-export default GenreForm;
+export default ClientForm;

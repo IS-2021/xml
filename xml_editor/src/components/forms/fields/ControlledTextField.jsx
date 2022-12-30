@@ -2,7 +2,7 @@ import { TextField } from "@mui/material";
 import { Controller } from "react-hook-form";
 import PropTypes from "prop-types";
 import { useContext } from "react";
-import { FormContext } from "../contexts/FormContext.jsx";
+import { FormContext } from "../../../contexts/FormContext.jsx";
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);

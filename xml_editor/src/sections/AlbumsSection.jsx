@@ -3,7 +3,7 @@ import "./AlbumsSection.css";
 import Modal from "../components/Modal.jsx";
 import { useModalWithDispatch } from "../hooks/useModalWithDispatch.js";
 import { useContext, useState } from "react";
-import AlbumForm from "../components/AlbumForm.jsx";
+import AlbumForm from "../components/forms/AlbumForm.jsx";
 import { StateContext } from "../contexts/StateContext.jsx";
 
 function AlbumsSection({ albums }) {

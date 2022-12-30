@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { StateContext } from "../contexts/StateContext.jsx";
 import { useModalWithDispatch } from "../hooks/useModalWithDispatch.js";
 import Modal from "../components/Modal.jsx";
-import GenreForm from "../components/GenreForm.jsx";
+import GenreForm from "../components/forms/GenreForm.jsx";
 
 function GenresSection({ genres }) {
     const [modalTitle, setModalTitle] = useState("");
