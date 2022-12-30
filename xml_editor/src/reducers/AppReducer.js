@@ -30,31 +30,31 @@ export const initialAppState = {
     },
 };
 
-export const appReducer = (state, action) => {
+export const appReducer = (draft, action) => {
     const { type, payload } = action;
 
     switch (type) {
         case TOGGLE_MODAL: {
             return {
-                ...state,
-                isModalOpen: !state.isModalOpen,
+                ...draft,
+                isModalOpen: !draft.isModalOpen,
             };
         }
         case CLOSE_MODAL: {
             return {
-                ...state,
+                ...draft,
                 isModalOpen: false,
             };
         }
         case OPEN_MODAL: {
             return {
-                ...state,
+                ...draft,
                 isModalOpen: true,
             };
         }
         case XML_LOADED: {
             return {
-                ...state,
+                ...draft,
                 isLoaded: true,
                 xml: {
                     refs: {
@@ -69,64 +69,64 @@ export const appReducer = (state, action) => {
             return { ...state };
         }
         case GENRE_UPDATE: {
-            const genre = state.xml.refs.gatunki.filter((genre) => genre.id === payload.id);
+            const genre = draft.xml.refs.gatunki.filter((genre) => genre.id === payload.id);
 
             genre[0].updateFromObject(payload.data);
 
-            return { ...state };
+            return { ...draft };
         }
         case GENRE_DELETE: {
-            const genre = state.xml.refs.gatunki.filter((genre) => genre.id === payload.id);
+            const genre = draft.xml.refs.gatunki.filter((genre) => genre.id === payload.id);
 
             genre[0].node.remove();
 
-            return { ...state };
+            return { ...draft };
         }
         case ALBUM_ADD: {
-            state.xml.refs.topLevelNodes.albumy.appendChild(payload);
+            draft.xml.refs.topLevelNodes.albumy.appendChild(payload);
 
-            return { ...state };
+            return { ...draft };
         }
         case ALBUM_UPDATE: {
-            const album = state.xml.refs.albumy.filter((album) => album.id === payload.id);
+            const album = draft.xml.refs.albumy.filter((album) => album.id === payload.id);
 
             album[0].updateFromObject(payload.data);
 
-            return { ...state };
+            return { ...draft };
         }
         case ALBUM_DELETE: {
-            const album = state.xml.refs.albumy.filter((album) => album.id === payload.id);
+            const album = draft.xml.refs.albumy.filter((album) => album.id === payload.id);
 
             album[0].node.remove();
 
-            return { ...state };
+            return { ...draft };
         }
         case ALBUM_AUTHOR_DELETE: {
-            const album = state.xml.refs.albumy.filter((album) => album.id === payload.albumId)[0];
+            const album = draft.xml.refs.albumy.filter((album) => album.id === payload.albumId)[0];
             const author = album.wykonawcy.filter((_, index) => index === payload.authorIndex)[0];
 
             author.node.remove();
 
-            return { ...state };
+            return { ...draft };
         }
         case CLIENT_ADD: {
-            state.xml.refs.topLevelNodes.klienci.appendChild(payload);
+            draft.xml.refs.topLevelNodes.klienci.appendChild(payload);
 
-            return { ...state };
+            return { ...draft };
         }
         case CLIENT_UPDATE: {
-            const client = state.xml.refs.klienci.filter((client) => client.pesel === payload.id);
+            const client = draft.xml.refs.klienci.filter((client) => client.pesel === payload.id);
 
             client[0].updateFromObject(payload.data);
 
-            return { ...state };
+            return { ...draft };
         }
         case CLIENT_DELETE: {
-            const client = state.xml.refs.klienci.filter((client) => client.pesel === payload.id);
+            const client = draft.xml.refs.klienci.filter((client) => client.pesel === payload.id);
 
             client[0].node.remove();
 
-            return { ...state };
+            return { ...draft };
         }
         default:
             throw new Error(`Action ${type} not found in appReducer.`);

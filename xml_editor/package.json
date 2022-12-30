@@ -17,10 +17,12 @@
     "@mui/material": "^5.11.0",
     "@mui/x-date-pickers": "^5.0.12",
     "dayjs": "^1.11.7",
+    "immer": "^9.0.16",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.41.0",
+    "use-immer": "^0.8.1",
     "zod": "^3.20.2"
   },
   "devDependencies": {
