@@ -5,6 +5,12 @@ class Album extends Base {
         super(element);
     }
 
+    toObject() {
+        return {
+            numer: this.numer,
+        };
+    }
+
     get numer() {
         return this.get("numer");
     }
@@ -19,6 +25,14 @@ export class Wypozyczenie extends Base {
         super(element);
 
         this.albumy = Album.fromNodeList(this.getNodeAll("album"));
+    }
+
+    toObject() {
+        return {
+            albumy: this.albumy.map((album) => album.toObject()),
+            dataRozpoczecia: this.dataRozpoczecia,
+            dataZakonczenia: this.dataZakonczenia,
+        };
     }
 
     get dataRozpoczecia() {

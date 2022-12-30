@@ -14,6 +14,7 @@ export class Klient extends Base {
             imie: this.imie,
             nazwisko: this.nazwisko,
             login: this.login,
+            wypozyczenia: this.wypozyczenia.map((wypozyczenie) => wypozyczenie.toObject()),
         };
     }
 

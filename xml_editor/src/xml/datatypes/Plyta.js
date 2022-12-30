@@ -8,6 +8,13 @@ export class Plyta extends Base {
         this.utwory = Utwor.fromNodeList(this.getNodeAll("utwor"));
     }
 
+    toObject() {
+        return {
+            cd: this.cd,
+            utwory: this.utwory.map((utwor) => utwor.toObject()),
+        };
+    }
+
     get cd() {
         return this.get("cd");
     }

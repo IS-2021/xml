@@ -5,6 +5,13 @@ export class Zadanie extends Base {
         super(element);
     }
 
+    toObject() {
+        return {
+            temat: this.temat,
+            nazwa: this.nazwa,
+        };
+    }
+
     get temat() {
         return this.getNodeText("temat");
     }

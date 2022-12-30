@@ -21,7 +21,7 @@ export class Album extends Base {
             producent: this.producent,
             dystrybutor: this.dystrybutor,
             opakowanie: this.opakowanie,
-            // plyty
+            plyty: this.plyty.map((plyta) => plyta.toObject()),
             dataPremiery: dayjs(this.dataPremiery),
             cena: this.cena,
             waluta: this.waluta,

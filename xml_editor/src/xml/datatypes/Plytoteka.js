@@ -22,6 +22,16 @@ export class Plytoteka {
         };
     }
 
+    toObject() {
+        return {
+            autor: this.autor.toObject(),
+            zadanie: this.zadanie.toObject(),
+            gatunki: this.gatunki.map((gatunek) => gatunek.toObject()),
+            albumy: this.albumy.map((album) => album.toObject()),
+            klienci: this.klienci.map((klient) => klient.toObject()),
+        };
+    }
+
     get gatunki() {
         return Gatunek.fromNodeList(this._selectors.gatunki());
     }

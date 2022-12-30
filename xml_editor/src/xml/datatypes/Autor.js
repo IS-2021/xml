@@ -5,7 +5,14 @@ export class Autor extends Base {
         super(element);
     }
 
-    // Student
+    toObject() {
+        return {
+            imie: this.imie,
+            nazwisko: this.nazwisko,
+            indeks: this.indeks,
+        };
+    }
+
     get imie() {
         return this.getNodeText("imie");
     }

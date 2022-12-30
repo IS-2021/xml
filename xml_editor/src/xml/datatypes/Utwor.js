@@ -5,6 +5,14 @@ export class Utwor extends Base {
         super(element);
     }
 
+    toObject() {
+        return {
+            numer: this.numer,
+            nazwa: this.nazwa,
+            dlugosc: this.dlugosc,
+        };
+    }
+
     get numer() {
         return this.getNodeText("numer");
     }
