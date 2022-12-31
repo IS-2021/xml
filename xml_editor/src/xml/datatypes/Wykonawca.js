@@ -1,4 +1,4 @@
-import { Base } from "./Base.js";
+import { Base, element } from "./Base.js";
 
 export class Wykonawca extends Base {
     constructor(element) {
@@ -42,4 +42,10 @@ export class Wykonawca extends Base {
     set czyZagranicznyBool(val) {
         this.czyZagraniczny = val === true ? "tak" : "nie";
     }
+}
+
+export function createWykonawcaElement({ nazwa, czyZagraniczny }) {
+    const e = element("wykonawca", nazwa);
+    e.setAttribute("czyZagraniczny", czyZagraniczny ? "tak" : "nie");
+    return e;
 }

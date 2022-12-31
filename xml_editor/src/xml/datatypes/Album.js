@@ -1,6 +1,6 @@
-import { Base } from "./Base.js";
-import { Plyta } from "./Plyta.js";
-import { Wykonawca } from "./Wykonawca.js";
+import { Base, element } from "./Base.js";
+import { createPlytaElement, Plyta } from "./Plyta.js";
+import { createWykonawcaElement, Wykonawca } from "./Wykonawca.js";
 import dayjs from "dayjs";
 
 export class Album extends Base {
@@ -151,13 +151,42 @@ export class Album extends Base {
     }
 }
 
-export function createAlbumElement(id, gatunek, album) {
-    const el = Album.createElement();
-    el.id = id;
-    el.setAttribute("gatunek", gatunek);
-    el.innerHTML = `
-        <nazwa>${album.nazwa}</nazwa>
-        <okladka src="${album.okladka}" />
-    `;
-    return el;
+export function createAlbumElement(album) {
+    const albumEl = Album.createElement();
+    albumEl.id = album.id;
+    albumEl.setAttribute("gatunek", album.gatunek);
+
+    const nazwa = element("nazwa", album.nazwa);
+    const okladka = element("okladka");
+    okladka.setAttribute("src", album.okladka);
+    const wykonawcy = element("wykonawcy");
+    album.wykonawcy.forEach((wykonawca) =>
+        wykonawcy.appendChild(createWykonawcaElement(wykonawca))
+    );
+    const producent = element("producent", album.producent);
+    const dystrybutor = element("dystrybutor", album.dystrybutor);
+    const opakowanie = element("opakowanie", album.opakowanie);
+    const plyty = element("plyty");
+    album.plyty.forEach((plyta) => plyty.appendChild(createPlytaElement(plyta)));
+    const dataPremiery = element("dataPremiery", dayjs(album.dataPremiery).format("YYYY-MM-DD"));
+    const cena = element("cena", album.cena);
+    cena.setAttribute("waluta", album.waluta);
+    const ocena = element("ocena", album.ocena);
+    const naklad = element("naklad", album.naklad);
+    const sprzedaneEgzemplarze = element("sprzedaneEgzemplarze", album.sprzedaneEgzemplarze);
+
+    albumEl.appendChild(nazwa);
+    albumEl.appendChild(okladka);
+    albumEl.appendChild(wykonawcy);
+    albumEl.appendChild(producent);
+    albumEl.appendChild(dystrybutor);
+    albumEl.appendChild(opakowanie);
+    albumEl.appendChild(plyty);
+    albumEl.appendChild(dataPremiery);
+    albumEl.appendChild(cena);
+    albumEl.appendChild(ocena);
+    albumEl.appendChild(naklad);
+    albumEl.appendChild(sprzedaneEgzemplarze);
+
+    return albumEl;
 }

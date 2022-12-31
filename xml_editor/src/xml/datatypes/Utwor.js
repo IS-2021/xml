@@ -1,4 +1,4 @@
-import { Base } from "./Base.js";
+import { Base, element } from "./Base.js";
 
 export class Utwor extends Base {
     constructor(element) {
@@ -36,4 +36,18 @@ export class Utwor extends Base {
     set dlugosc(val) {
         this.setNodeText("dlugosc", val);
     }
+}
+
+export function createUtworElement(utwor) {
+    const el = element("utwor");
+
+    const numer = element("numer", utwor.numer);
+    const nazwa = element("nazwa", utwor.nazwa);
+    const dlugosc = element("dlugosc", utwor.dlugosc);
+
+    el.appendChild(numer);
+    el.appendChild(nazwa);
+    el.appendChild(dlugosc);
+
+    return el;
 }

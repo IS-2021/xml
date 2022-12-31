@@ -1,5 +1,5 @@
-import { Base } from "./Base.js";
-import { Wypozyczenie } from "./Wypozyczenie.js";
+import { Base, element } from "./Base.js";
+import { createWypozyczenieElement, Wypozyczenie } from "./Wypozyczenie.js";
 
 export class Klient extends Base {
     constructor(element) {
@@ -61,13 +61,22 @@ export class Klient extends Base {
 }
 
 export function createKlientElement(klient) {
-    const el = Klient.createElement();
-    el.innerHTML = `
-        <pesel>${klient.pesel}</pesel>
-        <imie>${klient.imie}</imie>
-        <nazwisko>${klient.nazwisko}</nazwisko>
-        <login>${klient.login}</login>
-        <wypozyczenia></wypozyczenia>
-    `;
+    const el = element("klient");
+
+    const pesel = element("pesel", klient.pesel);
+    const imie = element("imie", klient.imie);
+    const nazwisko = element("nazwisko", klient.nazwisko);
+    const login = element("login", klient.login);
+    const wypozyczenia = element("wypozyczenia");
+    klient.wypozyczenia.forEach((wypozyczenie) =>
+        wypozyczenia.appendChild(createWypozyczenieElement(wypozyczenie))
+    );
+
+    el.appendChild(pesel);
+    el.appendChild(imie);
+    el.appendChild(nazwisko);
+    el.appendChild(login);
+    el.appendChild(wypozyczenia);
+
     return el;
 }

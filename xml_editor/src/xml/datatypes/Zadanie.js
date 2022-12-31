@@ -1,4 +1,4 @@
-import { Base } from "./Base.js";
+import { Base, element } from "./Base.js";
 
 export class Zadanie extends Base {
     constructor(element) {
@@ -27,4 +27,16 @@ export class Zadanie extends Base {
     set nazwa(val) {
         this.setNodeText("nazwa", val);
     }
+}
+
+export function createZadanieElement(zadanie) {
+    const el = element("zadanie");
+
+    const temat = element("temat", zadanie.temat);
+    const nazwa = element("nazwa", zadanie.nazwa);
+
+    el.appendChild(temat);
+    el.appendChild(nazwa);
+
+    return el;
 }

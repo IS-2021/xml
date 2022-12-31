@@ -6,6 +6,7 @@ import { useContext, useEffect } from "react";
 import { XML_LOADED } from "../reducers/AppReducer.js";
 import { StateContext } from "../contexts/StateContext.jsx";
 import { Plytoteka } from "../xml/datatypes/Plytoteka.js";
+import { objectToXML } from "../xml/objectToXML.js";
 
 const dispatchLoadedXML = (dispatch, xml) => {
     const xmlReferences = new Plytoteka(xml);
@@ -65,7 +66,7 @@ function FileSection() {
                 {state.isLoaded && (
                     <Button
                         text="Zapisz"
-                        onClick={() => XMLDao.save(state.xml.original)}
+                        onClick={() => XMLDao.save(objectToXML(state.xml.refs))}
                         className={"clear-left"}
                     />
                 )}

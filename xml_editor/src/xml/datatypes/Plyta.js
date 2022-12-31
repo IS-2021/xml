@@ -1,5 +1,5 @@
-import { Base } from "./Base.js";
-import { Utwor } from "./Utwor.js";
+import { Base, element } from "./Base.js";
+import { createUtworElement, Utwor } from "./Utwor.js";
 
 export class Plyta extends Base {
     constructor(element) {
@@ -22,4 +22,15 @@ export class Plyta extends Base {
     set cd(val) {
         return this.set("cd", val);
     }
+}
+
+export function createPlytaElement(plyta) {
+    const el = element("plyta");
+    el.setAttribute("cd", plyta.cd);
+
+    const utwory = element("utwory");
+    plyta.utwory.forEach((utwor) => utwory.appendChild(createUtworElement(utwor)));
+    el.appendChild(utwory);
+
+    return el;
 }

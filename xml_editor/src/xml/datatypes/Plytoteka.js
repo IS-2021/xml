@@ -1,4 +1,4 @@
-import { Autor } from "./Autor.js";
+import { Student } from "./Student.js";
 import { Zadanie } from "./Zadanie.js";
 import { Gatunek } from "./Gatunek.js";
 import { Album } from "./Album.js";
@@ -7,7 +7,7 @@ import { Klient } from "./Klient.js";
 // noinspection CssInvalidHtmlTagReference
 export class Plytoteka {
     constructor(root) {
-        this.autor = new Autor(root.querySelector("autor"));
+        this.autor = new Student(root.querySelector("autor"));
         this.zadanie = new Zadanie(root.querySelector("autor"));
         this._selectors = {
             gatunki: () => root.querySelectorAll("plytoteka > gatunki > gatunek"),

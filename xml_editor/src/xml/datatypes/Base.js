@@ -49,3 +49,9 @@ export class Base {
         return document.createElementNS("", this.name.toLowerCase());
     }
 }
+
+export function element(name, textContent) {
+    const el = document.createElementNS("", name);
+    textContent && (el.textContent = textContent);
+    return el;
+}
