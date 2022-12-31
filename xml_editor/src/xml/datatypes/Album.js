@@ -17,7 +17,10 @@ export class Album extends Base {
             gatunek: this.gatunek,
             nazwa: this.nazwa,
             okladka: this.okladka,
-            wykonawcy: this.wykonawcy.map((wykonawca) => wykonawca.toObject()),
+            wykonawcy: this.wykonawcy.map((wykonawca, idx) => ({
+                id: idx,
+                ...wykonawca.toObject(),
+            })),
             producent: this.producent,
             dystrybutor: this.dystrybutor,
             opakowanie: this.opakowanie,

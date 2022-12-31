@@ -9,9 +9,6 @@ export const GENRE_DELETE = "GENRE_REMOVE";
 export const ALBUM_ADD = "ALBUM_ADD";
 export const ALBUM_UPDATE = "ALBUM_MODIFY";
 export const ALBUM_DELETE = "ALBUM_REMOVE";
-export const ALBUM_AUTHOR_ADD = "ALBUM_AUTHOR_ADD";
-export const ALBUM_AUTHOR_UPDATE = "ALBUM_AUTHOR_UPDATE";
-export const ALBUM_AUTHOR_DELETE = "ALBUM_AUTHOR_DELETE";
 export const CLIENT_ADD = "CLIENT_ADD";
 export const CLIENT_UPDATE = "CLIENT_MODIFY";
 export const CLIENT_DELETE = "CLIENT_REMOVE";
@@ -105,14 +102,6 @@ export const appReducer = (draft, action) => {
                 (album) => album.id !== payload.id
             );
             break;
-        }
-        case ALBUM_AUTHOR_DELETE: {
-            const album = draft.xml.refs.albumy.filter((album) => album.id === payload.albumId)[0];
-            const author = album.wykonawcy.filter((_, index) => index === payload.authorIndex)[0];
-
-            author.node.remove();
-
-            return { ...draft };
         }
         case CLIENT_ADD: {
             draft.xml.refs.klienci.push({

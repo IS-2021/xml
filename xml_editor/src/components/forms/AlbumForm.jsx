@@ -1,23 +1,19 @@
 import { Button, Tab, Tabs, ThemeProvider } from "@mui/material";
-import { useForm } from "react-hook-form";
+import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { albumSchema } from "../../xml/schemas/album.js";
 import { appMaterialTheme } from "./theme.js";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { StateContext } from "../../contexts/StateContext.jsx";
 import { FormContext } from "../../contexts/FormContext.jsx";
-import {
-    ALBUM_ADD,
-    ALBUM_AUTHOR_DELETE,
-    ALBUM_DELETE,
-    ALBUM_UPDATE,
-} from "../../reducers/AppReducer.js";
+import { ALBUM_ADD, ALBUM_DELETE, ALBUM_UPDATE } from "../../reducers/AppReducer.js";
 import { initialAlbum } from "./initialFormData.js";
 import { DevTool } from "@hookform/devtools";
 import "../Form.css";
 import GeneralInfoTab from "./tabs/album/GeneralInfoTab.jsx";
 import AuthorsTab from "./tabs/album/AuthorsTab.jsx";
 import ProductionTab from "./tabs/album/ProductionTab.jsx";
+import dayjs from "dayjs";
 
 function a11yProps(index) {
     return {
@@ -27,39 +23,28 @@ function a11yProps(index) {
 }
 
 function AlbumForm({ onSubmit, album, nextId }) {
-    const getWykonawcyFromState = () =>
-        state.xml.refs.albumy.filter((sAlbum) => sAlbum.id === album?.id)[0]?.wykonawcy ?? [];
-
     const {
         control,
         handleSubmit,
         formState: { errors },
         watch,
-        getValues,
     } = useForm({
         mode: "all",
         reValidateMode: "onChange",
         resolver: zodResolver(albumSchema),
         defaultValues: { ...initialAlbum, ...{ id: nextId }, ...(album || {}) },
     });
+    const { fields, append, remove } = useFieldArray({
+        control,
+        name: "wykonawcy",
+    });
     const okladkaWatch = watch("okladka", initialAlbum.okladka);
-    const { state, dispatch } = useContext(StateContext);
+    const { dispatch } = useContext(StateContext);
     const [selectedTab, setSelectedTab] = useState(0);
-    const [wykonawcy, setWykonawcy] = useState([getValues("wykonawcy[0]")]);
-    // This is for triggering re-render, as internal references aren't changing:
-    const [updateCounter, setUpdateCounter] = useState(0);
 
     const handleTabChange = (event, newTab) => {
         setSelectedTab(newTab);
     };
-
-    useEffect(() => {
-        const wykonawcy = getWykonawcyFromState();
-
-        if (wykonawcy.length === 0) return setWykonawcy(initialAlbum.wykonawcy);
-
-        setWykonawcy(wykonawcy);
-    }, [updateCounter]);
 
     const deleteAlbum = (genreId) => {
         dispatch({ type: ALBUM_DELETE, payload: { id: genreId } });
@@ -86,17 +71,6 @@ function AlbumForm({ onSubmit, album, nextId }) {
         return Object.keys(errors).length === 0;
     }
 
-    function handleDeleteAuthor(albumId, authorIndex) {
-        dispatch({
-            type: ALBUM_AUTHOR_DELETE,
-            payload: {
-                albumId: albumId,
-                authorIndex: authorIndex,
-            },
-        });
-        setUpdateCounter((prev) => prev + 1);
-    }
-
     return (
         <FormContext.Provider value={{ control, errors }}>
             <ThemeProvider theme={appMaterialTheme}>
@@ -121,9 +95,7 @@ function AlbumForm({ onSubmit, album, nextId }) {
                     <AuthorsTab
                         currentIndex={selectedTab}
                         tabIndex={1}
-                        albumId={album.id}
-                        wykonawcy={wykonawcy}
-                        authorDelete={handleDeleteAuthor}
+                        wykonawcyFieldArray={{ fields, append, remove }}
                     />
                     {/*<TabPanel index={selectedTab} value={2}></TabPanel>*/}
                     <ProductionTab currentIndex={selectedTab} tabIndex={3} />

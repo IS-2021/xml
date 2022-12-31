@@ -44,7 +44,7 @@ function GeneralInfoTab({ currentIndex, tabIndex, coverWatch }) {
                                 <ControlledTextField
                                     name="waluta"
                                     placeholder="Podaj walutę"
-                                    textFieldProps={{ select: true }}
+                                    textFieldProps={{ select: true, fullWidth: true }}
                                 >
                                     <MenuItem value="PLN">ZŁ</MenuItem>
                                     <MenuItem value="USD">$</MenuItem>
