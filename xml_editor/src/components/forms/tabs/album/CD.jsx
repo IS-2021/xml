@@ -1,6 +1,8 @@
 import ControlledTextField from "../../fields/ControlledTextField.jsx";
-import { Stack } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
+import { initialAlbum } from "../../initialFormData.js";
+import { useFieldArray } from "react-hook-form";
 
 function nazwaHasErrors(field, errors, params) {
     const { cd, index } = params;
@@ -42,13 +44,23 @@ function dlugoscGetErrors(field, errors, params) {
     return errors.plyty[cd].utwory[index].dlugosc.message;
 }
 
-function CD({ cd, utworyFieldArray }) {
-    const { fields } = utworyFieldArray;
-    const plyta = `plyty[${cd - 1}]`;
+function CD({ cdIndex, control, deleteCD }) {
+    const { fields, append, remove } = useFieldArray({
+        control,
+        name: `plyty[${cdIndex}].utwory`,
+    });
+    const plyta = `plyty[${cdIndex}]`;
 
     return (
         <Stack spacing={1.5}>
-            <h2>💿 CD {cd}</h2>
+            <header>
+                <Stack direction="row" alignItems="center" width="100%">
+                    <h2 style={{ flexGrow: 1 }}>💿 CD {cdIndex + 1}</h2>
+                    <Button color="error" onClick={deleteCD}>
+                        Usuń płytę
+                    </Button>
+                </Stack>
+            </header>
             {fields.map((field, idx) => (
                 <Grid container columnSpacing={1} key={`${plyta}_utwory${idx}`}>
                     <Grid xs={2}>
@@ -64,9 +76,9 @@ function CD({ cd, utworyFieldArray }) {
                             label="Nazwa"
                             textFieldProps={{ fullWidth: true }}
                             error={nazwaHasErrors}
-                            errorParams={{ index: idx, cd: cd - 1 }}
+                            errorParams={{ index: idx, cd: cdIndex }}
                             helper={nazwaGetErrors}
-                            helperTextParams={{ index: idx, cd: cd - 1 }}
+                            helperTextParams={{ index: idx, cd: cdIndex }}
                         />
                     </Grid>
                     <Grid xs={3}>
@@ -75,13 +87,36 @@ function CD({ cd, utworyFieldArray }) {
                             label="Długość"
                             textFieldProps={{ fullWidth: true }}
                             error={dlugoscHasErrors}
-                            errorParams={{ index: idx, cd: cd - 1 }}
+                            errorParams={{ index: idx, cd: cdIndex }}
                             helper={dlugoscGetErrors}
-                            helperTextParams={{ index: idx, cd: cd - 1 }}
+                            helperTextParams={{ index: idx, cd: cdIndex }}
                         />
                     </Grid>
                 </Grid>
             ))}
+            <Grid container columnSpacing={1.5}>
+                <Grid>
+                    <Button
+                        variant="contained"
+                        onClick={() =>
+                            append({
+                                ...initialAlbum.plyty[0].utwory[0],
+                                numer: `${fields.length + 1}`.padStart(2, "0"),
+                            })
+                        }
+                    >
+                        Dodaj utwór
+                    </Button>
+                </Grid>
+                <Grid>
+                    <Button
+                        disabled={fields.length === 1}
+                        onClick={() => remove(fields.length - 1)}
+                    >
+                        Usuń ostatni utwór
+                    </Button>
+                </Grid>
+            </Grid>
         </Stack>
     );
 }

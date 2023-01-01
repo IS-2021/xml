@@ -44,12 +44,6 @@ function AlbumForm({ onSubmit, album, nextId }) {
         control,
         name: "plyty",
     });
-    const utwory = plyty.fields.map((plyta, idx) =>
-        useFieldArray({
-            control,
-            name: `plyty[${idx}].utwory`,
-        })
-    );
 
     const okladkaWatch = watch("okladka", initialAlbum.okladka);
     const { dispatch } = useContext(StateContext);
@@ -114,12 +108,32 @@ function AlbumForm({ onSubmit, album, nextId }) {
                         <Stack spacing={2} sx={{ height: 396, width: "100%", overflowY: "scroll" }}>
                             {plyty.fields.map((field, idx) => (
                                 <Box
-                                    sx={{ p: 2, width: "100%", border: "1px solid gray" }}
+                                    sx={{
+                                        p: 2,
+                                        width: "100%",
+                                        border: "2px solid #444",
+                                        borderRadius: "2px",
+                                    }}
                                     key={`CD${idx}`}
                                 >
-                                    <CD cd={field.cd} utworyFieldArray={utwory[idx]} />
+                                    <CD
+                                        cdIndex={idx}
+                                        control={control}
+                                        deleteCD={() => plyty.remove(idx)}
+                                    />
                                 </Box>
                             ))}
+                            <Button
+                                variant="outlined"
+                                onClick={() =>
+                                    plyty.append({
+                                        ...initialAlbum.plyty[0],
+                                        cd: plyty.fields.length + 1,
+                                    })
+                                }
+                            >
+                                Dodaj płytę
+                            </Button>
                         </Stack>
                     </TabPanel>
                     <ProductionTab currentIndex={selectedTab} tabIndex={3} />
