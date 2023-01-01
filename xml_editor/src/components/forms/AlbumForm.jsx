@@ -15,13 +15,7 @@ import AuthorsTab from "./tabs/album/AuthorsTab.jsx";
 import ProductionTab from "./tabs/album/ProductionTab.jsx";
 import dayjs from "dayjs";
 import DiscContentTab from "./tabs/album/DiscContentTab.jsx";
-
-function a11yProps(index) {
-    return {
-        id: `vertical-tab-${index}`,
-        "aria-controls": `vertical-tabpanel-${index}`,
-    };
-}
+import { a11yProps } from "./tabs/TabPanel.jsx";
 
 function AlbumForm({ onSubmit, album, nextId }) {
     const {
