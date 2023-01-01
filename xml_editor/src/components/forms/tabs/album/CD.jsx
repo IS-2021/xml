@@ -44,7 +44,7 @@ function dlugoscGetErrors(field, errors, params) {
     return errors.plyty[cd].utwory[index].dlugosc.message;
 }
 
-function CD({ cdIndex, control, deleteCD }) {
+function CD({ cdIndex, control, deleteCD, disableDelete }) {
     const { fields, append, remove } = useFieldArray({
         control,
         name: `plyty[${cdIndex}].utwory`,
@@ -56,7 +56,7 @@ function CD({ cdIndex, control, deleteCD }) {
             <header>
                 <Stack direction="row" alignItems="center" width="100%">
                     <h2 style={{ flexGrow: 1 }}>💿 CD {cdIndex + 1}</h2>
-                    <Button color="error" onClick={deleteCD}>
+                    <Button color="error" onClick={deleteCD} disabled={disableDelete}>
                         Usuń płytę
                     </Button>
                 </Stack>

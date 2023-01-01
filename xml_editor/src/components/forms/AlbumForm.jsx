@@ -1,5 +1,5 @@
-import { Box, Button, Stack, Tab, Tabs, ThemeProvider } from "@mui/material";
-import { useForm, useFieldArray } from "react-hook-form";
+import { Button, Tab, Tabs, ThemeProvider } from "@mui/material";
+import { useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { albumSchema } from "../../xml/schemas/album.js";
 import { appMaterialTheme } from "./theme.js";
@@ -14,8 +14,7 @@ import GeneralInfoTab from "./tabs/album/GeneralInfoTab.jsx";
 import AuthorsTab from "./tabs/album/AuthorsTab.jsx";
 import ProductionTab from "./tabs/album/ProductionTab.jsx";
 import dayjs from "dayjs";
-import TabPanel from "./tabs/TabPanel.jsx";
-import CD from "./tabs/album/CD.jsx";
+import DiscContentTab from "./tabs/album/DiscContentTab.jsx";
 
 function a11yProps(index) {
     return {
@@ -104,38 +103,11 @@ function AlbumForm({ onSubmit, album, nextId }) {
                         tabIndex={1}
                         wykonawcyFieldArray={wykonawcy}
                     />
-                    <TabPanel currentIndex={selectedTab} tabIndex={2}>
-                        <Stack spacing={2} sx={{ height: 396, width: "100%", overflowY: "scroll" }}>
-                            {plyty.fields.map((field, idx) => (
-                                <Box
-                                    sx={{
-                                        p: 2,
-                                        width: "100%",
-                                        border: "2px solid #444",
-                                        borderRadius: "2px",
-                                    }}
-                                    key={`CD${idx}`}
-                                >
-                                    <CD
-                                        cdIndex={idx}
-                                        control={control}
-                                        deleteCD={() => plyty.remove(idx)}
-                                    />
-                                </Box>
-                            ))}
-                            <Button
-                                variant="outlined"
-                                onClick={() =>
-                                    plyty.append({
-                                        ...initialAlbum.plyty[0],
-                                        cd: plyty.fields.length + 1,
-                                    })
-                                }
-                            >
-                                Dodaj płytę
-                            </Button>
-                        </Stack>
-                    </TabPanel>
+                    <DiscContentTab
+                        currentIndex={selectedTab}
+                        tabIndex={2}
+                        plytyFieldArray={plyty}
+                    />
                     <ProductionTab currentIndex={selectedTab} tabIndex={3} />
 
                     <div className="form__buttons">
