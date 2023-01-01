@@ -1,4 +1,4 @@
-import { Button, Tab, Tabs, ThemeProvider } from "@mui/material";
+import { Box, Button, Stack, Tab, Tabs, ThemeProvider } from "@mui/material";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { albumSchema } from "../../xml/schemas/album.js";
@@ -14,6 +14,8 @@ import GeneralInfoTab from "./tabs/album/GeneralInfoTab.jsx";
 import AuthorsTab from "./tabs/album/AuthorsTab.jsx";
 import ProductionTab from "./tabs/album/ProductionTab.jsx";
 import dayjs from "dayjs";
+import TabPanel from "./tabs/TabPanel.jsx";
+import CD from "./tabs/album/CD.jsx";
 
 function a11yProps(index) {
     return {
@@ -34,10 +36,21 @@ function AlbumForm({ onSubmit, album, nextId }) {
         resolver: zodResolver(albumSchema),
         defaultValues: { ...initialAlbum, ...{ id: nextId }, ...(album || {}) },
     });
-    const { fields, append, remove } = useFieldArray({
+    const wykonawcy = useFieldArray({
         control,
         name: "wykonawcy",
     });
+    const plyty = useFieldArray({
+        control,
+        name: "plyty",
+    });
+    const utwory = plyty.fields.map((plyta, idx) =>
+        useFieldArray({
+            control,
+            name: `plyty[${idx}].utwory`,
+        })
+    );
+
     const okladkaWatch = watch("okladka", initialAlbum.okladka);
     const { dispatch } = useContext(StateContext);
     const [selectedTab, setSelectedTab] = useState(0);
@@ -95,9 +108,20 @@ function AlbumForm({ onSubmit, album, nextId }) {
                     <AuthorsTab
                         currentIndex={selectedTab}
                         tabIndex={1}
-                        wykonawcyFieldArray={{ fields, append, remove }}
+                        wykonawcyFieldArray={wykonawcy}
                     />
-                    {/*<TabPanel index={selectedTab} value={2}></TabPanel>*/}
+                    <TabPanel currentIndex={selectedTab} tabIndex={2}>
+                        <Stack spacing={2} sx={{ height: 396, width: "100%", overflowY: "scroll" }}>
+                            {plyty.fields.map((field, idx) => (
+                                <Box
+                                    sx={{ p: 2, width: "100%", border: "1px solid gray" }}
+                                    key={`CD${idx}`}
+                                >
+                                    <CD cd={field.cd} utworyFieldArray={utwory[idx]} />
+                                </Box>
+                            ))}
+                        </Stack>
+                    </TabPanel>
                     <ProductionTab currentIndex={selectedTab} tabIndex={3} />
 
                     <div className="form__buttons">

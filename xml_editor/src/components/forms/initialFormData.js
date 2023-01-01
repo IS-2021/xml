@@ -28,7 +28,7 @@ export const initialAlbum = {
             cd: 1,
             utwory: [
                 {
-                    numer: 0,
+                    numer: "01",
                     nazwa: "",
                     dlugosc: "",
                 },

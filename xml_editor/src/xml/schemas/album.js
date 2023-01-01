@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { albumIDSchema, CURRENCIES, genreIDSchema, min2Chars } from "./common.js";
 import { wykonawcaSchema } from "./wykonawca.js";
+import { plytaSchema } from "./plyta.js";
 
 export const rating05 = "Ocena musi być z zakresu od 0 do 5";
 export const ALBUM_CASE_TYPES = ["Digipack", "Digibook", "Jewel Case", "Standard"];
@@ -14,7 +15,7 @@ export const albumSchema = z.object({
     producent: min2Chars,
     dystrybutor: min2Chars,
     opakowanie: z.enum(ALBUM_CASE_TYPES),
-    // plyty
+    plyty: z.array(plytaSchema, "Album musi mieć min. jedną płytę"),
     dataPremiery: z.any(),
     waluta: z.enum(CURRENCIES),
     cena: z.coerce.number().min(0, "Cena nie może być ujemna"),
