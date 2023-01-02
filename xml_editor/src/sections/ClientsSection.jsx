@@ -42,9 +42,9 @@ function ClientsSection({ clients }) {
                     <p className="client_card__name">Dodaj klienta</p>
                 </div>
 
-                {clients.map((client) => (
+                {clients.map((client, idx) => (
                     <Client
-                        key={client.pesel}
+                        key={`${idx}${client.pesel}`}
                         client={client}
                         onClick={(pesel) => {
                             setModalTitle("Edytuj klienta");
