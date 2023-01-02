@@ -55,7 +55,7 @@ function Rent({ rentIndex, onDelete }) {
                         onClick={addNewAlbum}
                         disabled={fields.length === 2}
                     >
-                        Dodaj album
+                        {fields.length < 2 ? "Dodaj album" : "Max. albumów"}
                     </Button>
                 </Stack>
                 <Stack spacing={1.5}>
