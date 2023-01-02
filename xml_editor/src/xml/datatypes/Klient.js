@@ -10,7 +10,7 @@ export class Klient extends Base {
 
     toObject() {
         return {
-            pesel: this.pesel,
+            pesel: this.pesel ?? this.nip,
             imie: this.imie,
             nazwisko: this.nazwisko,
             login: this.login,
@@ -33,6 +33,14 @@ export class Klient extends Base {
 
     set pesel(val) {
         this.setNodeText("pesel", val);
+    }
+
+    get nip() {
+        return this.getNodeText("nip");
+    }
+
+    set nip(val) {
+        this.setNodeText("nip", val);
     }
 
     get imie() {
