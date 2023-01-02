@@ -44,10 +44,6 @@ const loadFromFileHandler = (dispatch) => {
 function FileSection() {
     const { state, dispatch } = useContext(StateContext);
 
-    useEffect(() => {
-        loadEmptyHandler(dispatch);
-    }, []);
-
     return (
         <section>
             <h1>Edytor XML</h1>
