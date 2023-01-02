@@ -1,4 +1,4 @@
-import { Button, Grid, Stack, ThemeProvider } from "@mui/material";
+import { Button, Stack, ThemeProvider, Tooltip } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { genreSchema } from "../../xml/schemas/gatunek.js";
@@ -10,9 +10,10 @@ import { GENRE_ADD, GENRE_UPDATE, GENRE_DELETE } from "../../reducers/AppReducer
 import { initialGenre } from "./initialFormData.js";
 import "../Form.css";
 import ControlledTextField from "./fields/ControlledTextField.jsx";
+import Grid from "@mui/material/Unstable_Grid2";
 
 function GenreForm({ onSubmit, genre, nextId }) {
-    const { dispatch } = useContext(StateContext);
+    const { state, dispatch } = useContext(StateContext);
 
     const {
         control,
@@ -24,6 +25,11 @@ function GenreForm({ onSubmit, genre, nextId }) {
         resolver: zodResolver(genreSchema),
         defaultValues: { ...initialGenre, ...{ id: nextId }, ...(genre || {}) },
     });
+
+    if (genre) {
+        var disableDelete =
+            state.xml.refs.albumy.filter((al) => al.gatunek === genre.id).length > 0;
+    }
 
     const addGenre = (genre) => {
         dispatch({ type: GENRE_ADD, payload: genre });
@@ -63,7 +69,7 @@ function GenreForm({ onSubmit, genre, nextId }) {
             <ThemeProvider theme={appMaterialTheme}>
                 <form onSubmit={handleSubmit(handleFormSubmit)}>
                     <Grid container spacing={2}>
-                        <Grid item xs={12}>
+                        <Grid xs={12}>
                             <Stack spacing={1.5}>
                                 <ControlledTextField
                                     name="id"
@@ -76,38 +82,52 @@ function GenreForm({ onSubmit, genre, nextId }) {
                         </Grid>
                     </Grid>
 
-                    <div className="form__buttons">
+                    <Grid container columnSpacing={1} sx={{ marginTop: "1rem" }}>
                         {!genre && (
-                            <Button
-                                fullWidth
-                                type="submit"
-                                variant="contained"
-                                disabled={!isFormDataValid()}
-                            >
-                                Dodaj gatunek
-                            </Button>
-                        )}
-                        {genre && (
-                            <>
+                            <Grid xs={12}>
                                 <Button
                                     fullWidth
                                     type="submit"
                                     variant="contained"
                                     disabled={!isFormDataValid()}
                                 >
-                                    Zapisz zmiany
+                                    Dodaj gatunek
                                 </Button>
-                                <Button
-                                    fullWidth
-                                    variant="outlined"
-                                    color="error"
-                                    onClick={() => deleteGenre(genre.id)}
-                                >
-                                    Usuń gatunek
-                                </Button>
+                            </Grid>
+                        )}
+                        {genre && (
+                            <>
+                                <Grid xs={6}>
+                                    <Button
+                                        fullWidth
+                                        type="submit"
+                                        variant="contained"
+                                        disabled={!isFormDataValid()}
+                                    >
+                                        Zapisz zmiany
+                                    </Button>
+                                </Grid>
+                                <Grid xs={6}>
+                                    <Tooltip
+                                        title={disableDelete && "Gatunek posiada przypisane utwory"}
+                                        style={{ width: "100%" }}
+                                    >
+                                        <div>
+                                            <Button
+                                                fullWidth
+                                                variant="outlined"
+                                                color="error"
+                                                disabled={disableDelete}
+                                                onClick={() => deleteGenre(genre.id)}
+                                            >
+                                                Usuń gatunek
+                                            </Button>
+                                        </div>
+                                    </Tooltip>
+                                </Grid>
                             </>
                         )}
-                    </div>
+                    </Grid>
                 </form>
             </ThemeProvider>
         </FormContext.Provider>
