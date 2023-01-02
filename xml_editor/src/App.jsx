@@ -20,7 +20,9 @@ function App() {
             {state.isLoaded && (
                 <>
                     <GenresSection genres={state.xml.refs.gatunki} />
-                    <AlbumsSection albums={state.xml.refs.albumy} />
+                    {state.xml.refs.gatunki.length > 0 && (
+                        <AlbumsSection albums={state.xml.refs.albumy} />
+                    )}
                     <ClientsSection clients={state.xml.refs.klienci} />
                 </>
             )}
