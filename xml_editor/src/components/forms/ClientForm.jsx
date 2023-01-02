@@ -36,7 +36,6 @@ function ClientForm({ onSubmit, client }) {
     };
 
     useEffect(() => {
-        // console.log("EFFECT");
         validatePesel();
     }, [getValues("pesel")]);
 
@@ -46,7 +45,6 @@ function ClientForm({ onSubmit, client }) {
     };
 
     const handleFormSubmit = (data) => {
-        // console.log(checkPeselUniqueness(), getValues("pesel"));
         if (!checkPeselUniqueness()) return;
 
         if (client) {
@@ -65,13 +63,11 @@ function ClientForm({ onSubmit, client }) {
 
     function checkPeselUniqueness() {
         const inputPesel = getValues("pesel");
-        // console.log(client?.pesel, inputPesel, client?.pesel === inputPesel);
 
         // Editing the same client
         if (client?.pesel === inputPesel) return true;
 
         // Adding new client
-        // console.log("New client");
         const arr = state.xml.refs.klienci;
         return arr.filter((klient) => klient.pesel === inputPesel).length < 1;
     }
@@ -82,7 +78,7 @@ function ClientForm({ onSubmit, client }) {
         setPeselIsUnique(isUnique);
         if (isUnique) return;
 
-        setError("pesel", { type: "custom", message: "PESEL nie jest unikalny" });
+        setError("pesel", { type: "custom", message: "PESEL/NIP nie jest unikalny" });
     }
 
     function isFormDataValid() {
