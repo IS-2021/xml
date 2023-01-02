@@ -60,15 +60,17 @@ function ClientForm({ onSubmit, client }) {
         <FormContext.Provider value={{ control, errors }}>
             <ThemeProvider theme={appMaterialTheme}>
                 <form className="form__client" onSubmit={handleSubmit(handleFormSubmit)}>
-                    <Tabs
-                        orientation="horizontal"
-                        value={selectedTab}
-                        onChange={handleTabChange}
-                        sx={{ marginBottom: "1rem" }}
-                    >
-                        <Tab label="Dane" {...a11yProps(0)} />
-                        <Tab label="Wypożyczenia" {...a11yProps(1)} />
-                    </Tabs>
+                    {client && (
+                        <Tabs
+                            orientation="horizontal"
+                            value={selectedTab}
+                            onChange={handleTabChange}
+                            sx={{ marginBottom: "1rem" }}
+                        >
+                            <Tab label="Dane" {...a11yProps(0)} />
+                            <Tab label="Wypożyczenia" {...a11yProps(1)} />
+                        </Tabs>
+                    )}
 
                     <ClientDataTab currentIndex={selectedTab} tabIndex={0} />
                     <ClientRentTab currentIndex={selectedTab} tabIndex={1} />
