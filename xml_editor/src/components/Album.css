@@ -64,6 +64,19 @@
     transition: 200ms color ease-in;
 }
 
+img.album_card__cover {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: 200;
+    color: var(--gray);
+    background-color: var(--darker);
+    border-radius: 6px;
+
+    transition: 200ms color ease-in;
+}
+
 .album_card--add > .album_card__title {
     display: grid;
     justify-content: center;
