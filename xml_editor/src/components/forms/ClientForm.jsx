@@ -15,6 +15,7 @@ import { a11yProps } from "./tabs/TabPanel.jsx";
 
 function ClientForm({ onSubmit, client }) {
     const { dispatch } = useContext(StateContext);
+    const [selectedTab, setSelectedTab] = useState(0);
 
     const {
         control,
