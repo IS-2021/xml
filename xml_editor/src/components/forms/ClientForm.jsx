@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { clientSchema } from "../../xml/schemas/klient.js";
 import { appMaterialTheme } from "./theme.js";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { StateContext } from "../../contexts/StateContext.jsx";
 import { FormContext } from "../../contexts/FormContext.jsx";
 import { CLIENT_ADD, CLIENT_DELETE, CLIENT_UPDATE } from "../../reducers/AppReducer.js";
@@ -14,13 +14,16 @@ import ClientDataTab from "./tabs/klient/ClientDataTab.jsx";
 import { a11yProps } from "./tabs/TabPanel.jsx";
 
 function ClientForm({ onSubmit, client }) {
-    const { dispatch } = useContext(StateContext);
+    const { state, dispatch } = useContext(StateContext);
     const [selectedTab, setSelectedTab] = useState(0);
+    const [peselIsUnique, setPeselIsUnique] = useState(false);
 
     const {
         control,
         handleSubmit,
         formState: { errors },
+        setError,
+        getValues,
     } = useForm({
         mode: "all",
         reValidateMode: "onChange",
@@ -32,12 +35,20 @@ function ClientForm({ onSubmit, client }) {
         setSelectedTab(newTab);
     };
 
+    useEffect(() => {
+        // console.log("EFFECT");
+        validatePesel();
+    }, [getValues("pesel")]);
+
     const deleteClient = (clientId) => {
         dispatch({ type: CLIENT_DELETE, payload: { id: clientId } });
         onSubmit();
     };
 
     const handleFormSubmit = (data) => {
+        // console.log(checkPeselUniqueness(), getValues("pesel"));
+        if (!checkPeselUniqueness()) return;
+
         if (client) {
             dispatch({
                 type: CLIENT_UPDATE,
@@ -52,8 +63,30 @@ function ClientForm({ onSubmit, client }) {
         onSubmit();
     };
 
+    function checkPeselUniqueness() {
+        const inputPesel = getValues("pesel");
+        // console.log(client?.pesel, inputPesel, client?.pesel === inputPesel);
+
+        // Editing the same client
+        if (client?.pesel === inputPesel) return true;
+
+        // Adding new client
+        // console.log("New client");
+        const arr = state.xml.refs.klienci;
+        return arr.filter((klient) => klient.pesel === inputPesel).length < 1;
+    }
+
+    function validatePesel() {
+        const isUnique = checkPeselUniqueness();
+
+        setPeselIsUnique(isUnique);
+        if (isUnique) return;
+
+        setError("pesel", { type: "custom", message: "PESEL nie jest unikalny" });
+    }
+
     function isFormDataValid() {
-        return Object.keys(errors).length === 0;
+        return Object.keys(errors).length === 0 && peselIsUnique;
     }
 
     return (
