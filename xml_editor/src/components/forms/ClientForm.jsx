@@ -105,7 +105,11 @@ function ClientForm({ onSubmit, client }) {
                         </Tabs>
                     )}
 
-                    <ClientDataTab currentIndex={selectedTab} tabIndex={0} />
+                    <ClientDataTab
+                        currentIndex={selectedTab}
+                        disablePeselEdition={!!client}
+                        tabIndex={0}
+                    />
                     <ClientRentTab currentIndex={selectedTab} tabIndex={1} />
 
                     <div className="form__buttons">
