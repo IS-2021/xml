@@ -912,7 +912,7 @@ export default `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
             </wypozyczenia>
         </klient>
         <klient>
-            <pesel>81101074789</pesel>
+            <nip>8110107479</nip>
             <imie>Christian</imie>
             <nazwisko>Perez</nazwisko>
             <login>mr_worldwide</login>
