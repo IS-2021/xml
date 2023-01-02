@@ -21,7 +21,7 @@ function RentAlbum({ rentIndex, albumIndex, albumId, onDelete }) {
         <Grid container columnGap={2}>
             <Grid xs="auto">
                 <img
-                    src={`./assets/covers/${album.okladka}`}
+                    src={album.okladka}
                     alt="Okladka"
                     style={{
                         width: "80px",

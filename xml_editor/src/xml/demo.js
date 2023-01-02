@@ -30,7 +30,7 @@ export default `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
     <albumy>
         <album id="AL_01" gatunek="GAT_07" explicit="false">
             <nazwa>Flume (Deluxe Edition)</nazwa>
-            <okladka src="Flume_Deluxe_Edition.jpg" />
+            <okladka src="./assets/covers/Flume_Deluxe_Edition.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="tak">Flume</wykonawca>
             </wykonawcy>
@@ -85,7 +85,7 @@ export default `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
         </album>
         <album explicit="false" id="AL_02" gatunek="GAT_01">
             <nazwa>Random Access Memories</nazwa>
-            <okladka src="Random_Access_Memories.jpg" />
+            <okladka src="./assets/covers/Random_Access_Memories.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="tak">Daft Punk</wykonawca>
             </wykonawcy>
@@ -121,7 +121,7 @@ export default `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
         </album>
         <album explicit="false" id="AL_03" gatunek="GAT_01">
             <nazwa>Dire Straits</nazwa>
-            <okladka src="Dire_Straits.jpg" />
+            <okladka src="./assets/covers/Dire_Straits.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="tak">Dire Straits</wykonawca>
             </wykonawcy>
@@ -157,7 +157,7 @@ export default `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
         </album>
         <album explicit="false" id="AL_04" gatunek="GAT_05">
             <nazwa>Metallica (Remastered)</nazwa>
-            <okladka src="Metallica_Remastered.jpg" />
+            <okladka src="./assets/covers/Metallica_Remastered.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="tak">Metallica</wykonawca>
             </wykonawcy>
@@ -193,7 +193,7 @@ export default `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
         </album>
         <album explicit="false" id="AL_05" gatunek="GAT_02">
             <nazwa>Milion dróg do śmierci</nazwa>
-            <okladka src="Milion_dróg_do_śmierci.jpg" />
+            <okladka src="./assets/covers/Milion_dróg_do_śmierci.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="nie">Kali</wykonawca>
                 <wykonawca czyZagraniczny="nie">Paluch</wykonawca>
@@ -230,7 +230,7 @@ export default `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
         </album>
         <album explicit="false" id="AL_06" gatunek="GAT_01">
             <nazwa>Born To Die (The Paradise Edition)</nazwa>
-            <okladka src="Born_To_Die_The_Paradise_Edition.jpg" />
+            <okladka src="./assets/covers/Born_To_Die_The_Paradise_Edition.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="tak">Lana Del Rey</wykonawca>
             </wykonawcy>
@@ -266,7 +266,7 @@ export default `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
         </album>
         <album explicit="false" id="AL_07" gatunek="GAT_01">
             <nazwa>Omamy</nazwa>
-            <okladka src="Omamy.jpg" />
+            <okladka src="./assets/covers/Omamy.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="nie">Wieniawa Julia</wykonawca>
             </wykonawcy>
@@ -302,7 +302,7 @@ export default `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
         </album>
         <album explicit="false" id="AL_08" gatunek="GAT_04">
             <nazwa>Bordeaux Concert</nazwa>
-            <okladka src="Bordeaux_Concert.jpg" />
+            <okladka src="./assets/covers/Bordeaux_Concert.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="tak">Jarrett Keith</wykonawca>
             </wykonawcy>
@@ -338,7 +338,7 @@ export default `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
         </album>
         <album explicit="false" id="AL_09" gatunek="GAT_04">
             <nazwa>Spirit To All</nazwa>
-            <okladka src="Spirit_To_All.jpg" />
+            <okladka src="./assets/covers/Spirit_To_All.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="nie">Wojtek Mazolewski Quintet</wykonawca>
             </wykonawcy>
@@ -374,7 +374,7 @@ export default `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
         </album>
         <album explicit="false" id="AL_10" gatunek="GAT_03">
             <nazwa>Inaczej</nazwa>
-            <okladka src="Inaczej.jpg" />
+            <okladka src="./assets/covers/Inaczej.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="nie">Bednarek</wykonawca>
             </wykonawcy>
@@ -410,7 +410,7 @@ export default `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
         </album>
         <album explicit="false" id="AL_11" gatunek="GAT_03">
             <nazwa>Oddycham</nazwa>
-            <okladka src="Oddycham.jpg" />
+            <okladka src="./assets/covers/Oddycham.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="nie">Bednarek</wykonawca>
             </wykonawcy>
@@ -446,7 +446,7 @@ export default `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
         </album>
         <album explicit="false" id="AL_12" gatunek="GAT_03">
             <nazwa>Jestem...</nazwa>
-            <okladka src="Jestem.jpg" />
+            <okladka src="./assets/covers/Jestem.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="nie">Bednarek</wykonawca>
             </wykonawcy>
@@ -482,7 +482,7 @@ export default `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
         </album>
         <album explicit="false" id="AL_13" gatunek="GAT_03">
             <nazwa>Legend: The Best Of Bob Marley &amp; The Wailers</nazwa>
-            <okladka src="Legend_The_Best_Of_Bob_Marley_The_Wailers.jpg" />
+            <okladka src="./assets/covers/Legend_The_Best_Of_Bob_Marley_The_Wailers.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="tak">Bob Marley And The Wailers</wykonawca>
             </wykonawcy>
@@ -518,7 +518,7 @@ export default `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
         </album>
         <album explicit="false" id="AL_14" gatunek="GAT_03">
             <nazwa>To co najlepsze</nazwa>
-            <okladka src="To_co_najlepsze.jpg" />
+            <okladka src="./assets/covers/To_co_najlepsze.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="nie">Daab</wykonawca>
             </wykonawcy>
@@ -554,7 +554,7 @@ export default `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
         </album>
         <album explicit="false" id="AL_15" gatunek="GAT_06">
             <nazwa>Arrival (Original Motion Picture Soundtrack)</nazwa>
-            <okladka src="Arrival_Original_Motion_Picture_Soundtrack.jpg" />
+            <okladka src="./assets/covers/Arrival_Original_Motion_Picture_Soundtrack.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="tak">Johannsson Johann</wykonawca>
             </wykonawcy>
@@ -590,7 +590,7 @@ export default `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
         </album>
         <album explicit="false" id="AL_16" gatunek="GAT_06">
             <nazwa>Gru, Dru i Minionki (Despicable Me 3)</nazwa>
-            <okladka src="Gru_Dru_i_Minionki_Despicable_Me_3.jpg" />
+            <okladka src="./assets/covers/Gru_Dru_i_Minionki_Despicable_Me_3.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="tak">Various Artists</wykonawca>
             </wykonawcy>
@@ -626,7 +626,7 @@ export default `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
         </album>
         <album explicit="false" id="AL_17" gatunek="GAT_06">
             <nazwa>The Witcher: Season 2 (Soundtrack from the Netflix Series)</nazwa>
-            <okladka src="The_Witcher_Season_2_Soundtrack_from_the_Netflix_Series.jpg" />
+            <okladka src="./assets/covers/The_Witcher_Season_2_Soundtrack_from_the_Netflix_Series.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="tak">Trapanese Joseph</wykonawca>
             </wykonawcy>
@@ -662,7 +662,7 @@ export default `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
         </album>
         <album explicit="false" id="AL_18" gatunek="GAT_06">
             <nazwa>Bohemian Rhapsody</nazwa>
-            <okladka src="Bohemian_Rhapsody.jpg" />
+            <okladka src="./assets/covers/Bohemian_Rhapsody.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="tak">Queen</wykonawca>
             </wykonawcy>
@@ -698,7 +698,7 @@ export default `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
         </album>
         <album explicit="false" id="AL_19" gatunek="GAT_01">
             <nazwa>Black Pumas (Deluxe Edition)</nazwa>
-            <okladka src="Black_Pumas_Deluxe_Edition.jpg" />
+            <okladka src="./assets/covers/Black_Pumas_Deluxe_Edition.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="tak">Black Pumas</wykonawca>
             </wykonawcy>
@@ -734,7 +734,7 @@ export default `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
         </album>
         <album explicit="false" id="AL_20" gatunek="GAT_07">
             <nazwa>To Believe</nazwa>
-            <okladka src="To_Believe.jpg" />
+            <okladka src="./assets/covers/To_Believe.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="tak">The Cinematic Orchestra</wykonawca>
             </wykonawcy>
@@ -770,7 +770,7 @@ export default `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
         </album>
         <album explicit="false" id="AL_21" gatunek="GAT_01">
             <nazwa>S16</nazwa>
-            <okladka src="S16.jpg" />
+            <okladka src="./assets/covers/S16.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="tak">Woodkid</wykonawca>
             </wykonawcy>
@@ -806,7 +806,7 @@ export default `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
         </album>
         <album explicit="false" id="AL_22" gatunek="GAT_02">
             <nazwa>Teraz pieniądz w cenie / Ty przecież wiesz co</nazwa>
-            <okladka src="Teraz_pieniądz_w_cenie_Ty_przecież_wiesz_co.jpg" />
+            <okladka src="./assets/covers/Teraz_pieniądz_w_cenie_Ty_przecież_wiesz_co.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="nie">Sokół</wykonawca>
                 <wykonawca czyZagraniczny="nie">Pono</wykonawca>
@@ -843,7 +843,7 @@ export default `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
         </album>
         <album explicit="false" id="AL_23" gatunek="GAT_01">
             <nazwa>Brothers In Arms</nazwa>
-            <okladka src="Brothers_In_Arms.jpg" />
+            <okladka src="./assets/covers/Brothers_In_Arms.jpg" />
             <wykonawcy>
                 <wykonawca czyZagraniczny="tak">Dire Straits</wykonawca>
             </wykonawcy>

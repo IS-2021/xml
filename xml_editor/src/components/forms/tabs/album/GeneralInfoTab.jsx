@@ -15,7 +15,7 @@ function GeneralInfoTab({ currentIndex, tabIndex, coverWatch }) {
                 <Grid item xs={6}>
                     <img
                         className="form__album__image"
-                        src={`./assets/covers/${coverWatch}`}
+                        src={coverWatch}
                         alt="Podgląd okładki albumu"
                     />
                 </Grid>

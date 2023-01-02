@@ -6,7 +6,8 @@ function Album({ album, onClick }) {
         <div className="album_card" onClick={onClick}>
             <img
                 className="album_card__cover"
-                src={`./assets/covers/${album.okladka}`}
+                src={album.okladka}
+                loading="lazy"
                 alt={`Okladka albumu ${album.nazwa}`}
             />
             <p className="album_card__title">{album.nazwa}</p>
