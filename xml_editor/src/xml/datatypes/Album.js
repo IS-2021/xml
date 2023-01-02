@@ -158,6 +158,7 @@ export function createAlbumElement(album) {
     const albumEl = Album.createElement();
     albumEl.id = album.id;
     albumEl.setAttribute("gatunek", album.gatunek);
+    albumEl.setAttribute("explicit", "false");
 
     const nazwa = element("nazwa", album.nazwa);
     const okladka = element("okladka");
@@ -171,7 +172,7 @@ export function createAlbumElement(album) {
     const opakowanie = element("opakowanie", album.opakowanie);
     const plyty = element("plyty");
     album.plyty.forEach((plyta) => plyty.appendChild(createPlytaElement(plyta)));
-    const dataPremiery = element("dataPremiery", dayjs(album.dataPremiery).format("YYYY-MM-DD"));
+    const dataPremiery = element("data_premiery", dayjs(album.dataPremiery).format("YYYY-MM-DD"));
     const cena = element("cena", album.cena);
     cena.setAttribute("waluta", album.waluta);
     const ocena = element("ocena", album.ocena);
