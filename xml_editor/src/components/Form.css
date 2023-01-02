@@ -18,3 +18,7 @@
 .form__album {
     min-width: 600px;
 }
+
+.form__client {
+    min-width: 500px;
+}

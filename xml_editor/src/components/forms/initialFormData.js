@@ -1,8 +1,19 @@
+export const emptyWypozyczenie = {
+    albumy: [
+        {
+            numer: "",
+        },
+    ],
+    dataRozpoczecia: "",
+    dataZakonczenia: "",
+};
+
 export const initialClient = {
     imie: "",
     nazwisko: "",
     pesel: "",
     login: "",
+    wypozyczenia: [],
 };
 
 export const initialGenre = {

@@ -1,16 +1,17 @@
-import { Button, Grid, Stack, ThemeProvider } from "@mui/material";
+import { Button, Tab, Tabs, ThemeProvider } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { clientSchema } from "../../xml/schemas/klient.js";
 import { appMaterialTheme } from "./theme.js";
-import { createKlientElement } from "../../xml/datatypes/Klient.js";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { StateContext } from "../../contexts/StateContext.jsx";
 import { FormContext } from "../../contexts/FormContext.jsx";
-import { CLIENT_ADD, CLIENT_UPDATE, CLIENT_DELETE } from "../../reducers/AppReducer.js";
+import { CLIENT_ADD, CLIENT_DELETE, CLIENT_UPDATE } from "../../reducers/AppReducer.js";
 import "../Form.css";
 import { initialClient } from "./initialFormData.js";
-import ControlledTextField from "./fields/ControlledTextField.jsx";
+import ClientRentTab from "./tabs/klient/ClientRentTab.jsx";
+import ClientDataTab from "./tabs/klient/ClientDataTab.jsx";
+import { a11yProps } from "./tabs/TabPanel.jsx";
 
 function ClientForm({ onSubmit, client }) {
     const { dispatch } = useContext(StateContext);
@@ -25,6 +26,10 @@ function ClientForm({ onSubmit, client }) {
         resolver: zodResolver(clientSchema),
         defaultValues: { ...initialClient, ...(client || {}) },
     });
+
+    const handleTabChange = (event, newTab) => {
+        setSelectedTab(newTab);
+    };
 
     const deleteClient = (clientId) => {
         dispatch({ type: CLIENT_DELETE, payload: { id: clientId } });
@@ -53,26 +58,19 @@ function ClientForm({ onSubmit, client }) {
     return (
         <FormContext.Provider value={{ control, errors }}>
             <ThemeProvider theme={appMaterialTheme}>
-                <form onSubmit={handleSubmit(handleFormSubmit)}>
-                    <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <Stack spacing={1.5}>
-                                <p className="form__header">Dane klienta</p>
-                                <ControlledTextField
-                                    name="imie"
-                                    label="Imię"
-                                    placeholder="Podaj imię"
-                                />
-                                <ControlledTextField name="nazwisko" placeholder="Podaj nazwisko" />
-                                <ControlledTextField
-                                    name="pesel"
-                                    label="PESEL / NIP"
-                                    placeholder="Podaj PESEL lub NIP"
-                                />
-                                <ControlledTextField name="login" placeholder="Podaj login" />
-                            </Stack>
-                        </Grid>
-                    </Grid>
+                <form className="form__client" onSubmit={handleSubmit(handleFormSubmit)}>
+                    <Tabs
+                        orientation="horizontal"
+                        value={selectedTab}
+                        onChange={handleTabChange}
+                        sx={{ marginBottom: "1rem" }}
+                    >
+                        <Tab label="Dane" {...a11yProps(0)} />
+                        <Tab label="Wypożyczenia" {...a11yProps(1)} />
+                    </Tabs>
+
+                    <ClientDataTab currentIndex={selectedTab} tabIndex={0} />
+                    <ClientRentTab currentIndex={selectedTab} tabIndex={1} />
 
                     <div className="form__buttons">
                         {!client && (
