@@ -5,8 +5,12 @@ import { createStudentElement } from "./datatypes/Student.js";
 import { createZadanieElement } from "./datatypes/Zadanie.js";
 import { element } from "./datatypes/Base.js";
 
-export function objectToXML(plytoteka) {
+export function objectToXML(plytoteka = []) {
     const xmlRoot = element("plytoteka");
+    for (const rootAttribute of plytoteka.rootAttributes) {
+        console.log(rootAttribute);
+        xmlRoot.setAttribute(rootAttribute.name, rootAttribute.value);
+    }
 
     const autor = element("autor");
     autor.appendChild(createStudentElement(plytoteka.autor));

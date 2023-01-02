@@ -7,6 +7,7 @@ import { Klient } from "./Klient.js";
 // noinspection CssInvalidHtmlTagReference
 export class Plytoteka {
     constructor(root) {
+        this.rootAttributes = Object.values(root.attributes);
         this.autor = new Student(root.querySelector("autor"));
         this.zadanie = new Zadanie(root.querySelector("autor"));
         this._selectors = {
@@ -29,6 +30,7 @@ export class Plytoteka {
             gatunki: this.gatunki.map((gatunek) => gatunek.toObject()),
             albumy: this.albumy.map((album) => album.toObject()),
             klienci: this.klienci.map((klient) => klient.toObject()),
+            rootAttributes: this.rootAttributes,
         };
     }
 
