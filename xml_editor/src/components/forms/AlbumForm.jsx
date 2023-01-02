@@ -8,7 +8,6 @@ import { StateContext } from "../../contexts/StateContext.jsx";
 import { FormContext } from "../../contexts/FormContext.jsx";
 import { ALBUM_ADD, ALBUM_DELETE, ALBUM_UPDATE } from "../../reducers/AppReducer.js";
 import { initialAlbum } from "./initialFormData.js";
-import { DevTool } from "@hookform/devtools";
 import "../Form.css";
 import GeneralInfoTab from "./tabs/album/GeneralInfoTab.jsx";
 import AuthorsTab from "./tabs/album/AuthorsTab.jsx";
@@ -138,7 +137,6 @@ function AlbumForm({ onSubmit, album, nextId }) {
                             </>
                         )}
                     </div>
-                    <DevTool control={control} />
                 </form>
             </ThemeProvider>
         </FormContext.Provider>
