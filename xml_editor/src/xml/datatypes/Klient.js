@@ -71,7 +71,15 @@ export class Klient extends Base {
 export function createKlientElement(klient) {
     const el = element("klient");
 
-    const pesel = element("pesel", klient.pesel);
+    // PESEL / NIP
+    if (klient.pesel.length === 10) {
+        const nip = element("nip", klient.pesel);
+        el.appendChild(nip);
+    } else {
+        const pesel = element("pesel", klient.pesel);
+        el.appendChild(pesel);
+    }
+
     const imie = element("imie", klient.imie);
     const nazwisko = element("nazwisko", klient.nazwisko);
     const login = element("login", klient.login);
@@ -80,7 +88,6 @@ export function createKlientElement(klient) {
         wypozyczenia.appendChild(createWypozyczenieElement(wypozyczenie))
     );
 
-    el.appendChild(pesel);
     el.appendChild(imie);
     el.appendChild(nazwisko);
     el.appendChild(login);
