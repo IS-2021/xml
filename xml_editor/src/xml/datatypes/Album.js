@@ -155,7 +155,7 @@ export class Album extends Base {
 }
 
 export function createAlbumElement(album) {
-    const albumEl = Album.createElement();
+    const albumEl = element("album");
     albumEl.id = album.id;
     albumEl.setAttribute("gatunek", album.gatunek);
     albumEl.setAttribute("explicit", "false");
